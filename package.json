@@ -1,0 +1,16 @@
+{
+  "title": "Backbone.Marionette Boilerplate",
+  "name": "marionette-boilerplate",
+  "version": "1.0.0",
+  "author": "Juan G. Hurtado <juan.g.hurtado@gmail.com>",
+  "description": "Backbone.Marionette boilerplate project",
+  "devDependencies": {
+    "grunt" : "*",
+    "grunt-contrib-less" : "*",
+    "grunt-contrib-watch" : "*",
+    "grunt-exec" : "*",
+    "grunt-requirejs" : "*",
+    "grunt-smushit" : "*",
+    "grunt-jasmine-runner" : "*"
+  }
+}
