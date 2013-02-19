@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
   /* =DEPENDENCIES
   --------------------------------------------------------------------------- */
+  grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-exec');
@@ -10,9 +11,13 @@ module.exports = function(grunt) {
   /* =CONFIG
   --------------------------------------------------------------------------- */
   grunt.initConfig({
-    server: {
-      port: 8888,
-      base: '.'
+    connect: {
+      server: {
+        options : {
+          port: 8888,
+          base: '.'
+        }
+      }
     },
     exec: {
       jasmine: {
@@ -71,8 +76,8 @@ module.exports = function(grunt) {
 
   /* =TASKS
   --------------------------------------------------------------------------- */
-  grunt.registerTask('default', 'less:development');
-  grunt.registerTask('test', 'server exec:jasmine');
-  grunt.registerTask('listen', 'server watch');
-  grunt.registerTask('build', 'server exec:jasmine requirejs less:production smushit');
+  grunt.registerTask('default', ['less:development']);
+  grunt.registerTask('test', ['connect', 'exec:jasmine']);
+  grunt.registerTask('listen', ['connect', 'watch']);
+  grunt.registerTask('build', ['connect', 'exec:jasmine', 'requirejs', 'less:production', 'smushit']);
 };
