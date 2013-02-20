@@ -1,16 +1,17 @@
 module.exports = function(grunt) {
   /* =DEPENDENCIES
   --------------------------------------------------------------------------- */
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-exec');
-  grunt.loadNpmTasks('grunt-requirejs');
-  grunt.loadNpmTasks('grunt-smushit');
 
   /* =CONFIG
   --------------------------------------------------------------------------- */
   grunt.initConfig({
+    clean : ['./app/js/main.min.js', './app/css/main.min.css'],
     connect: {
       server: {
         options : {
@@ -57,11 +58,6 @@ module.exports = function(grunt) {
         }
       },
     },
-    smushit: {
-      path: {
-        src: './app/images/'
-      }
-    },
     watch: {
       less: {
         files: './app/css/less/**/*',
@@ -79,5 +75,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['less:development']);
   grunt.registerTask('test', ['connect', 'exec:jasmine']);
   grunt.registerTask('listen', ['connect', 'watch']);
-  grunt.registerTask('build', ['connect', 'exec:jasmine', 'requirejs', 'less:production', 'smushit']);
+  grunt.registerTask('build', ['clean', 'connect', 'exec:jasmine', 'requirejs', 'less:production']);
 };
