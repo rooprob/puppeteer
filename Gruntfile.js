@@ -12,7 +12,7 @@ module.exports = function(grunt) {
   /* =CONFIG
   --------------------------------------------------------------------------- */
   grunt.initConfig({
-    clean : ['./app/js/main.min.js', './app/css/main.min.css'],
+    clean : ['./app/js/main.min.js', './app/css/main.min.css', './app/css/main.css'],
     connect: {
       server: {
         options : {
@@ -97,5 +97,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['coffee:app', 'less:development']);
   grunt.registerTask('test', ['coffee:test', 'connect', 'exec:jasmine']);
   grunt.registerTask('listen', ['connect', 'watch']);
-  grunt.registerTask('build', ['clean', 'connect', 'exec:jasmine', 'requirejs', 'less:production']);
+  grunt.registerTask('build', ['clean', 'connect', 'exec:jasmine', 'requirejs', 'less']);
 };
