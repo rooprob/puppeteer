@@ -8,9 +8,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../components/jasmine/lib/jasmine-core/jasmine.css">
+    <script src="./lib/mocha/mocha.js"></script>
+    <script src="./lib/chai/chai.js"></script>
+
+    <link rel="stylesheet" href="./lib/mocha/mocha.css">
   </head>
   <body>
-    <script data-main="lib/require-config-test" src="../components/requirejs/require.js"></script>
+    <div id="mocha"></div>
+    <script data-main="dev/test/main" src="./lib/requirejs/require.js"></script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+
   /* =DEPENDENCIES
   --------------------------------------------------------------------------- */
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -7,49 +8,41 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-mocha');
 
   /* =CONFIG
   --------------------------------------------------------------------------- */
   grunt.initConfig({
-    clean : ['./app/js/main.min.js', './app/css/main.min.css', './app/css/main.css'],
+
+    clean : {
+      all : ['./dev/*', './production/*'],
+      dev : ['./dev/*'],
+      production : ['./production']
+    },
+
     connect: {
-      server: {
+      dev: {
+        options : {
+          port: 8000,
+          base: '.',
+          keepalive: true
+        }
+      },
+
+      test: {
         options : {
           port: 8888,
           base: '.'
         }
       }
     },
-    exec: {
-      jasmine: {
-        command: 'phantomjs test/lib/run-jasmine.js http://localhost:8888/test',
-        stdout: true
-      }
-    },
-    coffee : {
-      app: {
-        expand: true,
-        cwd: './app/js',
-        src: ['**/*.coffee'],
-        dest: './app/js',
-        ext: '.js'
-      },
 
-      test: {
-        expand: true,
-        cwd: './test',
-        src: ['**/*.coffee'],
-        dest: './test/',
-        ext: '.js'
-      },
-    },
     requirejs: {
       compile: {
         options: {
-          baseUrl: './app/js',
-          mainConfigFile: './app/js/main.js',
-          out: './app/js/main.min.js',
+          baseUrl: './dev/app',
+          mainConfigFile: './dev/app/main.js',
+          out: './production/app/main.js',
           include: 'main',
           uglify: {
             toplevel: true,
@@ -61,10 +54,25 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    coffee : {
+      dev : {
+        files : [
+          {
+            expand: true,
+            cwd: './src/',
+            src: ['**/*.coffee'],
+            dest: './dev/',
+            ext: '.js'
+          }
+        ]
+      }
+    },
+
     less: {
-      development: {
+      dev: {
         files: {
-          './app/css/main.css': './app/css/less/main.less'
+          './dev/app/assets/css/main.css': './src/app/assets/css/main.less'
         }
       },
       production: {
@@ -72,30 +80,58 @@ module.exports = function(grunt) {
           yuicompress: true
         },
         files: {
-          './app/css/main.min.css': './app/css/less/main.less'
+          './production/app/assets/css/main.css': './src/app/assets/css/main.less'
         }
       },
     },
+
+    mocha: {
+      test : {
+        options: {
+          urls: [ 'http://localhost:8888/test.html'],
+          reporter : 'Spec'
+        }
+      }
+    },
+
     watch: {
       coffee : {
-        files: './app/js/**/*.coffee',
-        tasks: ['coffee:app']
+        files: './src/app/**/*.coffee',
+        tasks: ['coffee']
       },
       less: {
-        files: './app/css/less/**/*',
-        tasks: ['less']
+        files: './src/**/*.less',
+        tasks: ['less:dev']
       },
       test: {
-        files: './test/specs/**/*.coffee',
-        tasks: ['coffee:test', 'exec:jasmine']
+        files: './src/test/**/*.coffee',
+        tasks: ['test']
       }
     }
+
   });
 
   /* =TASKS
   --------------------------------------------------------------------------- */
-  grunt.registerTask('default', ['coffee:app', 'less:development']);
-  grunt.registerTask('test', ['coffee:test', 'connect', 'exec:jasmine']);
-  grunt.registerTask('listen', ['connect', 'watch']);
-  grunt.registerTask('build', ['clean', 'connect', 'exec:jasmine', 'requirejs', 'less']);
+  grunt.registerTask('default', ['dev', 'connect:dev']);
+
+  grunt.registerTask('dev', [
+    'clean:dev',
+    'coffee',
+    'less:dev'
+  ]);
+
+  grunt.registerTask('production', [
+    'clean:production',
+    'coffee',
+    'less:production',
+    'requirejs'
+  ]);
+
+  grunt.registerTask('test', [
+    'coffee',
+    'connect:test',
+    'mocha'
+  ]);
+
 };

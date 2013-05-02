@@ -1,3 +1,4 @@
-components/
+lib/
 node_modules/
-_SpecRunner.html
+dev/
+production/

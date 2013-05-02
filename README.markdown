@@ -10,7 +10,8 @@ This is a boilerplate project to build stuff using [Backbone.Marionette](http://
 
 ## Grunt.js tasks
 
-* `default`: Compiles all LESS files under `/app/css/less/` to `/app/css/main.css`
-* `test`: Executes all Jasmine tests
-* `listen`: Watches changes in LESS files and Jasmine spec files to re-compile or re-run them
-* `build`: Runs tests, prepares a production JS file to `/app/js/main.min.js`, compiles LESS files for production to `/app/css/main.min.css` and optimizes images under `/app/images/`
+* `default`: Runs `dev` task and start an HTTP server using `connect:dev` task
+* `dev`: Cleans `/dev`, compiles CoffeScript and LESS files under `/src` to `/dev`
+* `production`: Cleans `/production`, compiles CoffeScript files under `/src` to `/dev`, compiles LESS files under `/src` to `/production` and optimize all JS files under `/dev` to `/production` using RequireJS
+* `test`: compiles CoffeScript files under `/src` to `/dev`, launch an HTTP server using `connect:test` task and run all tests under `/dev/test`
+* `watch`: Watchs changes on CoffeeScript and LESS files to run appropiate tasks
