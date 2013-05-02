@@ -4,11 +4,13 @@ module.exports = function(grunt) {
   --------------------------------------------------------------------------- */
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-smushit');
 
   /* =CONFIG
   --------------------------------------------------------------------------- */
@@ -34,6 +36,36 @@ module.exports = function(grunt) {
           port: 8888,
           base: '.'
         }
+      }
+    },
+
+    copy: {
+      dev: {
+        files: [
+          {
+            expand: true,
+            cwd: './src/app/assets',
+            src: ['**'],
+            dest: './dev/app/assets'
+          }
+        ]
+      },
+
+      production: {
+        files: [
+          {
+            expand: true,
+            cwd: './src/app/assets',
+            src: ['**'],
+            dest: './production/app/assets'
+          }
+        ]
+      }
+    },
+
+    smushit : {
+      production: {
+        src: './production/app/assets'
       }
     },
 
@@ -72,7 +104,7 @@ module.exports = function(grunt) {
     less: {
       dev: {
         files: {
-          './dev/app/assets/css/main.css': './src/app/assets/css/main.less'
+          './dev/app/css/main.css': './src/app/css/main.less'
         }
       },
       production: {
@@ -80,7 +112,7 @@ module.exports = function(grunt) {
           yuicompress: true
         },
         files: {
-          './production/app/assets/css/main.css': './src/app/assets/css/main.less'
+          './production/app/css/main.css': './src/app/css/main.less'
         }
       },
     },
@@ -118,14 +150,17 @@ module.exports = function(grunt) {
   grunt.registerTask('dev', [
     'clean:dev',
     'coffee',
-    'less:dev'
+    'less:dev',
+    'copy:dev'
   ]);
 
   grunt.registerTask('production', [
     'clean:production',
-    'coffee',
+    'test',
     'less:production',
-    'requirejs'
+    'requirejs',
+    'copy:production',
+    'smushit:production'
   ]);
 
   grunt.registerTask('test', [
