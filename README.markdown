@@ -1,6 +1,6 @@
 # Backbone.Marionette Boilerplate
 
-This is a boilerplate project to build stuff using [Backbone.Marionette](http://marionettejs.com "Marionette.js – A scalable and composite application architecture for Backbone.js"). Some other funny names involved are: [Require.js](http://requirejs.org "RequireJS"), [Bower](http://twitter.github.com/bower/ "BOWER"), [Jasmine](http://pivotal.github.com/jasmine/ "introduction.js"), [Grunt.js](http://gruntjs.com "grunt: a task-based command line build tool for JavaScript projects"), [LESS](http://lesscss.org "LESS &laquo; The Dynamic Stylesheet language").
+This is a boilerplate project to build stuff using [Backbone.Marionette](http://marionettejs.com "Marionette.js – A scalable and composite application architecture for Backbone.js"). Some other funny names involved are: [Require.js](http://requirejs.org "RequireJS"), [Bower](http://twitter.github.com/bower/ "BOWER"), [Mocha](ub.io/mocha/), [Chai](http://chaijs.com "Home - Chai"), [Grunt.js](http://gruntjs.com "grunt: a task-based command line build tool for JavaScript projects"), [LESS](http://lesscss.org "LESS &laquo; The Dynamic Stylesheet language").
 
 ## Dependencies
 
