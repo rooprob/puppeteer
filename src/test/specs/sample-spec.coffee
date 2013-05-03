@@ -14,7 +14,7 @@ define ['backbone'], (backbone) ->
 
 			object.method 1
 
-			spy.should.have.been.calledWith 1;
+			spy.should.have.been.calledWith 1
 
 		it 'sample sinon stub', ->
 			object =
