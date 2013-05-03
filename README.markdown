@@ -14,4 +14,4 @@ This is a boilerplate project to build stuff using [Backbone.Marionette](http://
 * `dev`: Cleans `/dev`, compiles CoffeScript and LESS files under `/src` to `/dev`
 * `production`: Cleans `/production`, compiles CoffeScript files under `/src` to `/dev`, compiles LESS files under `/src` to `/production` and optimize all JS files under `/dev` to `/production` using RequireJS
 * `test`: compiles CoffeScript files under `/src` to `/dev`, launch an HTTP server using `connect:test` task and run all tests under `/dev/test`
-* `watch`: Watchs changes on CoffeeScript and LESS files to run appropiate tasks
+* `watch`: Watchs changes on CoffeeScript and LESS files to run appropiate tasks (for test files you should have a running test HTTP server with `grunt connect:test`)

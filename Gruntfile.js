@@ -34,7 +34,8 @@ module.exports = function(grunt) {
 			test: {
 				options : {
 					port: 8888,
-					base: '.'
+					base: '.',
+					keepalive: true
 				}
 			}
 		},
@@ -129,7 +130,10 @@ module.exports = function(grunt) {
 		watch: {
 			coffee : {
 				files: './src/app/**/*.coffee',
-				tasks: ['coffee']
+				tasks: [],
+				options : {
+					nospawn: true
+				}
 			},
 			less: {
 				files: './src/**/*.less',
@@ -137,7 +141,10 @@ module.exports = function(grunt) {
 			},
 			test: {
 				files: './src/test/**/*.coffee',
-				tasks: ['test']
+				tasks: ['test'],
+				options : {
+					nospawn: true
+				}
 			}
 		}
 
@@ -145,6 +152,23 @@ module.exports = function(grunt) {
 
 	/* =TASKS
 	--------------------------------------------------------------------------- */
+	grunt.event.on('watch', function(action, filepath) {
+		cwd = 'src/';
+		filepath = filepath.replace(cwd, '');
+
+		grunt.config.set('coffee', {
+			changed : {
+				expand: true,
+				cwd: cwd,
+				src: filepath,
+				dest: './dev',
+				ext: '.js'
+			}
+		});
+
+    grunt.task.run('coffee:changed');
+	});
+
 	grunt.registerTask('default', ['dev', 'connect:dev']);
 
 	grunt.registerTask('dev', [
@@ -164,8 +188,6 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('test', [
-		'coffee',
-		'connect:test',
 		'mocha'
 	]);
 
