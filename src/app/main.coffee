@@ -3,6 +3,7 @@ require.config
 		'text': '../../lib/requirejs-text/text',
 		'tpl': '../../lib/requirejs-tpl/tpl',
 		'jquery': '../../lib/jquery/jquery',
+		'bootstrap': '../../lib/bootstrap/docs/assets/js/bootstrap.min',
 		'underscore': '../../lib/underscore-amd/underscore',
 		'backbone': '../../lib/backbone-amd/backbone',
 		'backbone.wreqr': '../../lib/backbone.wreqr/lib/amd/backbone.wreqr',
@@ -11,11 +12,9 @@ require.config
 		'marionette': '../../lib/marionette/lib/core/amd/backbone.marionette',
 		'cfg': './config/config'
 	shim:
-		'cfg':
-			'deps': [
-				'./config/marionette/marionette-template-cache'
-			]
+		'bootstrap': ['jquery']
+		'cfg': ['./config/marionette/marionette-template-cache']
 
-require ['modules/app/app-module', 'jquery', 'cfg'], (App, $) ->
+require ['modules/app/app-module', 'jquery', 'cfg', 'bootstrap'], (App, $) ->
 	$ ->
 		App.start()

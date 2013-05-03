@@ -3,6 +3,7 @@ require.config
 		'text': '../../lib/requirejs-text/text',
 		'tpl': '../../lib/requirejs-tpl/tpl',
 		'jquery': '../../lib/jquery/jquery',
+		'bootstrap': '../../lib/bootstrap/docs/assets/js/bootstrap.min',
 		'underscore': '../../lib/underscore-amd/underscore',
 		'backbone': '../../lib/backbone-amd/backbone',
 		'backbone.wreqr': '../../lib/backbone.wreqr/lib/amd/backbone.wreqr',
@@ -15,14 +16,10 @@ require.config
 		'sinon-chai' : '../../lib/sinon-chai/lib/sinon-chai',
 		'sinon' : '../../lib/sinon/index'
 	shim:
-		'cfg':
-			'deps': []
+		'bootstrap': ['jquery']
+		'cfg': ['./config/marionette/marionette-template-cache']
 
-require [
-	'chai',
-	'sinon-chai',
-	'sinon'
-], (chai, sinonChai, sinon) ->
+require ['chai', 'sinon-chai', 'sinon'], (chai, sinonChai, sinon) ->
 	mocha.setup 'bdd'
 	chai.should()
 	chai.use(sinonChai);

@@ -4,6 +4,7 @@
 		"requirejs-text": "~2.0.3",
 		"requirejs-tpl": "*",
 
+		"bootstrap": "~2.3.1",
 		"jquery": "~1.9.0",
 		"underscore-amd": "~1.4.3",
 		"backbone-amd": "~0.9.2",
