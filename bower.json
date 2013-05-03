@@ -13,6 +13,8 @@
 		"marionette": "~1.0.0-rc2",
 
 		"chai": "~1.6.0",
-		"mocha": "~1.9.0"
+		"mocha": "~1.9.0",
+		"sinon": "http://sinonjs.org/releases/sinon-1.6.0.js",
+		"sinon-chai": "~2.4.0"
 	}
 }

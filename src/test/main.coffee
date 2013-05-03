@@ -10,13 +10,22 @@ require.config
 		'backbone.babysitter': '../../lib/backbone.babysitter/lib/amd/backbone.babysitter',
 		'marionette': '../../lib/marionette/lib/core/amd/backbone.marionette',
 		'cfg': './config/config'
+
+		'chai' : '../../lib/chai/chai',
+		'sinon-chai' : '../../lib/sinon-chai/lib/sinon-chai',
+		'sinon' : '../../lib/sinon/index'
 	shim:
 		'cfg':
 			'deps': []
 
-require [], () ->
+require [
+	'chai',
+	'sinon-chai',
+	'sinon'
+], (chai, sinonChai, sinon) ->
 	mocha.setup 'bdd'
 	chai.should()
+	chai.use(sinonChai);
 
 	require [
 		'specs/sample-spec'
