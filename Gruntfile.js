@@ -29,14 +29,6 @@ module.exports = function(grunt) {
 					base: '.',
 					keepalive: true
 				}
-			},
-
-			test: {
-				options : {
-					port: 8888,
-					base: '.',
-					keepalive: true
-				}
 			}
 		},
 
@@ -121,7 +113,7 @@ module.exports = function(grunt) {
 		mocha: {
 			test : {
 				options: {
-					urls: [ 'http://localhost:8888/test.html'],
+					urls: [ 'http://localhost:8000/test.html'],
 					reporter : 'Spec'
 				}
 			}
