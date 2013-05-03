@@ -1,5 +1,4 @@
 module.exports = (grunt) ->
-
 	grunt.loadNpmTasks 'grunt-contrib-clean'
 	grunt.loadNpmTasks 'grunt-contrib-coffee'
 	grunt.loadNpmTasks 'grunt-contrib-copy'
@@ -142,6 +141,7 @@ module.exports = (grunt) ->
 	]
 
 	grunt.registerTask 'test', [
+		'coffee'
 		'connect:test'
 		'mocha'
 	]
