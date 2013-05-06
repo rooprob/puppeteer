@@ -1,9 +1,12 @@
-define ['backbone'], (backbone) ->
+define ['backbone', 'jquery', 'js-fixtures'], (backbone, $, fixtures) ->
 	object = null
 
 	beforeEach ->
 		object =
 			method: ->
+
+	afterEach ->
+		fixtures.cleanUp()
 
 	describe 'Sample spec', ->
 		it 'sample equal assertion', ->
@@ -31,3 +34,8 @@ define ['backbone'], (backbone) ->
 				done()
 
 			setTimeout async, 10
+
+		it 'sample fixture load', ->
+			fixtures.load "sample.html"
+
+			$(fixtures.body()).filter('p.test').length.should.equal 1

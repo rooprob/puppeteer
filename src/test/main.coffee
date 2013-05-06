@@ -14,15 +14,18 @@ require.config
 
 		'chai' : '../../lib/chai/chai',
 		'sinon-chai' : '../../lib/sinon-chai/lib/sinon-chai',
-		'sinon' : '../../lib/sinon/index'
+		'sinon' : '../../lib/sinon/index',
+		'js-fixtures' : '../../lib/js-fixtures/index'
 	shim:
 		'bootstrap': ['jquery']
 		'cfg': ['./config/marionette/marionette-template-cache']
 
-require ['chai', 'sinon-chai', 'sinon'], (chai, sinonChai, sinon) ->
+require ['chai', 'sinon-chai', 'sinon', 'js-fixtures'], (chai, sinonChai, sinon, fixtures) ->
 	mocha.setup 'bdd'
 	chai.should()
-	chai.use(sinonChai);
+	chai.use sinonChai
+
+	fixtures.path = 'dev/test/fixtures/'
 
 	require [
 		'specs/sample-spec'

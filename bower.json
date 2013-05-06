@@ -16,6 +16,7 @@
 		"chai": "~1.6.0",
 		"mocha": "~1.9.0",
 		"sinon": "http://sinonjs.org/releases/sinon-1.6.0.js",
-		"sinon-chai": "~2.4.0"
+		"sinon-chai": "~2.4.0",
+		"js-fixtures": "https://raw.github.com/badunk/js-fixtures/master/fixtures.js"
 	}
 }

@@ -34,6 +34,13 @@ module.exports = (grunt) ->
 					src: ['**']
 					dest: './dev/app/assets'
 				]
+			test:
+				files: [
+					expand: true
+					cwd: './src/test/fixtures'
+					src: ['**']
+					dest: './dev/test/fixtures'
+				]
 			production:
 				files: [
 						expand: true
@@ -137,11 +144,13 @@ module.exports = (grunt) ->
 	]
 
 	grunt.registerTask 'test:watch', [
+		'copy:test'
 		'mocha'
 	]
 
 	grunt.registerTask 'test', [
 		'coffee'
+		'copy:test'
 		'connect:test'
 		'mocha'
 	]
