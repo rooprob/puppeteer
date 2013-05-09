@@ -1,8 +1,7 @@
 {
 	"dependencies": {
-		"requirejs": "~2.1.2",
-		"requirejs-text": "~2.0.3",
-		"requirejs-tpl": "*",
+		"requirejs": "~2.1.5",
+		"requirejs-text": "~2.0.6",
 
 		"bootstrap": "~2.3.1",
 		"jquery": "~1.9.0",

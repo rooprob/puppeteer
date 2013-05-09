@@ -34,6 +34,13 @@ module.exports = (grunt) ->
 					src: ['**']
 					dest: './dev/app/assets'
 				]
+			templates:
+				files: [
+					expand: true
+					cwd: './src/app/modules'
+					src: ['**/*.html']
+					dest: './dev/app/modules'
+				]
 			test:
 				files: [
 					expand: true
@@ -60,12 +67,6 @@ module.exports = (grunt) ->
 					mainConfigFile: './dev/app/main.js'
 					out: './production/app/main.js'
 					include: 'main'
-					preserveLicenseComments: false
-					uglify:
-						toplevel: true
-						ascii_only: true
-						beautify: false
-						max_line_length: 1000
 
 		coffee:
 			dev:
@@ -94,6 +95,11 @@ module.exports = (grunt) ->
 					reporter : 'Spec'
 
 		watch:
+			templates:
+				files: './src/app/**/*.html'
+				tasks: ['copy:templates']
+				options:
+					nospawn: true
 			coffee:
 				files: './src/app/**/*.coffee'
 				tasks: []
@@ -120,7 +126,7 @@ module.exports = (grunt) ->
 				dest: './dev'
 				ext: '.js'
 
-		grunt.task.run 'coffee:changed'
+		grunt.task.run 'coffee:changed' unless filepath.indexOf('.coffee') < 0
 
 	grunt.registerTask 'default', [
 		'dev'
@@ -132,14 +138,16 @@ module.exports = (grunt) ->
 		'coffee'
 		'less:dev'
 		'copy:dev'
+		'copy:templates'
 	]
 
 	grunt.registerTask 'production', [
 		'clean:production'
 		'test'
 		'less:production'
-		'requirejs'
 		'copy:production'
+		'copy:templates'
+		'requirejs'
 		'smushit:production'
 	]
 
