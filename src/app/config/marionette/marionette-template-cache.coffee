@@ -5,7 +5,7 @@ define ['marionette'], (Marionette) ->
 	Marionette.TemplateCache::loadTemplate = (templateId) ->
 		template = templateId
 
-		return template unless !template or template.length == 0
+		return template unless not template or template.length is 0
 
 		err = new Error "Template not found: '#{templateId}'"
 		err.name = "NoTemplateError"
