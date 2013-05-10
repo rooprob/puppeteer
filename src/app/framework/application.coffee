@@ -10,45 +10,51 @@ define [
 			super args
 
 			@.on "initialize:after", (options) =>
-				@startHistory()
-				@navigate(@rootRoute, trigger: true) unless @getCurrentRoute()
+				@history.startHistory()
+				@history.navigate(@rootRoute, trigger: true) unless @history.getCurrentRoute()
 
-			CommunicationBus.commands.setHandler "register:instance", (instance, id) =>
-				@registry.add instance, id
-
-			CommunicationBus.commands.setHandler "unregister:instance", (instance, id) =>
-				@registry.remove instance, id
-
-			CommunicationBus.commands.setHandler "reset:instances", (instance, id) =>
-				@registry.reset()
-
-			CommunicationBus.vent.on 'app:navigate', (route, options = {}) =>
-				@navigate(route, options)
-
-		navigate: (route, options = {}) ->
-			route = "#" + route if route and route.charAt(0) is "/"
-			Backbone.history.navigate(route, options)
-
-		getCurrentRoute: ->
-			frag = Backbone.history.fragment
-			if _.isEmpty(frag) then null else frag
-
-		setRootRoute: (route) ->
-			@rootRoute = route
-
-		startHistory: ->
-			Backbone.history.start() if Backbone.history
+			@history.attachHandlers()
+			@registry.attachHandlers()
 
 		setDefaultRegion: (region) ->
 			CommunicationBus.reqres.setHandler "app:default:region", ->
 				region
 
+		history:
+			attachHandlers: ->
+				CommunicationBus.vent.on 'app:navigate', (route, options = {}) =>
+					@navigate(route, options)
+
+			navigate: (route, options = {}) ->
+				route = "#" + route if route and route.charAt(0) is "/"
+				Backbone.history.navigate(route, options)
+
+			getCurrentRoute: ->
+				frag = Backbone.history.fragment
+				if _.isEmpty(frag) then null else frag
+
+			setRootRoute: (route) ->
+				@rootRoute = route
+
+			startHistory: ->
+				Backbone.history.start() if Backbone.history
+
 		registry:
+			attachHandlers: ->
+				CommunicationBus.commands.setHandler "register:instance", (instance, id) =>
+					@add instance, id
+
+				CommunicationBus.commands.setHandler "unregister:instance", (id) =>
+					@remove id
+
+				CommunicationBus.commands.setHandler "reset:instances", =>
+					@reset()
+
 			add: (instance, id) ->
 				@_registry ?= {}
 				@_registry[id] = instance
 
-			remove: (instance, id) ->
+			remove: (id) ->
 				delete @_registry[id]
 
 			reset: ->
