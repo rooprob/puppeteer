@@ -129,14 +129,6 @@ define [
 		describe "Registry", ->
 
 			# attachHandlers()
-			#	CommunicationBus.commands.setHandler "register:instance", (instance, id) =>
-			#		@add instance, id
-      #
-			#	CommunicationBus.commands.setHandler "unregister:instance", (instance, id) =>
-			#		@remove instance, id
-      #
-			#	CommunicationBus.commands.setHandler "reset:instances", (instance, id) =>
-			#		@reset()
 			# ----------------------------------------------------------------------------------
 			describe "attachHandlers()", ->
 				it "should register a 'register:instance' command", ->
@@ -171,8 +163,6 @@ define [
 
 
 			# add()
-			#		@_registry ?= {}
-			#		@_registry[id] = instance
 			# ----------------------------------------------------------------------------------
 			describe "add()", ->
 				it "should add a new item to the registry", ->
@@ -183,7 +173,6 @@ define [
 					application.registry._registry[2].should.equal 1
 
 			# remove()
-			# delete @_registry[id]
 			# ----------------------------------------------------------------------------------
 			describe "remove()", ->
 				it "should remove items from the registry", ->
@@ -196,17 +185,6 @@ define [
 					should.not.exist application.registry._registry[2]
 
 			# reset()
-			# oldCount = @getSize()
-      #
-			# for key, controller of @_registry
-			# 	controller.region?.close()
-      #
-			# msg = "There were #{oldCount} controllers, there are now #{@getSize()}"
-      #
-			# if @getSize() > 0
-			# 	console.warn msg, @_registry
-			# else
-			# 	console.log msg
 			# ----------------------------------------------------------------------------------
 			describe "reset()", ->
 				beforeEach ->
@@ -242,7 +220,6 @@ define [
 					stub.should.have.been.called
 
 			# getSize()
-			# _.size @_registry
 			# ----------------------------------------------------------------------------------
 			describe "getSize()", ->
 				it "should return registry size", ->
