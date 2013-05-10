@@ -1,7 +1,5 @@
 define ['marionette'], (Marionette) ->
 
-	class View extends Marionette.View
-
 	_remove = Marionette.View::remove
 	_initialize = Marionette.View::initialize
 
@@ -23,5 +21,3 @@ define ['marionette'], (Marionette) ->
 		remove : (args...) ->
 				console.log "Removing view:", @
 				_remove.apply @, args
-
-	return View
