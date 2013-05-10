@@ -92,7 +92,7 @@ module.exports = (grunt) ->
 			test:
 				options:
 					urls: [ 'http://localhost:8000/test.html']
-					reporter : 'Spec'
+					reporter : 'Dot'
 
 		watch:
 			templates:
