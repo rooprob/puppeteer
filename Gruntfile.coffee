@@ -138,6 +138,7 @@ module.exports = (grunt) ->
 		'coffee'
 		'less:dev'
 		'copy:dev'
+		'copy:test'
 		'copy:templates'
 	]
 
