@@ -1,9 +1,9 @@
 {
-	"title": "Backbone.Marionette Boilerplate",
-	"name": "marionette-boilerplate",
-	"version": "1.0.0",
+	"title": "Puppeteer",
+	"name": "puppeteer",
+	"version": "0.0.1",
 	"author": "Juan G. Hurtado <juan.g.hurtado@gmail.com>",
-	"description": "Backbone.Marionette boilerplate project",
+	"description": "Web app boilerplate project with Backbone, Marionette, CoffeeScript, Mocha, Chai, Bower, Grunt…",
 	"devDependencies": {
 		"grunt" : "~0.4.0",
 		"grunt-contrib-clean" : "*",
