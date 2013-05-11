@@ -3,7 +3,7 @@
 	"name": "puppeteer",
 	"version": "0.0.1",
 	"author": "Juan G. Hurtado <juan.g.hurtado@gmail.com>",
-	"description": "Web app boilerplate project with Backbone, Marionette, CoffeeScript, Mocha, Chai, Bower, Grunt…",
+	"description": "Web development stack. With Backbone, Marionette, CoffeeScript, Mocha, Chai, Bower, Grunt…",
 	"devDependencies": {
 		"grunt" : "~0.4.0",
 		"grunt-contrib-clean" : "*",
