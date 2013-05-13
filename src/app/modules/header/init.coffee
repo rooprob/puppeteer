@@ -8,10 +8,11 @@ define [
 	class HeaderModule extends Framework.Module
 
 		# This initialize method will execute on instantiation of this class
-		initialize: (options = {}) ->
+		initialize: (region) ->
 			# Instantiate ShowController, passing the region it will belong
 			# this region is passed on module instantiation
-			new ShowController region: options.region
+			new ShowController region: region
 
-	# Return HeaderModule object (because this is a RequireJS module)
-	return HeaderModule
+	# Register Module's start command
+	CommunicationBus.commands.setHandler "module:header:start", (region) ->
+		new HeaderModule region

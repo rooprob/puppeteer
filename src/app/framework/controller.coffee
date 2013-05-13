@@ -16,7 +16,7 @@ define [
 			super args
 			CommunicationBus.commands.execute "unregister:instance", @_instance_id
 
-		show: (view, close = true) ->
+		show: (view) ->
 			@listenTo view, "close", @close
 
 			@region.show view

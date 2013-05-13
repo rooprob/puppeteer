@@ -9,5 +9,9 @@ define [
 		# Set View template
 		template: template
 
+		ui:
+			sampleModuleLink : '#sample-module-link'
+			otherModuleLink : '#other-module-link'
+
 	# Return HeaderView object (because this is a RequireJS module)
 	return HeaderView

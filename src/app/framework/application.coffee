@@ -11,7 +11,9 @@ define [
 
 			@.on "initialize:after", (options) =>
 				@history.startHistory()
-				@history.navigate(@rootRoute, trigger: true) unless @history.getCurrentRoute()
+
+				if @rootRoute
+					@history.navigate(@rootRoute, trigger: true) unless @history.getCurrentRoute()
 
 			@history.attachHandlers()
 			@registry.attachHandlers()

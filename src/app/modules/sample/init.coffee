@@ -1,26 +1,37 @@
 define [
 	'modules/sample/controllers/first-controller'
 	'modules/sample/controllers/second-controller'
+	'modules/sample/controllers/third-controller'
 	'app.framework'
 	'communication-bus'
-], (FirstController, SecondController, Framework, CommunicationBus) ->
+	'modules/other/init'
+], (FirstController, SecondController, ThirdController, Framework, CommunicationBus) ->
 
 	# Define SampleModule class
 	class SampleModule extends Framework.Module
 
 		# This initialize method will execute on instantiation of this class
-		initialize: (options = {}) =>
-
-			# Instantiate a new Framework.AppRouter, linking it with "router"
-			# property of the Module.
-			# The router will manage association between URLs and methods.
-			@router = new Framework.AppRouter
+		initialize: (options = {}) ->
+			# Instantiate a new Framework.AppRouter.
+			# The router will manage association between URLs and actions.
+			new Framework.AppRouter
 				routes:
-					# When navigating to "", instantiate a FirstController
-					""							: => new FirstController
+					"": => @startController "first-controller"
+					"sample/second": => @startController "second-controller"
 
-					# When navigating to "sample/second", instantiate a SecondController
-					"sample/second"	: => new SecondController
+		# Attach command handlers
+		commands:
+			"module:sample:first-controller:start": -> new FirstController
+			"module:sample:second-controller:start": -> new SecondController
+			"module:sample:third-controller:start": -> new ThirdController
 
-	# Return SampleModule object (because this is a RequireJS module)
-	return SampleModule
+		# Start given controller, triggering a "module selected" event
+		# which, for this sample, will be used on HeaderModule to mark
+		# active navigation link
+		startController: (controller) ->
+			CommunicationBus.commands.execute "module:sample:#{controller}:start"
+			CommunicationBus.vent.trigger "module:sample:selected"
+
+	# Register Module's start command
+	CommunicationBus.commands.setHandler "module:sample:start", (region) ->
+		new SampleModule region: region

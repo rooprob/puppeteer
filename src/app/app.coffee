@@ -1,9 +1,10 @@
 define [
-	'modules/header/init'
-	'modules/sample/init'
 	'app.framework'
 	'communication-bus'
-], (HeaderModule, SampleModule, Framework, CommunicationBus) ->
+	'modules/header/init'
+	'modules/sample/init'
+	'modules/other/init'
+], (Framework, CommunicationBus) ->
 
 	# Instanciate application
 	App = new Framework.Application()
@@ -19,8 +20,9 @@ define [
 
 	# This initializer will execute on App.start() (look main.coffee)
 	App.addInitializer ->
-		new HeaderModule region : App.headerRegion
-		new SampleModule
+		CommunicationBus.commands.execute "module:header:start", App.headerRegion
+		CommunicationBus.commands.execute "module:sample:start"
+		CommunicationBus.commands.execute "module:other:start"
 
 	# Return App object (because this is a RequireJS module)
 	return App
