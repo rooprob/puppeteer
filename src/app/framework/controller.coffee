@@ -14,10 +14,11 @@ define [
 
 		close: (args...) ->
 			super args
-			CommunicationBus.commands.execute "unregister:instance", @, @_instance_id
+			CommunicationBus.commands.execute "unregister:instance", @_instance_id
 
-		show: (view) ->
+		show: (view, close = true) ->
 			@listenTo view, "close", @close
+
 			@region.show view
 
 	return Controller

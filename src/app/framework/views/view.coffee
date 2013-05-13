@@ -19,5 +19,5 @@ define ['marionette'], (Marionette) ->
 		# Overwrite default Marionette's Views "remove" method
 		# to allow logging out when views are removed
 		remove : (args...) ->
-				console.log "Removing view:", @
+				# console.log "Removing view:", @
 				_remove.apply @, args

@@ -22,7 +22,7 @@ define [
 
 		history:
 			attachHandlers: ->
-				CommunicationBus.vent.on 'app:navigate', (route, options = {}) =>
+				CommunicationBus.commands.setHandler 'app:navigate', (route, options = {}) =>
 					@navigate(route, options)
 
 			navigate: (route, options = {}) ->
@@ -49,6 +49,11 @@ define [
 
 				CommunicationBus.commands.setHandler "reset:instances", =>
 					@reset()
+
+				CommunicationBus.commands.setHandler "list:instances", =>
+					console.log @_registry
+
+				window.CommunicationBus = CommunicationBus
 
 			add: (instance, id) ->
 				@_registry ?= {}

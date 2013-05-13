@@ -20,17 +20,6 @@ define ['marionette', 'framework/views/view'], (Marionette) ->
 	# --------------------------------------------------------------------------------------
 	describe "Framework.View", ->
 
-		# Global
-		# ------------------------------------------------------------------------------------
-		describe "Global", ->
-			it "should call to console.log whem removed", ->
-				spy = @sandbox.spy console, "log"
-				view = new Marionette.View
-
-				view.remove()
-
-				spy.should.have.been.called
-
 		# Animations
 		# ------------------------------------------------------------------------------------
 		describe "Animations", ->

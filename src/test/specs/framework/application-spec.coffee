@@ -49,14 +49,16 @@ define [
 				stub.should.have.been.calledWith 'sample/route', trigger: true
 
 			it "should attach history handlers after initialization", ->
-				stub = @sandbox.stub CommunicationBus.vent, 'on', ->
+				stub = @sandbox.stub CommunicationBus.commands, 'setHandler', ->
 				application = new Application
-				stub.should.have.been.called
+				stub.should.have.been.calledWith "app:navigate"
 
 			it "should attach registry handlers after initialization", ->
 				stub = @sandbox.stub CommunicationBus.commands, 'setHandler', ->
 				application = new Application
-				stub.should.have.been.calledThrice
+				stub.should.have.been.calledWith "register:instance"
+				stub.should.have.been.calledWith "unregister:instance"
+				stub.should.have.been.calledWith "reset:instances"
 
 		# History
 		# ------------------------------------------------------------------------------------
@@ -66,13 +68,13 @@ define [
 			# ----------------------------------------------------------------------------------
 			describe "attachHandlers()", ->
 				it "should create an 'app:navigate' event listener on attachHandlers", ->
-					stub = @sandbox.stub CommunicationBus.vent, 'on', ->
+					stub = @sandbox.stub CommunicationBus.commands, 'setHandler', ->
 					@application.history.attachHandlers()
 					stub.should.have.been.calledWith 'app:navigate'
 
-				it "should call history.navigate on 'app:navigate' event", ->
+				it "should call history.navigate on 'app:navigate' command", ->
 					stub = @sandbox.stub @application.history, 'navigate', ->
-					CommunicationBus.vent.trigger 'app:navigate', 'sample/route', foo: 'bar'
+					CommunicationBus.commands.execute 'app:navigate', 'sample/route', foo: 'bar'
 					stub.should.have.been.calledWith 'sample/route', foo: 'bar'
 
 			# navigate()
