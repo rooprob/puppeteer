@@ -2,6 +2,10 @@
 
 Development stack to build web stuff using [Marionette](http://marionettejs.com "Marionette.js – A scalable and composite application architecture for Backbone.js"). Some other funny names involved are: [Require.js](http://requirejs.org "RequireJS"), [Bower](http://twitter.github.com/bower/ "BOWER"), [Mocha](ub.io/mocha/), [Chai](http://chaijs.com "Home - Chai"), [Grunt.js](http://gruntjs.com "grunt: a task-based command line build tool for JavaScript projects"), [LESS](http://lesscss.org "LESS &laquo; The Dynamic Stylesheet language").
 
+## Caution
+
+This is an extremely personal stack, with an extremely personal way of doing things. I feel comfortable doing stuff this way, but I change my mind easily. So if you have something to suggest, please do it. Fork it, change it, adapt it, enlighten me with better ways of doing things.
+
 ## Getting started
 
 1. [Install Node.js and npm](http://nodejs.org/download/ "node.js")
