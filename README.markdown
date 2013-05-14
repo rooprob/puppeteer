@@ -56,12 +56,14 @@ Puppeteer has his own micro framework on top of Backbone and Marionette. This wi
 
 The framework object holding all other objects can be required through RequireJS using the dependency string `app.framework`.
 
-	define ['app.framework'], (Framework) ->
-		# Use framework objects at your will…
-		console.log Framework.Application
-		console.log Framework.Collection
-		console.log Framework.Controller
-		console.log Framework.ItemView
+```coffeescript
+define ['app.framework'], (Framework) ->
+	# Use framework objects at your will…
+	console.log Framework.Application
+	console.log Framework.Collection
+	console.log Framework.Controller
+	console.log Framework.ItemView
+```
 
 ### Application
 
@@ -69,18 +71,22 @@ Extends from `Marionette.Application`.
 
 When the application starts, a common task is to start the navigation history. With Framework.Application this is done for you. After the app has ben started, the history will be automatically started, and it will navigate to the default `rootRoute` (you can define it with `Application.history.setRootRoute`):
 
-	App = new Framework.Application()
-	App.history.setRootRoute "sample/route"
-	App.start() # History will be started, and navigate to "sample/route"
+```coffeescript
+App = new Framework.Application()
+App.history.setRootRoute "sample/route"
+App.start() # History will be started, and navigate to "sample/route"
+```
 
 To define the application default region (which will be used by default by controllers whithout an explicit region defined) you can use `Application.setDefaultRegion` method:
 
-	App = new Framework.Application()
+```coffeescript
+App = new Framework.Application()
 
-	App.addRegions
-		contentRegion: "#content-region"
+App.addRegions
+	contentRegion: "#content-region"
 
-	App.setDefaultRegion App.contentRegion
+App.setDefaultRegion App.contentRegion
+```
 
 In order to maintain a registry of instanced objects (just Controllers at the time), Framework.Application has a set of methods to work with this registry. They are used internally, so you don't have to worry about it. Just keep in mind that this registry exists, and you can consult it or reset it using the commands detaile above.
 
@@ -108,34 +114,37 @@ Controllers are automatically inserted into the application registry when instan
 
 If you need to show a View inside the region associated with your controller, use `show` method. It will liste to the close event on that view to close the controller as well.
 
-	class FirstController extends Framework.Controller
-		initialize: ->
-			@show new FirstView
+```coffeescript
+class FirstController extends Framework.Controller
+	initialize: ->
+		@show new FirstView
+```
 
 Controllers should have an associated `region` that you pass to them on instantiation. If you don't do it, they will look for the default region (it can be defined with your `Framework.Application` through its `setDefaultRegion` method)
 
-	# Create application
-	App = new Framework.Application()
+```coffeescript
+# Create application
+App = new Framework.Application()
 
-	# Define app regions
-	App.addRegions
-		headerRegion: "#header-region"
-		contentRegion: "#content-region"
+# Define app regions
+App.addRegions
+	headerRegion: "#header-region"
+	contentRegion: "#content-region"
 
-	# Set default region and start app
-	App.setDefaultRegion App.contentRegion
-	App.start()
+# Set default region and start app
+App.setDefaultRegion App.contentRegion
+App.start()
 
-	# Instanciate controller with region
-	controller1 = new SampleController1 region : App.headerRegion
+# Instanciate controller with region
+controller1 = new SampleController1 region : App.headerRegion
 
-	# Instanciate controller without region
-	controller2 = new SampleController2
+# Instanciate controller without region
+controller2 = new SampleController2
 
-	# Check regions
-	console.log controller1.region # => headerRegion
-	console.log controller2.region # => contentRegion
-
+# Check regions
+console.log controller1.region # => headerRegion
+console.log controller2.region # => contentRegion
+```
 
 ### Model
 
@@ -151,25 +160,26 @@ Expose a class to be used to create modules. You can extend this class with:
 
 Example:
 
-	# Define the class extending from Framework.Module
-	# and setting one command, one request and one event
-	class ModuleName extends Framework.Module
-		commands:
-			"command:name": -> console.log "OH"
-		requests:
-			"request:name": -> return "MY"
-		events:
-			"event:name": -> console.log "GOD!!!!"
+```coffeescript
+# Define the class extending from Framework.Module
+# and setting one command, one request and one event
+class ModuleName extends Framework.Module
+	commands:
+		"command:name": -> console.log "OH"
+	requests:
+		"request:name": -> return "MY"
+	events:
+		"event:name": -> console.log "GOD!!!!"
 
-	# Instanciation will cause the creation of every
-	# command, request and event of your module
-	new ModuleName
+# Instanciation will cause the creation of every
+# command, request and event of your module
+new ModuleName
 
-	# So you can execute them later
-	CommunicationBus.commands.execute "command:name" # "OH"
-	CommunicationBus.reqres.request "request:name" # "MY"
-	CommunicationBus.vent.trigger "command:name" # "GOD!!!!"
-
+# So you can execute them later
+CommunicationBus.commands.execute "command:name" # "OH"
+CommunicationBus.reqres.request "request:name" # "MY"
+CommunicationBus.vent.trigger "command:name" # "GOD!!!!"
+```
 
 ### Router
 
