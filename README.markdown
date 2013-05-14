@@ -1,6 +1,6 @@
 # Puppeteer
 
-Development stack to build web stuff using [Backbone.Marionette](http://marionettejs.com "Marionette.js – A scalable and composite application architecture for Backbone.js"). Some other funny names involved are: [Require.js](http://requirejs.org "RequireJS"), [Bower](http://twitter.github.com/bower/ "BOWER"), [Mocha](ub.io/mocha/), [Chai](http://chaijs.com "Home - Chai"), [Grunt.js](http://gruntjs.com "grunt: a task-based command line build tool for JavaScript projects"), [LESS](http://lesscss.org "LESS &laquo; The Dynamic Stylesheet language").
+Development stack to build web stuff using [Marionette](http://marionettejs.com "Marionette.js – A scalable and composite application architecture for Backbone.js"). Some other funny names involved are: [Require.js](http://requirejs.org "RequireJS"), [Bower](http://twitter.github.com/bower/ "BOWER"), [Mocha](ub.io/mocha/), [Chai](http://chaijs.com "Home - Chai"), [Grunt.js](http://gruntjs.com "grunt: a task-based command line build tool for JavaScript projects"), [LESS](http://lesscss.org "LESS &laquo; The Dynamic Stylesheet language").
 
 ## Getting started
 
@@ -212,3 +212,7 @@ Extends from `Marionette.Layout`.
 * `watch`: Watches changes on CoffeeScript and LESS files to run appropiate tasks (for test files you should have a running test HTTP server with `grunt connect:dev` or `grunt` default task)
 
 My preferred way of using these tasks for development is with three panes on my terminal. The first one with `grunt` (it will start everything up, including the HTTP server), second one with `grunt watch` (which will look for changes on my files) and the third one with my `$EDITOR`.
+
+## Thanks
+
+Huge thanks to [@derickbailey](https://github.com/derickbailey) for creating [Marionette](http://marionettejs.com "Marionette.js – A scalable and composite application architecture for Backbone.js"), and [@brian-mann](https://github.com/brian-mann) for his [BackboneRails](http://www.backbonerails.com "BackboneRails.com - Screencasts and Tutorials") screencast series.
