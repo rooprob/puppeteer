@@ -2,17 +2,203 @@
 
 Development stack to build web stuff using [Backbone.Marionette](http://marionettejs.com "Marionette.js – A scalable and composite application architecture for Backbone.js"). Some other funny names involved are: [Require.js](http://requirejs.org "RequireJS"), [Bower](http://twitter.github.com/bower/ "BOWER"), [Mocha](ub.io/mocha/), [Chai](http://chaijs.com "Home - Chai"), [Grunt.js](http://gruntjs.com "grunt: a task-based command line build tool for JavaScript projects"), [LESS](http://lesscss.org "LESS &laquo; The Dynamic Stylesheet language").
 
-## Dependencies
+## Getting started
 
-* Client-side dependencies are managed using [Bower](http://twitter.github.com/bower/ "BOWER") so install it with `npm install -g bower`. After that, you can install all dependencies using: `bower install`
-* [Grunt.js](http://gruntjs.com "grunt: a task-based command line build tool for JavaScript projects") is used to automatize tasks, so be sure to install it: `npm install -g grunt-cli`
-* You can install Node.js dependencies using: `npm install`
-* [PhantomJS](http://phantomjs.org "PhantomJS: Headless WebKit with JavaScript API") is used to run the tests suite. On OSX you can install it via Homebrew: `brew install phantomjs`
+1. [Install Node.js and npm](http://nodejs.org/download/ "node.js")
+2. [Install Grunt](http://gruntjs.com/getting-started "Getting started - Grunt: The JavaScript Task Runner")
+3. [Install Bower](http://bower.io "BOWER: A package manager for the web")
+4. Install npm dependencies: `npm install`
+5. Install Bower dependencies: `bower install`
+6. If you want to run the tests suite through the command line, [install PhantomJS](http://phantomjs.org/download.html "PhantomJS: Download and Install")
+7. Run `grunt` (default task) and point your browser to `http://localhost:8000/index-dev.html`
+8. When your awesome app is done, run `grunt production`. `index.html` will be the entry point for you fantastic app, and all other files will be under `production/`
 
-## Grunt.js tasks
+## App structure
+
+### General
+
+* `/bower.json`: Bower dependencies file
+* `/Gruntfile.coffee`: Grunt tasks definition file
+* `/package.json`: npm dependencies file
+
+### App
+
+* `/index.html`: Browser entry point for your application on production
+* `/index-dev.html`: Browser entry point for your application on development
+* `/test.html`: Tests suite runner page
+* `/src/app/assets/`: Images for your app
+* `/src/app/css/`: LESS files for your shiny styles
+* `/src/app/app.coffee`: Application entry point. Your magnificent app will be defined and started here
+
+#### Modules
+
+Modules are independent parts of your app. If you divide your app in modules, like a puzzle, it will be easier to deal with, easier to test, easier to understand.
+
+Some module examples may be: a Header or a Footer module, or on a classical TO-DO app you could have a Todo module.
+
+On Puppeteer, modules are located under `/src/app/modules/`.
+
+* `<module_name>/init.coffee`: The entry point for your module. Everything related to the module will be started up here
+* `<module_name>/controllers/<controller>.coffee`: All your module controllers. Usually they will be related to CRUD operations (list, show, edit…), but you don't have to stop there, use any controller you need.
+* `<module_name>/views/<view>.coffee`: Views will handle everything you see on screen and they will be saved here
+* `<module_name>/template/<template>.html`: Templates for your views
+
+#### Entities
+
+### Testing
+
+* `/src/test/specs/<spec>.coffee`: Here are the Mocha (with Chai) specs for your app
+* `/src/test/fixtures/<fixture>`: If you need fixtures on your specs, put them here
+
+## Framework
+
+Puppeteer has his own micro framework on top of Backbone and Marionette. This will maximize your chances of customizing the behavior of your global objects, increasing flexibility and extension and minimizing repetition.
+
+The framework object holding all other objects can be required through RequireJS using the dependency string `app.framework`.
+
+	define ['app.framework'], (Framework) ->
+		# Use framework objects at your will…
+		console.log Framework.Application
+		console.log Framework.Collection
+		console.log Framework.Controller
+		console.log Framework.ItemView
+
+### Application
+
+Extends from `Marionette.Application`.
+
+When the application starts, a common task is to start the navigation history. With Framework.Application this is done for you. After the app has ben started, the history will be automatically started, and it will navigate to the default `rootRoute` (you can define it with `Application.history.setRootRoute`):
+
+	App = new Framework.Application()
+	App.history.setRootRoute "sample/route"
+	App.start() # History will be started, and navigate to "sample/route"
+
+To define the application default region (which will be used by default by controllers whithout an explicit region defined) you can use `Application.setDefaultRegion` method:
+
+	App = new Framework.Application()
+
+	App.addRegions
+		contentRegion: "#content-region"
+
+	App.setDefaultRegion App.contentRegion
+
+In order to maintain a registry of instanced objects (just Controllers at the time), Framework.Application has a set of methods to work with this registry. They are used internally, so you don't have to worry about it. Just keep in mind that this registry exists, and you can consult it or reset it using the commands detaile above.
+
+Framework.Application also automatically attaches some commands to be used through the entire app while developing:
+
+- `app:navigate`: Performs a history navigation to the given URL, passing given options (see http://backbonejs.org/#Router-navigate)
+- `reset:instances`: Clean up all stored instances on the registry
+- `list:instances`: List all stored instances on the registry
+
+### Collection
+
+Extends from `Backbone.Collection`.
+
+### CommunicationBus
+
+Expose all three `Backbone.Wreqr` object types: `vent`, `commands`, `reqres`. This object will be used in an app wide context to register commands, requests and listening to events… and, of course, executing and trigering them.
+
+Since Puppeteer use RequireJS for modules management, I prefer having one global object to hold this messaging concerns instead of letting the modules objects or application object having their own messaging bus. This way I avoid possible circular dependencies (App requires ModuleA, and ModuleA wants to speak with App, so it has to require it… blah blah blah).
+
+### Controller
+
+Extends from `Marionette.Controller`.
+
+Controllers are automatically inserted into the application registry when instanciated, and removed when closed (see Framework.Application).
+
+If you need to show a View inside the region associated with your controller, use `show` method. It will liste to the close event on that view to close the controller as well.
+
+	class FirstController extends Framework.Controller
+		initialize: ->
+			@show new FirstView
+
+Controllers should have an associated `region` that you pass to them on instantiation. If you don't do it, they will look for the default region (it can be defined with your `Framework.Application` through its `setDefaultRegion` method)
+
+	# Create application
+	App = new Framework.Application()
+
+	# Define app regions
+	App.addRegions
+		headerRegion: "#header-region"
+		contentRegion: "#content-region"
+
+	# Set default region and start app
+	App.setDefaultRegion App.contentRegion
+	App.start()
+
+	# Instanciate controller with region
+	controller1 = new SampleController1 region : App.headerRegion
+
+	# Instanciate controller without region
+	controller2 = new SampleController2
+
+	# Check regions
+	console.log controller1.region # => headerRegion
+	console.log controller2.region # => contentRegion
+
+
+### Model
+
+Extends from `Backbone.Model`.
+
+### Module
+
+Expose a class to be used to create modules. You can extend this class with:
+
+- `commands`: Will create a CommunicationBus command for each item on the object. The `key` will be the command name, and the `value` will be the function to be executed.
+- `requests`: Will create a CommunicationBus request for each item on the object. The `key` will be the request name, and the `value` will be the function to be executed.
+- `events`: Will create a CommunicationBus event listener for each item on the object. The `key` will be the event name, and the `value` will be the function to be executed.
+
+Example:
+
+	# Define the class extending from Framework.Module
+	# and setting one command, one request and one event
+	class ModuleName extends Framework.Module
+		commands:
+			"command:name": -> console.log "OH"
+		requests:
+			"request:name": -> return "MY"
+		events:
+			"event:name": -> console.log "GOD!!!!"
+
+	# Instanciation will cause the creation of every
+	# command, request and event of your module
+	new ModuleName
+
+	# So you can execute them later
+	CommunicationBus.commands.execute "command:name" # "OH"
+	CommunicationBus.reqres.request "request:name" # "MY"
+	CommunicationBus.vent.trigger "command:name" # "GOD!!!!"
+
+
+### Router
+
+Extends from `Marionette.AppRouter`.
+
+### Views
+
+#### CollectionView
+
+Extends from `Marionette.CollectionView`.
+
+#### CompositeView
+
+Extends from `Marionette.CompositeView`.
+
+#### ItemView
+
+Extends from `Marionette.ItemView`.
+
+#### Layout
+
+Extends from `Marionette.Layout`.
+
+## Grunt tasks
 
 * `default`: Runs `dev` task and start an HTTP server using `connect:dev` task
 * `dev`: Cleans `/dev`, compiles CoffeScript and LESS files under `/src` to `/dev`
 * `production`: Cleans `/production`, compiles CoffeScript files under `/src` to `/dev`, runs the tests suite, compiles LESS files under `/src` to `/production` and optimize all JS files under `/dev` to `/production` using RequireJS
 * `test`: compiles CoffeScript files under `/src` to `/dev`, launch an HTTP server using `connect:test` task and run all tests under `/dev/test`
 * `watch`: Watches changes on CoffeeScript and LESS files to run appropiate tasks (for test files you should have a running test HTTP server with `grunt connect:dev` or `grunt` default task)
+
+My preferred way of using these tasks for development is with three panes on my terminal. The first one with `grunt` (it will start everything up, including the HTTP server), second one with `grunt watch` (which will look for changes on my files) and the third one with my `$EDITOR`.
