@@ -9,7 +9,6 @@ require.config
 		'backbone.wreqr': '../../lib/backbone.wreqr/lib/amd/backbone.wreqr'
 		'backbone.babysitter': '../../lib/backbone.babysitter/lib/amd/backbone.babysitter'
 		'marionette': '../../lib/marionette/lib/core/amd/backbone.marionette'
-		'cfg': './config/config'
 		'app.framework': './framework/framework'
 		'communication-bus': './framework/communication-bus'
 
@@ -26,7 +25,6 @@ require [
 	'sinon-chai'
 	'js-fixtures'
 	'sinon'
-	'cfg'
 	'bootstrap'
 ], (chai, sinonChai, fixtures) ->
 	mocha.setup 'bdd'
