@@ -46,31 +46,6 @@ define [
 
 				stub.should.have.been.calledWith "app:default:region"
 
-		# Registry
-		# ------------------------------------------------------------------------------------
-		describe "Registry", ->
-			it "should register the new created instance", ->
-				stub = @sandbox.stub CommunicationBus.commands, "execute", (args...) ->
-					console.log "Stub called with:", args
-
-				controller = new Controller
-					region: @region
-
-				stub.should.have.been.calledWith 'register:instance', controller
-
-			it "should unregister the instance when closing", ->
-				id = null
-				stub = @sandbox.stub CommunicationBus.commands, "execute", (args...) ->
-					id = args[1]
-					console.log "Stub called with:", args
-
-				controller = new Controller
-					region: @region
-
-				controller.close()
-
-				stub.should.have.been.calledWith 'unregister:instance', id
-
 		# show()
 		# ------------------------------------------------------------------------------------
 		describe "show()", ->

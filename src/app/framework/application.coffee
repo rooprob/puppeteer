@@ -16,11 +16,9 @@ define [
 					@history.navigate(@rootRoute, trigger: true) unless @history.getCurrentRoute()
 
 			@history.attachHandlers()
-			@registry.attachHandlers()
 
 		setDefaultRegion: (region) ->
-			CommunicationBus.reqres.setHandler "app:default:region", ->
-				region
+			CommunicationBus.reqres.setHandler "app:default:region", -> return region
 
 		history:
 			attachHandlers: ->
@@ -40,44 +38,5 @@ define [
 
 			startHistory: ->
 				Backbone.history.start() if Backbone.history
-
-		registry:
-			attachHandlers: ->
-				CommunicationBus.commands.setHandler "register:instance", (instance, id) =>
-					@add instance, id
-
-				CommunicationBus.commands.setHandler "unregister:instance", (id) =>
-					@remove id
-
-				CommunicationBus.commands.setHandler "reset:instances", =>
-					@reset()
-
-				CommunicationBus.commands.setHandler "list:instances", =>
-					console.log @_registry
-
-				window.CommunicationBus = CommunicationBus
-
-			add: (instance, id) ->
-				@_registry ?= {}
-				@_registry[id] = instance
-
-			remove: (id) ->
-				delete @_registry[id]
-
-			reset: ->
-				oldCount = @getSize()
-
-				for key, controller of @_registry
-					controller.region?.close()
-
-				msg = "There were #{oldCount} controllers, there are now #{@getSize()}"
-
-				if @getSize() > 0
-					console.warn msg, @_registry
-				else
-					console.log msg
-
-			getSize: ->
-				_.size @_registry
 
 	return Application
