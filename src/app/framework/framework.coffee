@@ -1,7 +1,8 @@
 define [
+	'underscore'
 	'framework/application'
-	'framework/model'
-	'framework/collection'
+	'framework/entities/model'
+	'framework/entities/collection'
 	'framework/controller'
 	'framework/views/collectionview'
 	'framework/views/compositeview'
@@ -9,8 +10,11 @@ define [
 	'framework/views/layout'
 	'framework/router'
 	'framework/module'
-	'framework/views/view'
+	'framework/config/backbone/sync'
+	'framework/config/marionette/view'
+	'framework/config/marionette/template-cache'
 ], (
+	_,
 	Application,
 	Model,
 	Collection,

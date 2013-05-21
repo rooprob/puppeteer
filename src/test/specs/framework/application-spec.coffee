@@ -5,25 +5,27 @@ define [
 	'communication-bus'
 ], (Application, Marionette, Backbone, CommunicationBus) ->
 
-	# BEFORE AND AFTER
-	# --------------------------------------------------------------------------------------
-	before ->
-		@historyStartStub = sinon.stub Backbone.history, 'start', ->
-
-	beforeEach ->
-		@sandbox = sinon.sandbox.create()
-		@application = new Application
-
-	afterEach ->
-		@application = null
-		@sandbox.restore()
-
-	after ->
-		Backbone.history.start.restore()
-
-	# SPECS
-	# --------------------------------------------------------------------------------------
 	describe "Framework.Application", ->
+
+		# BEFORE AND AFTER
+		# ------------------------------------------------------------------------------------
+		before ->
+			@historyStartStub = sinon.stub Backbone.history, 'start', ->
+
+		beforeEach ->
+			@sandbox = sinon.sandbox.create()
+			@application = new Application
+
+		afterEach ->
+			@application = null
+			@sandbox.restore()
+
+		after ->
+			Backbone.history.start.restore()
+
+
+		# SPECS
+		# ------------------------------------------------------------------------------------
 
 		# Global
 		# ------------------------------------------------------------------------------------

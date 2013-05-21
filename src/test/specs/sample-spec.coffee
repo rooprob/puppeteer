@@ -1,14 +1,22 @@
 define ['backbone', 'jquery', 'js-fixtures'], (backbone, $, fixtures) ->
-	object = null
-
-	beforeEach ->
-		object =
-			method: ->
-
-	afterEach ->
-		fixtures.cleanUp()
-
+	
 	describe "Sample spec", ->
+		
+		# HELPERS
+		# ------------------------------------------------------------------------------------
+		object = null
+
+		# BEFORE AND AFTER
+		# ------------------------------------------------------------------------------------
+		beforeEach ->
+			object =
+				method: ->
+
+		afterEach ->
+			fixtures.cleanUp()
+		
+		# SPECS
+		# ------------------------------------------------------------------------------------
 		it "sample equal assertion", ->
 			"Foo".should.equal "Foo"
 

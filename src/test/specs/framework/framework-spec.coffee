@@ -2,8 +2,8 @@ define [
 	'marionette'
 	'app.framework'
 	'framework/application'
-	'framework/model'
-	'framework/collection'
+	'framework/entities/model'
+	'framework/entities/collection'
 	'framework/controller'
 	'framework/views/collectionview'
 	'framework/views/compositeview'
@@ -11,7 +11,6 @@ define [
 	'framework/views/layout'
 	'framework/router'
 	'framework/module'
-	'framework/views/view'
 ], (
 	Marionette,
 	Framework,
@@ -28,6 +27,7 @@ define [
 ) ->
 
 	describe "Framework", ->
+
 		it "should have a property Application being an instance of Application", ->
 			prop = new Framework.Application
 			prop.should.be.an.instanceof Application

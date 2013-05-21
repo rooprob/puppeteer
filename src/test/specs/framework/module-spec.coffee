@@ -1,6 +1,7 @@
 define ['framework/module', 'marionette'], (Module, Marionette) ->
 
 	describe "Framework.Module", ->
+
 		it "should call initialize() method on instantiation", ->
 			class TestModule extends Module
 				initialize: (val) ->

@@ -1,6 +1,7 @@
 define ['communication-bus', 'backbone.wreqr'], (CommunicationBus, Wreqr) ->
 
 	describe "CommunicationBus", ->
+
 		it "Should have a 'vent', 'commands' and 'reqres' attributes", ->
 			CommunicationBus.vent.should.exist
 			CommunicationBus.commands.should.exist

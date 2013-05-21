@@ -30,16 +30,16 @@ require [
 	mocha.setup 'bdd'
 	chai.use sinonChai
 	chai.should()
-
 	fixtures.path = 'dev/test/fixtures/'
 
 	require [
 		'specs/framework/application-spec'
-		'specs/framework/collection-spec'
 		'specs/framework/communication-bus-spec'
 		'specs/framework/controller-spec'
+		'specs/framework/entities/entities-spec'
+		'specs/framework/entities/collection-spec'
+		'specs/framework/entities/model-spec'
 		'specs/framework/framework-spec'
-		'specs/framework/model-spec'
 		'specs/framework/module-spec'
 		'specs/framework/router-spec'
 		'specs/framework/views/collectionview-spec'

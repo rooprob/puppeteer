@@ -4,27 +4,28 @@ define [
 	'communication-bus'
 ], (Controller, Marionette, CommunicationBus) ->
 
-	# BEFORE AND AFTER
-	# --------------------------------------------------------------------------------------
-	beforeEach ->
-		@sandbox = sinon.sandbox.create()
-		@region = new Marionette.Region
-			el: '#sandbox'
-
-		@view = new Marionette.ItemView
-			template: '<div>test</div>'
-
-		@controller = new Controller
-			region: @region
-
-	afterEach ->
-		@region = null
-		@controller = null
-		@sandbox.restore()
-
-	# SPECS
-	# --------------------------------------------------------------------------------------
 	describe "Framework.Controller", ->
+
+		# BEFORE AND AFTER
+		# ------------------------------------------------------------------------------------
+		beforeEach ->
+			@sandbox = sinon.sandbox.create()
+			@region = new Marionette.Region
+				el: '#sandbox'
+
+			@view = new Marionette.ItemView
+				template: '<div>test</div>'
+
+			@controller = new Controller
+				region: @region
+
+		afterEach ->
+			@region = null
+			@controller = null
+			@sandbox.restore()
+
+		# SPECS
+		# ------------------------------------------------------------------------------------
 
 		# Global
 		# ------------------------------------------------------------------------------------

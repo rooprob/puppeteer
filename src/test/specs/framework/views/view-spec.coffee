@@ -1,24 +1,25 @@
-define ['marionette', 'framework/views/view'], (Marionette) ->
+define ['marionette', 'framework/config/marionette/view'], (Marionette) ->
 
-	# HELPERS
-	# --------------------------------------------------------------------------------------
-	createViewWithAnimationOptions = (options) ->
-		view = new Marionette.View
-		view.animations = options
-
-		return view
-
-	# BEFORE AND AFTER
-	# --------------------------------------------------------------------------------------
-	beforeEach ->
-		@sandbox = sinon.sandbox.create()
-
-	afterEach ->
-		@sandbox.restore()
-
-	# SPECS
-	# --------------------------------------------------------------------------------------
 	describe "Framework.View", ->
+
+		# HELPERS
+		# ------------------------------------------------------------------------------------
+		createViewWithAnimationOptions = (options) ->
+			view = new Marionette.View
+			view.animations = options
+
+			return view
+
+		# BEFORE AND AFTER
+		# ------------------------------------------------------------------------------------
+		beforeEach ->
+			@sandbox = sinon.sandbox.create()
+
+		afterEach ->
+			@sandbox.restore()
+
+		# SPECS
+		# ------------------------------------------------------------------------------------
 
 		# Animations
 		# ------------------------------------------------------------------------------------
