@@ -47,8 +47,6 @@ On Puppeteer, modules are located under `/src/app/modules/`.
 * `<module_name>/views/<view>.coffee`: Views will handle everything you see on screen and they will be saved here
 * `<module_name>/template/<template>.html`: Templates for your views
 
-#### Entities
-
 ### Testing
 
 * `/src/test/specs/<spec>.coffee`: Here are the Mocha (with Chai) specs for your app
@@ -92,17 +90,10 @@ App.addRegions
 App.setDefaultRegion App.contentRegion
 ```
 
-In order to maintain a registry of instanced objects (just Controllers at the time), Framework.Application has a set of methods to work with this registry. They are used internally, so you don't have to worry about it. Just keep in mind that this registry exists, and you can consult it or reset it using the commands detaile above.
-
 Framework.Application also automatically attaches some commands to be used through the entire app while developing:
 
 - `app:navigate`: Performs a history navigation to the given URL, passing given options (see http://backbonejs.org/#Router-navigate)
-- `reset:instances`: Clean up all stored instances on the registry
-- `list:instances`: List all stored instances on the registry
-
-### Collection
-
-Extends from `Backbone.Collection`.
+- `app:default:region`: Get default region for the app (defined through `setDefaultRegion()`)
 
 ### CommunicationBus
 
@@ -113,8 +104,6 @@ Since Puppeteer use RequireJS for modules management, I prefer having one global
 ### Controller
 
 Extends from `Marionette.Controller`.
-
-Controllers are automatically inserted into the application registry when instanciated, and removed when closed (see Framework.Application).
 
 If you need to show a View inside the region associated with your controller, use `show` method. It will liste to the close event on that view to close the controller as well.
 
@@ -149,6 +138,28 @@ controller2 = new SampleController2
 console.log controller1.region # => headerRegion
 console.log controller2.region # => contentRegion
 ```
+### Entities
+
+This is not an instantiable class, but it defines some commands and make some changes to Backbone methods.
+
+A global `when:fetched` command is defined, and should be used to execute a callback when a list of entities have ended fetching data from server:
+
+```coffee
+sampleModel1.fetch()
+sampleModel2.fetch()
+
+CommunicationBus.commands.execute 'when:fetched', [sampleModel1, sampleModel2], ->
+	console.log 'Yayyy, both models have been fetched!!!'
+```
+
+This module also attach some custom events to Models and Collections:
+
+- `sync:start`: this event will fire on the entity before it begins the communication with his source
+- `sync:stop`: this event will fire on the entity when the communication with his source has ended
+
+### Collection
+
+Extends from `Backbone.Collection`.
 
 ### Model
 
