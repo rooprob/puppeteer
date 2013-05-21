@@ -13,7 +13,7 @@ module.exports = (grunt) ->
 		clean:
 			all : ['./dev/*', './production/*']
 			dev : ['./dev/*']
-			production : ['./production']
+			production : ['./production/*']
 
 		connect:
 			dev:
@@ -54,6 +54,13 @@ module.exports = (grunt) ->
 						cwd: './src/app/assets'
 						src: ['**']
 						dest: './production/app/assets'
+				]
+			productionRequire:
+				files: [
+						expand: true
+						cwd: './lib/requirejs/'
+						src: ['require.js']
+						dest: './production/'
 				]
 
 		smushit:
@@ -147,6 +154,7 @@ module.exports = (grunt) ->
 		'test'
 		'less:production'
 		'copy:production'
+		'copy:productionRequire'
 		'copy:templates'
 		'requirejs'
 		'smushit:production'
