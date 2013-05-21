@@ -90,9 +90,14 @@ App.addRegions
 App.setDefaultRegion App.contentRegion
 ```
 
-Framework.Application also automatically attaches some commands to be used through the entire app while developing:
+Framework.Application also automatically attaches some `CommunicationBus` handlers to be used through the entire app while developing:
+
+**Commands**
 
 - `app:navigate`: Performs a history navigation to the given URL, passing given options (see http://backbonejs.org/#Router-navigate)
+
+**Requests**
+
 - `app:default:region`: Get default region for the app (defined through `setDefaultRegion()`)
 
 ### CommunicationBus
