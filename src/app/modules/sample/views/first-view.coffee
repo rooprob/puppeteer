@@ -1,8 +1,7 @@
 define [
 	'text!modules/sample/templates/first.html'
 	'app.framework'
-	'communication-bus'
-], (template, Framework, CommunicationBus) ->
+], (template, Framework) ->
 
 	class FirstView extends Framework.ItemView
 		template: template

@@ -2,7 +2,7 @@ define [
 	'framework/controller'
 	'marionette'
 	'communication-bus'
-], (Controller, Marionette, CommunicationBus) ->
+], (Controller, Marionette, Bus) ->
 
 	describe "Framework.Controller", ->
 
@@ -40,7 +40,7 @@ define [
 				@controller.region.should.equal @region
 
 			it "should use default region if no region is given", ->
-				stub = @sandbox.stub CommunicationBus.reqres, "request", (value) ->
+				stub = @sandbox.stub Bus.reqres, "request", (value) ->
 					console.log "Stub called with: #{value}"
 
 				controller = new Controller

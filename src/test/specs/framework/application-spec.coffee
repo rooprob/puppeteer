@@ -3,7 +3,7 @@ define [
 	'marionette'
 	'backbone'
 	'communication-bus'
-], (Application, Marionette, Backbone, CommunicationBus) ->
+], (Application, Marionette, Backbone, Bus) ->
 
 	describe "Framework.Application", ->
 
@@ -51,7 +51,7 @@ define [
 				stub.should.have.been.calledWith 'sample/route', trigger: true
 
 			it "should attach history handlers after initialization", ->
-				stub = @sandbox.stub CommunicationBus.commands, 'setHandler', ->
+				stub = @sandbox.stub Bus.commands, 'setHandler', ->
 				application = new Application
 				stub.should.have.been.calledWith "app:navigate"
 
@@ -63,13 +63,13 @@ define [
 			# ----------------------------------------------------------------------------------
 			describe "attachHandlers()", ->
 				it "should create an 'app:navigate' event listener on attachHandlers", ->
-					stub = @sandbox.stub CommunicationBus.commands, 'setHandler', ->
+					stub = @sandbox.stub Bus.commands, 'setHandler', ->
 					@application.history.attachHandlers()
 					stub.should.have.been.calledWith 'app:navigate'
 
 				it "should call history.navigate on 'app:navigate' command", ->
 					stub = @sandbox.stub @application.history, 'navigate', ->
-					CommunicationBus.commands.execute 'app:navigate', 'sample/route', foo: 'bar'
+					Bus.commands.execute 'app:navigate', 'sample/route', foo: 'bar'
 					stub.should.have.been.calledWith 'sample/route', foo: 'bar'
 
 			# navigate()

@@ -1,8 +1,7 @@
 define [
 	'text!modules/other/templates/show.html'
 	'app.framework'
-	'communication-bus'
-], (template, Framework, CommunicationBus) ->
+], (template, Framework) ->
 
 	class ShowView extends Framework.ItemView
 		template: template

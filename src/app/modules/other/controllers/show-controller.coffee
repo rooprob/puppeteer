@@ -2,7 +2,7 @@ define [
 	'modules/other/views/show-view'
 	'app.framework'
 	'communication-bus'
-], (ShowView, Framework, CommunicationBus) ->
+], (ShowView, Framework, Bus) ->
 
 	class ShowController extends Framework.Controller
 

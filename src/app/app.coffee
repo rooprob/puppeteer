@@ -1,12 +1,12 @@
 define [
 	'app.framework'
-	'communication-bus'
 	'modules/header/init'
 	'modules/sample/init'
 	'modules/other/init'
-], (Framework, CommunicationBus) ->
+	'marionette'
+], (Framework, HeaderRegion, SampleRegion, OtherRegion, Marionette) ->
 
-	App = new Framework.Application()
+	App = new Framework.Application
 
 	App.addRegions
 		headerRegion: "#header-region"
@@ -15,8 +15,8 @@ define [
 	App.setDefaultRegion App.contentRegion
 
 	App.addInitializer ->
-		CommunicationBus.commands.execute "module:header:start", App.headerRegion
-		CommunicationBus.commands.execute "module:sample:start"
-		CommunicationBus.commands.execute "module:other:start"
+		new HeaderRegion App.headerRegion
+		new SampleRegion
+		new OtherRegion
 
 	return App

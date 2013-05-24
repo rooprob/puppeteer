@@ -1,8 +1,7 @@
 define [
 	'text!modules/sample/templates/second.html'
 	'app.framework'
-	'communication-bus'
-], (template, Framework, CommunicationBus) ->
+], (template, Framework) ->
 
 	class SecondView extends Framework.ItemView
 		template: template

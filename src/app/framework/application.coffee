@@ -3,7 +3,7 @@ define [
 	'marionette'
 	'underscore'
 	'communication-bus'
-], (Backbone, Marionette, _, CommunicationBus) ->
+], (Backbone, Marionette, _, Bus) ->
 
 	class Application extends Marionette.Application
 		constructor: (args...) ->
@@ -18,11 +18,11 @@ define [
 			@history.attachHandlers()
 
 		setDefaultRegion: (region) ->
-			CommunicationBus.reqres.setHandler "app:default:region", -> return region
+			Bus.reqres.setHandler "app:default:region", -> return region
 
 		history:
 			attachHandlers: ->
-				CommunicationBus.commands.setHandler 'app:navigate', (route, options = {}) =>
+				Bus.commands.setHandler 'app:navigate', (route, options = {}) =>
 					@navigate(route, options)
 
 			navigate: (route, options = {}) ->

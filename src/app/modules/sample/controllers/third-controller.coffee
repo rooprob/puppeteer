@@ -2,7 +2,7 @@ define [
 	'modules/sample/views/third-view'
 	'app.framework'
 	'communication-bus'
-], (ThirdView, Framework, CommunicationBus) ->
+], (ThirdView, Framework, Bus) ->
 
 	class ThirdController extends Framework.Controller
 
@@ -10,7 +10,7 @@ define [
 			thirdView = new ThirdView
 
 			@listenTo thirdView, "button-go-to-second:clicked", ->
-				CommunicationBus.commands.execute "module:sample:second-controller:start"
+				Bus.commands.execute "module:sample:second:start"
 
 			@show thirdView
 

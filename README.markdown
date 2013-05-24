@@ -172,11 +172,15 @@ Extends from `Backbone.Model`.
 
 ### Module
 
-Expose a class to be used to create modules. You can extend this class with:
+Expose a class to be used to create modules. Instances of this class will have some utility methods to work with the CommunicationBus directly:
 
-- `commands`: Will create a CommunicationBus command for each item on the object. The `key` will be the command name, and the `value` will be the function to be executed.
-- `requests`: Will create a CommunicationBus request for each item on the object. The `key` will be the request name, and the `value` will be the function to be executed.
-- `events`: Will create a CommunicationBus event listener for each item on the object. The `key` will be the event name, and the `value` will be the function to be executed.
+- `setCommands`: Will create a CommunicationBus command for each item on the object given to the method. The `key` will be the command name, and the `value` will be the function to be executed.
+- `setRequests`: Will create a CommunicationBus request for each item on the object given to the method. The `key` will be the request name, and the `value` will be the function to be executed.
+- `setEvents`: Will create a CommunicationBus event listener for each item on the object given to the method. The `key` will be the event name, and the `value` will be the function to be executed.
+- `resetCommands`: Remove all the commands attached by the module
+- `resetRequests`: Remove all the requests attached by the module
+- `resetEvents`: Remove all the events attached by the module
+- `close`: Remove all messaging handlers attached by the module
 
 Example:
 
@@ -184,21 +188,33 @@ Example:
 # Define the class extending from Framework.Module
 # and setting one command, one request and one event
 class ModuleName extends Framework.Module
-	commands:
-		"command:name": -> console.log "OH"
-	requests:
-		"request:name": -> return "MY"
-	events:
-		"event:name": -> console.log "GOD!!!!"
+	initialize:
+		@setCommands
+			"command:name": -> console.log "OH"
+
+		@setRequests
+			"request:name": -> return "MY"
+
+		@setEventsevents
+			"event:name": -> console.log "GOD!!!!"
 
 # Instanciation will cause the creation of every
 # command, request and event of your module
-new ModuleName
+module = new ModuleName
 
 # So you can execute them later
 CommunicationBus.commands.execute "command:name" # "OH"
 CommunicationBus.reqres.request "request:name" # "MY"
 CommunicationBus.vent.trigger "command:name" # "GOD!!!!"
+
+# And if you reset the commands with resetCommands(), they will dissapear
+module.resetCommands()
+CommunicationBus.commands.execute "command:name" # Handler not found!
+
+# Or you can close() the module, and all module messaging handlers will dissappear
+module.close()
+CommunicationBus.reqres.request "request:name" # Handler not found!
+CommunicationBus.vent.trigger "command:name" # Nothing happens…
 ```
 
 ### Router

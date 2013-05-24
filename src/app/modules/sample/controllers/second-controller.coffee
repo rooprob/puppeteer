@@ -2,7 +2,7 @@ define [
 	'modules/sample/views/second-view'
 	'app.framework'
 	'communication-bus'
-], (SecondView, Framework, CommunicationBus) ->
+], (SecondView, Framework, Bus) ->
 
 	class SecondController extends Framework.Controller
 
@@ -10,10 +10,10 @@ define [
 			secondView = new SecondView
 
 			@listenTo secondView, "button-go-to-first:clicked", ->
-				CommunicationBus.commands.execute "app:navigate", '', trigger: true
+				Bus.commands.execute "app:navigate", '', trigger: true
 
 			@listenTo secondView, "button-go-to-second:clicked", =>
-				CommunicationBus.commands.execute "module:sample:third-controller:start"
+				Bus.commands.execute "module:sample:third:start"
 
 			@show secondView
 

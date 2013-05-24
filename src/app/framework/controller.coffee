@@ -1,13 +1,14 @@
 define [
 	'marionette',
-	'underscore',
 	'communication-bus'
-], (Marionette, _, CommunicationBus) ->
+], (Marionette, Bus) ->
 
 	class Controller extends Marionette.Controller
 
 		constructor: (options = {}) ->
-			@region = options.region or CommunicationBus.reqres.request "app:default:region"
+			@region = options.region or Bus.reqres.request "app:default:region"
+			console.warn "Controller needs a region", @region if not @region
+
 			super options
 
 		show: (view) ->

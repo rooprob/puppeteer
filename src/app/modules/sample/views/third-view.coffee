@@ -1,8 +1,7 @@
 define [
 	'text!modules/sample/templates/third.html'
 	'app.framework'
-	'communication-bus'
-], (template, Framework, CommunicationBus) ->
+], (template, Framework) ->
 
 	class ThirdView extends Framework.ItemView
 		template: template

@@ -4,24 +4,23 @@ define [
 	'modules/sample/controllers/third-controller'
 	'app.framework'
 	'communication-bus'
-	'modules/other/init'
-], (FirstController, SecondController, ThirdController, Framework, CommunicationBus) ->
+], (FirstController, SecondController, ThirdController, Framework, Bus) ->
 
 	class SampleModule extends Framework.Module
-		commands:
-			"module:sample:first-controller:start": -> new FirstController
-			"module:sample:second-controller:start": -> new SecondController
-			"module:sample:third-controller:start": -> new ThirdController
 
 		initialize: ->
+			@setCommands
+				"module:sample:first:start": -> new FirstController
+				"module:sample:second:start": -> new SecondController
+				"module:sample:third:start": -> new ThirdController
+
 			new Framework.AppRouter
 				routes:
-					"": => @startController "first-controller"
-					"sample/second": => @startController "second-controller"
+					"": => @startController "first"
+					"sample/second": => @startController "second"
 
 		startController: (controller) ->
-			CommunicationBus.commands.execute "module:sample:#{controller}:start"
-			CommunicationBus.vent.trigger "module:sample:selected"
+			Bus.commands.execute "module:sample:#{controller}:start"
+			Bus.vent.trigger "module:sample:selected"
 
-	CommunicationBus.commands.setHandler "module:sample:start", (region) ->
-		new SampleModule region: region
+	return SampleModule

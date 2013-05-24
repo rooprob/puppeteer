@@ -3,7 +3,7 @@ define [
 	'backbone',
 	'underscore',
 	'communication-bus'],
-($, Backbone, _, CommunicationBus) ->
+($, Backbone, _, Bus) ->
 
 	do (Backbone) ->
 		_sync = Backbone.sync
@@ -20,6 +20,6 @@ define [
 			beforeSend: -> @trigger "sync:start", @
 			complete: -> @trigger "sync:stop", @
 
-	CommunicationBus.commands.setHandler "when:fetched", (entities, callback) ->
+	Bus.commands.setHandler "when:fetched", (entities, callback) ->
 		xhrs = _.chain([entities]).flatten().pluck("_fetchPromise").value()
 		$.when(xhrs...).done callback

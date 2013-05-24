@@ -3,7 +3,7 @@ define [
 	'backbone'
 	'communication-bus'
 	'framework/entities/entities'
-], ($, Backbone, CommunicationBus) ->
+], ($, Backbone, Bus) ->
 
 	describe "Framework.Entities", ->
 
@@ -60,7 +60,7 @@ define [
 
 			it "should define a 'when:fetched' command handler", ->
 				should = require('chai').should()
-				should.exist CommunicationBus.commands.getHandler 'when:fetched'
+				should.exist Bus.commands.getHandler 'when:fetched'
 
 			it "should execute callback when all entities _fetchPromise are done", (done) ->
 				cb = -> console.log 'Callback'
@@ -79,7 +79,7 @@ define [
 				mockEntity2 =
 					_fetchPromise: deferredMethod()
 
-				CommunicationBus.commands.execute 'when:fetched', [mockEntity1, mockEntity2], spy
+				Bus.commands.execute 'when:fetched', [mockEntity1, mockEntity2], spy
 
 				setTimeout ->
 					spy.should.have.been.called

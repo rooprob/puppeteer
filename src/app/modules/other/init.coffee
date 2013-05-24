@@ -2,20 +2,20 @@ define [
 	'modules/other/controllers/show-controller'
 	'app.framework'
 	'communication-bus'
-], (ShowController, Framework, CommunicationBus) ->
+], (ShowController, Framework, Bus) ->
 
 	class OtherModule extends Framework.Module
-		commands:
-			"module:other:show-controller:start": -> new ShowController
 
 		initialize: ->
+			@setCommands
+				"module:other:show:start": -> new ShowController
+
 			new Framework.AppRouter
 				routes:
-					"other": => @startController "show-controller"
+					"other": => @startController "show"
 
 		startController: (controller) ->
-			CommunicationBus.commands.execute "module:other:#{controller}:start"
-			CommunicationBus.vent.trigger "module:other:selected"
+			Bus.commands.execute "module:other:#{controller}:start"
+			Bus.vent.trigger "module:other:selected"
 
-	CommunicationBus.commands.setHandler "module:other:start", (region) ->
-		new OtherModule region: region
+	return OtherModule
