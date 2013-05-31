@@ -9,7 +9,7 @@ define [
 		initialize: (module) ->
 			firstView = new FirstView
 
-			@listenTo firstView, "button-go-to-second:clicked", =>
+			@listenTo firstView, "button-go-to-second:clicked", ->
 				Bus.commands.execute "app:navigate", 'sample/second', trigger: true
 
 			@show firstView

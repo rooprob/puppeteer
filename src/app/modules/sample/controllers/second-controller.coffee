@@ -12,7 +12,7 @@ define [
 			@listenTo secondView, "button-go-to-first:clicked", ->
 				Bus.commands.execute "app:navigate", '', trigger: true
 
-			@listenTo secondView, "button-go-to-second:clicked", =>
+			@listenTo secondView, "button-go-to-second:clicked", ->
 				Bus.commands.execute "module:sample:third:start"
 
 			@show secondView

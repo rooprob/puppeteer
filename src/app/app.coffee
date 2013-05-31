@@ -3,8 +3,7 @@ define [
 	'modules/header/init'
 	'modules/sample/init'
 	'modules/other/init'
-	'marionette'
-], (Framework, HeaderRegion, SampleRegion, OtherRegion, Marionette) ->
+], (Framework, HeaderRegion, SampleRegion, OtherRegion) ->
 
 	App = new Framework.Application
 
