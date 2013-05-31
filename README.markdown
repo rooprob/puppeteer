@@ -175,14 +175,17 @@ Extends from `Backbone.Model`.
 Expose a class to be used to create modules. Instances of this class will have some utility methods to work with the CommunicationBus directly:
 
 
-- `setRoutes`: Create a new Framework.Router with the given routes object
 - `setCommands`: Will create a CommunicationBus command for each item on the object given to the method. The `key` will be the command name, and the `value` will be the function to be executed.
 - `setRequests`: Will create a CommunicationBus request for each item on the object given to the method. The `key` will be the request name, and the `value` will be the function to be executed.
 - `setEvents`: Will create a CommunicationBus event listener for each item on the object given to the method. The `key` will be the event name, and the `value` will be the function to be executed.
 - `resetCommands`: Remove all the commands attached by the module
 - `resetRequests`: Remove all the requests attached by the module
 - `resetEvents`: Remove all the events attached by the module
-- `close`: Remove all messaging handlers attached by the module
+
+And also other util methods:
+
+- `close`: Remove all messaging handlers attached by the methods explained above
+- `setRoutes`: Create a new Framework.Router with the given routes object
 
 Example:
 
