@@ -1,7 +1,8 @@
 define [
 	'underscore'
 	'communication-bus'
-], (_, Bus) ->
+	'framework/router'
+], (_, Bus, AppRouter) ->
 
 	class Module
 		initialize: ->
@@ -17,6 +18,10 @@ define [
 			@resetCommands()
 			@resetRequests()
 			@resetEvents()
+			@router?.stopListening()
+
+		setRoutes: (routes) ->
+			@router = new AppRouter routes: routes
 
 		setCommands: (commands) ->
 			if commands and _.isObject commands

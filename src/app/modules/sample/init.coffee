@@ -14,10 +14,9 @@ define [
 				"module:sample:second:start": -> new SecondController
 				"module:sample:third:start": -> new ThirdController
 
-			new Framework.AppRouter
-				routes:
-					"": => @startController "first"
-					"sample/second": => @startController "second"
+			@setRoutes
+				"": => @startController "first"
+				"sample/second": => @startController "second"
 
 		startController: (controller) ->
 			Bus.commands.execute "module:sample:#{controller}:start"

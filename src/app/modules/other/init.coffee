@@ -10,9 +10,8 @@ define [
 			@setCommands
 				"module:other:show:start": -> new ShowController
 
-			new Framework.AppRouter
-				routes:
-					"other": => @startController "show"
+			@setRoutes
+				"other": => @startController "show"
 
 		startController: (controller) ->
 			Bus.commands.execute "module:other:#{controller}:start"

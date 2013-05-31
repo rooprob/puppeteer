@@ -2,7 +2,8 @@ define [
 	'framework/module'
 	'marionette'
 	'communication-bus'
-], (Module, Marionette, Bus) ->
+	'framework/router'
+], (Module, Marionette, Bus, AppRouter) ->
 
 	describe "Framework.Module", ->
 
@@ -33,9 +34,39 @@ define [
 				spyInitialize.should.have.been.calledWith 1
 				spyLog.should.have.been.calledWith 1
 
+		# setRoutes
+		# ------------------------------------------------------------------------------------
+		describe 'Routes', ->
+
+			describe "setRoutes()", ->
+
+				beforeEach ->
+					@module = new Module
+					@module.setRoutes
+						'sample/route' : ->
+
+				it "should create a new AppRouter with given routes", ->
+					@module.router.routes['sample/route'].should.exist
+
+				it "should set Module router object", ->
+					@module.router.should.exist
+					@module.router.should.be.instanceof AppRouter
+
 		# Close
 		# ------------------------------------------------------------------------------------
 		describe 'Close', ->
+
+			it "should stop listening to router methods", ->
+				module = new Module
+				module.setRoutes
+					'sample/route' : ->
+
+				spy = @sandbox.spy module.router, 'stopListening'
+
+				module.close()
+
+				spy.should.have.been.called
+
 
 			it "should call the reset of all messaging objects", ->
 				module = new Module
