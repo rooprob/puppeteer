@@ -10,10 +10,26 @@ define ['marionette', 'framework/config/marionette/view'], (Marionette) ->
 
 			return view
 
+		spyShouldHaveBeenCalled = (spy, done) ->
+			async = ->
+				spy.should.have.been.called
+				done()
+
+			setTimeout async, 1
+
+		shouldHideViewIfRenderAnimationIs = (animation, test) =>
+			view = createViewWithAnimationOptions render: animation
+			spy = test.sandbox.spy view.$el, 'hide'
+
+			view.trigger('before:render')
+
+			spy.should.have.been.called
+
 		# BEFORE AND AFTER
 		# ------------------------------------------------------------------------------------
 		beforeEach ->
 			@sandbox = sinon.sandbox.create()
+			@should = require('chai').should()
 
 		afterEach ->
 			@sandbox.restore()
@@ -24,26 +40,55 @@ define ['marionette', 'framework/config/marionette/view'], (Marionette) ->
 		# Animations
 		# ------------------------------------------------------------------------------------
 		describe "Animations", ->
-			it "should hide view before render if 'render' animation equals to 'fadeIn'", ->
-				view = createViewWithAnimationOptions render: 'fadeIn'
-				spy = @sandbox.spy view.$el, 'hide'
 
-				view.trigger('before:render')
+			# getAnimationFor()
+			# ----------------------------------------------------------------------------------
+			describe "getAnimationFor()", ->
 
-				spy.should.have.been.called
+				it "should get animation name for given action", ->
+					view = createViewWithAnimationOptions render: 'fadeIn', close: 'fadeOut'
 
-			it "should fade view in on render if 'render' animation equals to 'fadeIn'", ->
-				view = createViewWithAnimationOptions render: 'fadeIn'
-				spy = @sandbox.spy view.$el, 'fadeIn'
+					view.getAnimationFor('render').should.equal 'fadeIn'
+					view.getAnimationFor('close').should.equal 'fadeOut'
 
-				view.trigger('render')
+				it "should return null if no animation is defined for given action", ->
+					view = createViewWithAnimationOptions render: 'fadeIn'
 
-				spy.should.have.been.called
+					@should.not.exist view.getAnimationFor('close')
 
-			it "should fade view out before close 'close' animation equals to 'fadeOut'", ->
-				view = createViewWithAnimationOptions close: 'fadeOut'
-				spy = @sandbox.spy view.$el, 'fadeOut'
+			# before:render
+			# ----------------------------------------------------------------------------------
+			describe "before:render", ->
 
-				view.trigger('before:close')
+				it "should hide view before rendering if 'render' animation is 'fadeIn'", ->
+					shouldHideViewIfRenderAnimationIs 'fadeIn', @
 
-				spy.should.have.been.called
+				it "should hide view before rendering if 'render' animation is 'slideDown'", ->
+					shouldHideViewIfRenderAnimationIs 'slideDown', @
+
+				it "should hide view before rendering if 'render' animation is 'show'", ->
+					shouldHideViewIfRenderAnimationIs 'show', @
+
+			# render
+			# ----------------------------------------------------------------------------------
+			describe "render", ->
+
+				it "should fade view in on render if 'render' animation is 'fadeIn'", (done) ->
+					view = createViewWithAnimationOptions render: 'fadeIn'
+					spy = @sandbox.spy view.$el, 'fadeIn'
+
+					view.trigger 'render'
+
+					spyShouldHaveBeenCalled spy, done
+
+			# before:close
+			# ----------------------------------------------------------------------------------
+			describe "before:close", ->
+
+				it "should fade view out before close 'close' animation is 'fadeOut'", (done) ->
+					view = createViewWithAnimationOptions close: 'fadeOut'
+					spy = @sandbox.spy view.$el, 'fadeOut'
+
+					view.trigger 'before:close'
+
+					spyShouldHaveBeenCalled spy, done
