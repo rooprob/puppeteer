@@ -115,8 +115,6 @@ define [
 			# startHistory()
 			# ----------------------------------------------------------------------------------
 			describe "startHistory()", ->
-			#startHistory: ->
-			#	Backbone.history.start() if Backbone.history
 				it "should start Backbone history", ->
 					@application.history.startHistory()
 					@historyStartStub.should.have.been.called
