@@ -102,6 +102,8 @@ module.exports = (grunt) ->
 					reporter : 'Dot'
 
 		watch:
+			options:
+				livereload: true
 			templates:
 				files: './src/app/**/*.html'
 				tasks: ['copy:templates']
@@ -132,6 +134,8 @@ module.exports = (grunt) ->
 				src: filepath
 				dest: './dev'
 				ext: '.js'
+				options:
+					livereload: true
 
 		grunt.task.run 'coffee:changed' unless filepath.indexOf('.coffee') < 0
 
