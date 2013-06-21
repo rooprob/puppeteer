@@ -34,6 +34,13 @@ module.exports = (grunt) ->
 					src: ['**']
 					dest: './dev/app/assets'
 				]
+			sources:
+				files: [
+					expand: true
+					cwd: './src/app'
+					src: ['**/*.coffee']
+					dest: './dev/app'
+				]
 			templates:
 				files: [
 					expand: true
@@ -47,6 +54,13 @@ module.exports = (grunt) ->
 					cwd: './src/test/fixtures'
 					src: ['**']
 					dest: './dev/test/fixtures'
+				]
+			testSources:
+				files: [
+					expand: true
+					cwd: './src/test'
+					src: ['**/*.coffee']
+					dest: './dev/test'
 				]
 			production:
 				files: [
@@ -77,6 +91,8 @@ module.exports = (grunt) ->
 
 		coffee:
 			dev:
+				options:
+					sourceMap: true
 				files: [
 					expand: true
 					cwd: './src/'
@@ -135,9 +151,20 @@ module.exports = (grunt) ->
 				dest: './dev'
 				ext: '.js'
 				options:
+					sourceMap: true
 					livereload: true
 
+		grunt.config.set 'copy',
+			newSources:
+				files: [
+					expand: true
+					cwd: cwd
+					src: filepath
+					dest: './dev'
+				]
+
 		grunt.task.run 'coffee:changed' unless filepath.indexOf('.coffee') < 0
+		grunt.task.run 'copy:newSources' unless filepath.indexOf('.coffee') < 0
 
 	grunt.registerTask 'default', [
 		'dev'
@@ -150,6 +177,7 @@ module.exports = (grunt) ->
 		'less:dev'
 		'copy:dev'
 		'copy:test'
+		'copy:sources'
 		'copy:templates'
 	]
 
@@ -172,6 +200,7 @@ module.exports = (grunt) ->
 	grunt.registerTask 'test', [
 		'coffee'
 		'copy:test'
+		'copy:testSources'
 		'connect:test'
 		'mocha'
 	]
