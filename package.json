@@ -13,6 +13,7 @@
 		"grunt-contrib-less" : "*",
 		"grunt-contrib-requirejs" : "*",
 		"grunt-contrib-watch" : "~0.4.0",
+		"grunt-coffeelint" : "*",
 		"grunt-mocha" : "*",
 		"grunt-smushit" : "*"
 	}
