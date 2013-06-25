@@ -6,8 +6,11 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-contrib-less'
 	grunt.loadNpmTasks 'grunt-contrib-requirejs'
 	grunt.loadNpmTasks 'grunt-contrib-watch'
+	grunt.loadNpmTasks 'grunt-coffeelint'
 	grunt.loadNpmTasks 'grunt-mocha'
 	grunt.loadNpmTasks 'grunt-smushit'
+
+	lintOptions = require('./coffeelint.json').options
 
 	grunt.initConfig
 		clean:
@@ -26,6 +29,15 @@ module.exports = (grunt) ->
 					port: 8000
 					base: '.'
 
+		coffeelint:
+			options: lintOptions
+			gruntfile: ['Gruntfile.coffee']
+			sources:
+				files: [
+					expand: true
+					cwd: './src/app'
+					src: ['**/*.coffee']
+				]
 		copy:
 			dev:
 				files: [
@@ -144,6 +156,7 @@ module.exports = (grunt) ->
 		filepath = filepath.replace cwd, ''
 
 		grunt.config.set 'coffee',
+			options: lintOptions
 			changed:
 				expand: true
 				cwd: cwd
@@ -163,6 +176,16 @@ module.exports = (grunt) ->
 					dest: './dev'
 				]
 
+		grunt.config.set 'coffeelint',
+			options: lintOptions
+			newSources:
+				files: [
+					expand: true
+					cwd: cwd
+					src: filepath
+				]
+
+		grunt.task.run 'coffeelint:newSources' unless filepath.indexOf('.coffee') < 0
 		grunt.task.run 'coffee:changed' unless filepath.indexOf('.coffee') < 0
 		grunt.task.run 'copy:newSources' unless filepath.indexOf('.coffee') < 0
 
@@ -172,6 +195,7 @@ module.exports = (grunt) ->
 	]
 
 	grunt.registerTask 'dev', [
+		'coffeelint'
 		'clean:dev'
 		'coffee'
 		'less:dev'
@@ -182,6 +206,7 @@ module.exports = (grunt) ->
 	]
 
 	grunt.registerTask 'production', [
+		'coffeelint'
 		'clean:production'
 		'test'
 		'less:production'
