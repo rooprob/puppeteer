@@ -105,6 +105,7 @@ module.exports = (grunt) ->
 			dev:
 				options:
 					sourceMap: true
+					sourceRoot: ""
 				files: [
 					expand: true
 					cwd: './src/'
