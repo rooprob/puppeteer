@@ -166,6 +166,7 @@ module.exports = (grunt) ->
 				ext: '.js'
 				options:
 					sourceMap: true
+					sourceRoot: ""
 					livereload: true
 
 		grunt.config.set 'copy',
