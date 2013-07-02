@@ -257,3 +257,8 @@ My preferred way of using these tasks for development is with three panes on my 
 ## Thanks
 
 Huge thanks to [@derickbailey](https://github.com/derickbailey) for creating [Marionette](http://marionettejs.com "Marionette.js – A scalable and composite application architecture for Backbone.js"), and [@brian-mann](https://github.com/brian-mann) for his [BackboneRails](http://www.backbonerails.com "BackboneRails.com - Screencasts and Tutorials") screencast series.
+
+And, of course, thanks a lot to the contributors:
+
+* [@abovethewater](https://github.com/abovethewater)
+* [@cockers](https://github.com/cockers)
