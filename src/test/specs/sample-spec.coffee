@@ -1,7 +1,7 @@
 define ['backbone', 'jquery', 'js-fixtures'], (backbone, $, fixtures) ->
-	
+
 	describe "Sample spec", ->
-		
+
 		# HELPERS
 		# ------------------------------------------------------------------------------------
 		object = null
@@ -14,7 +14,7 @@ define ['backbone', 'jquery', 'js-fixtures'], (backbone, $, fixtures) ->
 
 		afterEach ->
 			fixtures.cleanUp()
-		
+
 		# SPECS
 		# ------------------------------------------------------------------------------------
 		it "sample equal assertion", ->
