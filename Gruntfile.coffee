@@ -1,4 +1,7 @@
 module.exports = (grunt) ->
+
+	# IMPORTS
+	# ------------------------------------------------------------------------------------
 	grunt.loadNpmTasks 'grunt-contrib-clean'
 	grunt.loadNpmTasks 'grunt-contrib-coffee'
 	grunt.loadNpmTasks 'grunt-contrib-copy'
@@ -10,14 +13,25 @@ module.exports = (grunt) ->
 	grunt.loadNpmTasks 'grunt-mocha'
 	grunt.loadNpmTasks 'grunt-smushit'
 
+	# GLOBAL VARS
+	# ------------------------------------------------------------------------------------
 	lintOptions = require('./coffeelint.json').options
+	devFolder = "./dev"
+	productionFolder = "./production"
 
+	# TASKS DEFINITIONS
+	# ------------------------------------------------------------------------------------
 	grunt.initConfig
-		clean:
-			all : ['./dev/*', './production/*']
-			dev : ['./dev/*']
-			production : ['./production/*']
 
+		# Clean
+		# ----------------------------------------------------------------------------------
+		clean:
+			all : ["#{devFolder}/*", "#{productionFolder}/*"]
+			dev : ["#{devFolder}/*"]
+			production : ["#{productionFolder}/*"]
+
+		# Connect
+		# ----------------------------------------------------------------------------------
 		connect:
 			dev:
 				options:
@@ -29,6 +43,8 @@ module.exports = (grunt) ->
 					port: 8000
 					base: '.'
 
+		# Lint
+		# ----------------------------------------------------------------------------------
 		coffeelint:
 			options: lintOptions
 			gruntfile: ['Gruntfile.coffee']
@@ -38,69 +54,84 @@ module.exports = (grunt) ->
 					cwd: './src/app'
 					src: ['**/*.coffee']
 				]
+
+		# Copy
+		# ----------------------------------------------------------------------------------
 		copy:
 			dev:
 				files: [
-					expand: true
-					cwd: './src/app/assets'
-					src: ['**']
-					dest: './dev/app/assets'
-				]
-			sources:
-				files: [
-					expand: true
-					cwd: './src/app'
-					src: ['**/*.coffee']
-					dest: './dev/app'
+					{
+						expand: true
+						cwd: './src/app/assets'
+						src: ['**']
+						dest: "#{devFolder}/app/assets"
+					}
+					{
+						expand: true
+						cwd: './src/app'
+						src: ['**/*.coffee']
+						dest: "#{devFolder}/app"
+					}
 				]
 			templates:
 				files: [
 					expand: true
 					cwd: './src/app/modules'
 					src: ['**/*.html']
-					dest: './dev/app/modules'
+					dest: "#{devFolder}/app/modules"
+				]
+			fixtures:
+				files: [
+					{
+						expand: true
+						cwd: './src/test/fixtures'
+						src: ['**']
+						dest: "#{devFolder}/test/fixtures"
+					}
 				]
 			test:
 				files: [
-					expand: true
-					cwd: './src/test/fixtures'
-					src: ['**']
-					dest: './dev/test/fixtures'
-				]
-			testSources:
-				files: [
-					expand: true
-					cwd: './src/test'
-					src: ['**/*.coffee']
-					dest: './dev/test'
+					{
+						expand: true
+						cwd: './src/test'
+						src: ['**/*.coffee']
+						dest: "#{devFolder}/test"
+					}
 				]
 			production:
 				files: [
+					{
 						expand: true
 						cwd: './src/app/assets'
 						src: ['**']
-						dest: './production/app/assets'
-				]
-			productionRequire:
-				files: [
+						dest: "#{productionFolder}/app/assets"
+					}
+					{
 						expand: true
 						cwd: './lib/requirejs/'
 						src: ['require.js']
-						dest: './production/'
+						dest: "#{productionFolder}"
+					}
 				]
 
+		# Smusher
+		# ----------------------------------------------------------------------------------
 		smushit:
 			production:
-				src: './production/app/assets'
+				src: "#{productionFolder}/app/assets"
 
+		# RequireJS
+		# ----------------------------------------------------------------------------------
 		requirejs:
 			compile:
 				options:
-					baseUrl: './dev/app'
-					mainConfigFile: './dev/app/main.js'
-					out: './production/app/main.js'
+					baseUrl: "#{devFolder}/app"
+					mainConfigFile: "#{devFolder}/app/main.js"
+					out: "#{productionFolder}/app/main.js"
 					include: 'main'
 
+		# CoffeeScript
+		# ----------------------------------------------------------------------------------
 		coffee:
 			dev:
 				options:
@@ -110,87 +141,120 @@ module.exports = (grunt) ->
 					expand: true
 					cwd: './src/'
 					src: ['**/*.coffee']
-					dest: './dev/'
+					dest: devFolder
 					ext: '.js'
 				]
 
+		# LESS
+		# ----------------------------------------------------------------------------------
 		less:
 			dev:
 				files:
-					'./dev/app/css/main.css': './src/app/css/main.less'
+					[
+						src: ["./src/app/css/main.less"]
+						dest: "#{devFolder}/app/css/main.css"
+					]
 			production:
 				options:
 					yuicompress: true
 				files:
-					'./production/app/css/main.css': './src/app/css/main.less'
+					[
+						src: ["./src/app/css/main.less"]
+						dest: "#{devFolder}/app/css/main.css"
+					]
 
+		# Tests
+		# ----------------------------------------------------------------------------------
 		mocha:
 			test:
 				options:
 					urls: [ 'http://localhost:8000/test.html']
 					reporter : 'Dot'
 
+		# Watch
+		# ----------------------------------------------------------------------------------
 		watch:
 			options:
 				livereload: true
 			templates:
 				files: './src/app/**/*.html'
-				tasks: ['copy:templates']
+				tasks: []
 				options:
 					nospawn: true
 			coffee:
-				files: './src/app/**/*.coffee'
+				files: './src/**/*.coffee'
 				tasks: []
 				options:
 					nospawn: true
 			less:
 				files: './src/**/*.less'
 				tasks: ['less:dev']
-			test:
-				files: './src/test/**/*.coffee'
-				tasks: ['test:watch']
-				options:
-					nospawn: true
+			fixtures:
+				files: './src/test/**/*.html'
+				tasks: ['copy:fixtures', 'mocha']
 
+	# WATCH EVENT
+	# ------------------------------------------------------------------------------------
 	grunt.event.on 'watch', (action, filepath) ->
 		cwd = 'src/'
 		filepath = filepath.replace cwd, ''
+		isCoffee = filepath.indexOf('.coffee') >= 0
+		isHTML = filepath.indexOf('.html') >= 0
+		isTest = filepath.indexOf('test/specs') >= 0
 
-		grunt.config.set 'coffee',
-			options: lintOptions
-			changed:
-				expand: true
-				cwd: cwd
-				src: filepath
-				dest: './dev'
-				ext: '.js'
-				options:
-					sourceMap: true
-					sourceRoot: ""
-					livereload: true
+		if isHTML and not isTest
+			grunt.config.set 'copy',
+				templates:
+					files: [
+						expand: true
+						cwd: cwd
+						src: filepath
+						dest: devFolder
+					]
 
-		grunt.config.set 'copy',
-			newSources:
-				files: [
+			grunt.task.run 'copy:templates'
+
+		if isCoffee
+			grunt.config.set 'coffee',
+				options: lintOptions
+				changed:
 					expand: true
 					cwd: cwd
 					src: filepath
-					dest: './dev'
-				]
+					dest: devFolder
+					ext: '.js'
+					options:
+						sourceMap: true
+						sourceRoot: ""
+						livereload: true
 
-		grunt.config.set 'coffeelint',
-			options: lintOptions
-			newSources:
-				files: [
-					expand: true
-					cwd: cwd
-					src: filepath
-				]
+			grunt.config.set 'copy',
+				newSources:
+					files: [
+						expand: true
+						cwd: cwd
+						src: filepath
+						dest: devFolder
+					]
 
-		grunt.task.run 'coffeelint:newSources' unless filepath.indexOf('.coffee') < 0
-		grunt.task.run 'coffee:changed' unless filepath.indexOf('.coffee') < 0
-		grunt.task.run 'copy:newSources' unless filepath.indexOf('.coffee') < 0
+			grunt.config.set 'coffeelint',
+				options: lintOptions
+				newSources:
+					files: [
+						expand: true
+						cwd: cwd
+						src: filepath
+					]
 
+			grunt.task.run 'coffeelint:newSources'
+			grunt.task.run 'coffee:changed'
+			grunt.task.run 'copy:newSources'
+
+		if isTest
+			grunt.task.run 'mocha'
+
+	# REGISTERED TASKS
+	# ------------------------------------------------------------------------------------
 	grunt.registerTask 'default', [
 		'dev'
 		'connect:dev'
@@ -203,7 +267,7 @@ module.exports = (grunt) ->
 		'less:dev'
 		'copy:dev'
 		'copy:test'
-		'copy:sources'
+		'copy:fixtures'
 		'copy:templates'
 	]
 
@@ -213,21 +277,15 @@ module.exports = (grunt) ->
 		'test'
 		'less:production'
 		'copy:production'
-		'copy:productionRequire'
 		'copy:templates'
 		'requirejs'
 		'smushit:production'
 	]
 
-	grunt.registerTask 'test:watch', [
-		'copy:test'
-		'mocha'
-	]
-
 	grunt.registerTask 'test', [
 		'coffee'
 		'copy:test'
-		'copy:testSources'
+		'copy:fixtures'
 		'connect:test'
 		'mocha'
 	]
