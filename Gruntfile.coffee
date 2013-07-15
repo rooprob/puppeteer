@@ -161,7 +161,7 @@ module.exports = (grunt) ->
 				files:
 					[
 						src: ["./src/app/css/main.less"]
-						dest: "#{devFolder}/app/css/main.css"
+						dest: "#{productionFolder}/app/css/main.css"
 					]
 
 		# Tests
