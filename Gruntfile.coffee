@@ -15,6 +15,7 @@ module.exports = (grunt) ->
 
 	# GLOBAL VARS
 	# ------------------------------------------------------------------------------------
+	path = require('path')
 	lintOptions = require("./coffeelint.json").options
 	devFolder = "./dev"
 	productionFolder = "./production"
@@ -198,8 +199,8 @@ module.exports = (grunt) ->
 	grunt.event.on "watch", (action, filepath) ->
 		cwd = "src/"
 		filepath = filepath.replace cwd, ""
-		isCoffee = filepath.indexOf(".coffee") >= 0
-		isHTML = filepath.indexOf(".html") >= 0
+		isCoffee = path.extname filepath is ".coffee"
+		isHTML = path.extname filepath is ".html"
 		isTest = filepath.indexOf("test/specs") >= 0
 
 		if isHTML and not isTest
