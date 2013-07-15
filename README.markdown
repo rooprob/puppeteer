@@ -14,8 +14,8 @@ This is an extremely personal stack, with an extremely personal way of doing thi
 4. Install npm dependencies: `npm install`
 5. Install Bower dependencies: `bower install`
 6. If you want to run the tests suite through the command line, [install PhantomJS](http://phantomjs.org/download.html "PhantomJS: Download and Install")
-7. Run `grunt` (default task) and point your browser to `http://localhost:8000/index-dev.html`
-8. When your awesome app is done, run `grunt production`. `index.html` will be the entry point for you fantastic app, and all other files will be under `production/`
+7. Run `grunt` (default task) and point your browser to `http://localhost:8000/dev/`
+8. When your awesome app is done, run `grunt production`. Your awesome app will be under `production/` folder, ready to be deployed wherever you want
 
 ## App structure
 
@@ -27,8 +27,7 @@ This is an extremely personal stack, with an extremely personal way of doing thi
 
 ### App
 
-* `/index.html`: Browser entry point for your application on production
-* `/index-dev.html`: Browser entry point for your application on development
+* `/index.html`: Browser entry point for your application, it will be copied under `/dev` or `/production` depending on the executed build task
 * `/test.html`: Tests suite runner page
 * `/src/app/assets/`: Images for your app
 * `/src/app/css/`: LESS files for your shiny styles
