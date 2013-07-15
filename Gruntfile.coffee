@@ -2,20 +2,20 @@ module.exports = (grunt) ->
 
 	# IMPORTS
 	# ------------------------------------------------------------------------------------
-	grunt.loadNpmTasks 'grunt-contrib-clean'
-	grunt.loadNpmTasks 'grunt-contrib-coffee'
-	grunt.loadNpmTasks 'grunt-contrib-copy'
-	grunt.loadNpmTasks 'grunt-contrib-connect'
-	grunt.loadNpmTasks 'grunt-contrib-less'
-	grunt.loadNpmTasks 'grunt-contrib-requirejs'
-	grunt.loadNpmTasks 'grunt-contrib-watch'
-	grunt.loadNpmTasks 'grunt-coffeelint'
-	grunt.loadNpmTasks 'grunt-mocha'
-	grunt.loadNpmTasks 'grunt-smushit'
+	grunt.loadNpmTasks "grunt-contrib-clean"
+	grunt.loadNpmTasks "grunt-contrib-coffee"
+	grunt.loadNpmTasks "grunt-contrib-copy"
+	grunt.loadNpmTasks "grunt-contrib-connect"
+	grunt.loadNpmTasks "grunt-contrib-less"
+	grunt.loadNpmTasks "grunt-contrib-requirejs"
+	grunt.loadNpmTasks "grunt-contrib-watch"
+	grunt.loadNpmTasks "grunt-coffeelint"
+	grunt.loadNpmTasks "grunt-mocha"
+	grunt.loadNpmTasks "grunt-smushit"
 
 	# GLOBAL VARS
 	# ------------------------------------------------------------------------------------
-	lintOptions = require('./coffeelint.json').options
+	lintOptions = require("./coffeelint.json").options
 	devFolder = "./dev"
 	productionFolder = "./production"
 
@@ -36,23 +36,23 @@ module.exports = (grunt) ->
 			dev:
 				options:
 					port: 8000
-					base: '.'
+					base: "."
 					keepalive: true
 			test:
 				options:
 					port: 8000
-					base: '.'
+					base: "."
 
 		# Lint
 		# ----------------------------------------------------------------------------------
 		coffeelint:
 			options: lintOptions
-			gruntfile: ['Gruntfile.coffee']
+			gruntfile: ["Gruntfile.coffee"]
 			sources:
 				files: [
 					expand: true
-					cwd: './src/app'
-					src: ['**/*.coffee']
+					cwd: "./src/app"
+					src: ["**/*.coffee"]
 				]
 
 		# Copy
@@ -62,30 +62,30 @@ module.exports = (grunt) ->
 				files: [
 					{
 						expand: true
-						cwd: './src/app/assets'
-						src: ['**']
+						cwd: "./src/app/assets"
+						src: ["**"]
 						dest: "#{devFolder}/app/assets"
 					}
 					{
 						expand: true
-						cwd: './src/app'
-						src: ['**/*.coffee']
+						cwd: "./src/app"
+						src: ["**/*.coffee"]
 						dest: "#{devFolder}/app"
 					}
 				]
 			templates:
 				files: [
 					expand: true
-					cwd: './src/app/modules'
-					src: ['**/*.html']
+					cwd: "./src/app/modules"
+					src: ["**/*.html"]
 					dest: "#{devFolder}/app/modules"
 				]
 			fixtures:
 				files: [
 					{
 						expand: true
-						cwd: './src/test/fixtures'
-						src: ['**']
+						cwd: "./src/test/fixtures"
+						src: ["**"]
 						dest: "#{devFolder}/test/fixtures"
 					}
 				]
@@ -93,8 +93,8 @@ module.exports = (grunt) ->
 				files: [
 					{
 						expand: true
-						cwd: './src/test'
-						src: ['**/*.coffee']
+						cwd: "./src/test"
+						src: ["**/*.coffee"]
 						dest: "#{devFolder}/test"
 					}
 				]
@@ -102,14 +102,14 @@ module.exports = (grunt) ->
 				files: [
 					{
 						expand: true
-						cwd: './src/app/assets'
-						src: ['**']
+						cwd: "./src/app/assets"
+						src: ["**"]
 						dest: "#{productionFolder}/app/assets"
 					}
 					{
 						expand: true
-						cwd: './lib/requirejs/'
-						src: ['require.js']
+						cwd: "./lib/requirejs/"
+						src: ["require.js"]
 						dest: "#{productionFolder}"
 					}
 				]
@@ -128,7 +128,7 @@ module.exports = (grunt) ->
 					baseUrl: "#{devFolder}/app"
 					mainConfigFile: "#{devFolder}/app/main.js"
 					out: "#{productionFolder}/app/main.js"
-					include: 'main'
+					include: "main"
 
 		# CoffeeScript
 		# ----------------------------------------------------------------------------------
@@ -139,10 +139,10 @@ module.exports = (grunt) ->
 					sourceRoot: ""
 				files: [
 					expand: true
-					cwd: './src/'
-					src: ['**/*.coffee']
+					cwd: "./src/"
+					src: ["**/*.coffee"]
 					dest: devFolder
-					ext: '.js'
+					ext: ".js"
 				]
 
 		# LESS
@@ -168,8 +168,8 @@ module.exports = (grunt) ->
 		mocha:
 			test:
 				options:
-					urls: [ 'http://localhost:8000/test.html']
-					reporter : 'Dot'
+					urls: [ "http://localhost:8000/test.html"]
+					reporter : "Dot"
 
 		# Watch
 		# ----------------------------------------------------------------------------------
@@ -177,33 +177,33 @@ module.exports = (grunt) ->
 			options:
 				livereload: true
 			templates:
-				files: './src/app/**/*.html'
+				files: "./src/app/**/*.html"
 				tasks: []
 				options:
 					nospawn: true
 			coffee:
-				files: './src/**/*.coffee'
+				files: "./src/**/*.coffee"
 				tasks: []
 				options:
 					nospawn: true
 			less:
-				files: './src/**/*.less'
-				tasks: ['less:dev']
+				files: "./src/**/*.less"
+				tasks: ["less:dev"]
 			fixtures:
-				files: './src/test/**/*.html'
-				tasks: ['copy:fixtures', 'mocha']
+				files: "./src/test/**/*.html"
+				tasks: ["copy:fixtures", "mocha"]
 
 	# WATCH EVENT
 	# ------------------------------------------------------------------------------------
-	grunt.event.on 'watch', (action, filepath) ->
-		cwd = 'src/'
-		filepath = filepath.replace cwd, ''
-		isCoffee = filepath.indexOf('.coffee') >= 0
-		isHTML = filepath.indexOf('.html') >= 0
-		isTest = filepath.indexOf('test/specs') >= 0
+	grunt.event.on "watch", (action, filepath) ->
+		cwd = "src/"
+		filepath = filepath.replace cwd, ""
+		isCoffee = filepath.indexOf(".coffee") >= 0
+		isHTML = filepath.indexOf(".html") >= 0
+		isTest = filepath.indexOf("test/specs") >= 0
 
 		if isHTML and not isTest
-			grunt.config.set 'copy',
+			grunt.config.set "copy",
 				templates:
 					files: [
 						expand: true
@@ -212,23 +212,23 @@ module.exports = (grunt) ->
 						dest: devFolder
 					]
 
-			grunt.task.run 'copy:templates'
+			grunt.task.run "copy:templates"
 
 		if isCoffee
-			grunt.config.set 'coffee',
+			grunt.config.set "coffee",
 				options: lintOptions
 				changed:
 					expand: true
 					cwd: cwd
 					src: filepath
 					dest: devFolder
-					ext: '.js'
+					ext: ".js"
 					options:
 						sourceMap: true
 						sourceRoot: ""
 						livereload: true
 
-			grunt.config.set 'copy',
+			grunt.config.set "copy",
 				newSources:
 					files: [
 						expand: true
@@ -237,7 +237,7 @@ module.exports = (grunt) ->
 						dest: devFolder
 					]
 
-			grunt.config.set 'coffeelint',
+			grunt.config.set "coffeelint",
 				options: lintOptions
 				newSources:
 					files: [
@@ -246,46 +246,46 @@ module.exports = (grunt) ->
 						src: filepath
 					]
 
-			grunt.task.run 'coffeelint:newSources'
-			grunt.task.run 'coffee:changed'
-			grunt.task.run 'copy:newSources'
+			grunt.task.run "coffeelint:newSources"
+			grunt.task.run "coffee:changed"
+			grunt.task.run "copy:newSources"
 
 		if isTest
-			grunt.task.run 'mocha'
+			grunt.task.run "mocha"
 
 	# REGISTERED TASKS
 	# ------------------------------------------------------------------------------------
-	grunt.registerTask 'default', [
-		'dev'
-		'connect:dev'
+	grunt.registerTask "default", [
+		"dev"
+		"connect:dev"
 	]
 
-	grunt.registerTask 'dev', [
-		'coffeelint'
-		'clean:dev'
-		'coffee'
-		'less:dev'
-		'copy:dev'
-		'copy:test'
-		'copy:fixtures'
-		'copy:templates'
+	grunt.registerTask "dev", [
+		"coffeelint"
+		"clean:dev"
+		"coffee"
+		"less:dev"
+		"copy:dev"
+		"copy:test"
+		"copy:fixtures"
+		"copy:templates"
 	]
 
-	grunt.registerTask 'production', [
-		'coffeelint'
-		'clean:production'
-		'test'
-		'less:production'
-		'copy:production'
-		'copy:templates'
-		'requirejs'
-		'smushit:production'
+	grunt.registerTask "production", [
+		"coffeelint"
+		"clean:production"
+		"test"
+		"less:production"
+		"copy:production"
+		"copy:templates"
+		"requirejs"
+		"smushit:production"
 	]
 
-	grunt.registerTask 'test', [
-		'coffee'
-		'copy:test'
-		'copy:fixtures'
-		'connect:test'
-		'mocha'
+	grunt.registerTask "test", [
+		"coffee"
+		"copy:test"
+		"copy:fixtures"
+		"connect:test"
+		"mocha"
 	]
