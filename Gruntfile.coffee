@@ -73,28 +73,11 @@ module.exports = (grunt) ->
 						src: ["**/*.coffee"]
 						dest: "#{devFolder}/app"
 					}
-				]
-			devIndex:
-				files: [
-					expand: true
-					cwd: "./"
-					src: ["index.html"]
-					dest: "#{devFolder}/"
-				]
-			productionIndex:
-				files: [
-					expand: true
-					cwd: "./"
-					src: ["index.html"]
-					dest: "#{productionFolder}/"
-				]
-			require:
-				files: [
 					{
 						expand: true
-						cwd: "./lib/requirejs/"
-						src: ["require.js"]
-						dest: "#{productionFolder}"
+						cwd: "./"
+						src: ["index.html"]
+						dest: "#{devFolder}/"
 					}
 					{
 						expand: true
@@ -135,6 +118,18 @@ module.exports = (grunt) ->
 						cwd: "./src/app/assets"
 						src: ["**"]
 						dest: "#{productionFolder}/app/assets"
+					}
+					{
+						expand: true
+						cwd: "./"
+						src: ["index.html"]
+						dest: "#{productionFolder}/"
+					}
+					{
+						expand: true
+						cwd: "./lib/requirejs/"
+						src: ["require.js"]
+						dest: "#{productionFolder}"
 					}
 				]
 
@@ -290,8 +285,6 @@ module.exports = (grunt) ->
 		"coffee"
 		"less:dev"
 		"copy:dev"
-		"copy:devIndex"
-		"copy:require"
 		"copy:test"
 		"copy:fixtures"
 		"copy:templates"
@@ -303,8 +296,6 @@ module.exports = (grunt) ->
 		"test"
 		"less:production"
 		"copy:production"
-		"copy:productionIndex"
-		"copy:require"
 		"copy:templates"
 		"requirejs"
 		"smushit:production"
