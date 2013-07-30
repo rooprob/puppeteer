@@ -3,7 +3,7 @@ require.config
 	paths:
 		'text': '../../lib/requirejs-text/text'
 		'jquery': '../../lib/jquery/jquery'
-		'bootstrap': '../../lib/bootstrap/docs/assets/js/bootstrap.min'
+		'bootstrap': '../../lib/bootstrap/dist/js/bootstrap.min'
 		'underscore': '../../lib/underscore-amd/underscore'
 		'backbone': '../../lib/backbone-amd/backbone'
 		'backbone.wreqr': '../../lib/backbone.wreqr/lib/amd/backbone.wreqr'
