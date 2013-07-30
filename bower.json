@@ -1,19 +1,21 @@
 {
+	"name": "Puppeteer",
+	"version": "0.0.1",
 	"dependencies": {
-		"requirejs": "~2.1.5",
-		"requirejs-text": "~2.0.6",
+		"requirejs": "~2.1.8",
+		"requirejs-text": "~2.0.9",
 
-		"bootstrap": "~2.3.1",
-		"jquery": "~1.9.0",
-		"underscore-amd": "~1.4.4",
+		"bootstrap": "~3.0.0",
+		"jquery": "~1.10.2",
+		"underscore-amd": "~1.5.1",
 		"backbone-amd": "~1.0.0",
 		"backbone.wreqr": "~0.2.0",
-		"backbone.babysitter": "git://github.com/marionettejs/backbone.babysitter.git#~0.0.5",
-		"marionette": "~1.0.0",
+		"backbone.babysitter": "git://github.com/marionettejs/backbone.babysitter.git#~0.0.6",
+		"marionette": "~1.0.4",
 
-		"chai": "~1.6.0",
-		"mocha": "~1.9.0",
-		"sinon": "http://sinonjs.org/releases/sinon-1.6.0.js",
+		"chai": "~1.7.2",
+		"mocha": "~1.12.0",
+		"sinon": "http://sinonjs.org/releases/sinon-1.7.3.js",
 		"sinon-chai": "~2.4.0",
 		"js-fixtures": "https://raw.github.com/badunk/js-fixtures/master/fixtures.js"
 	}
