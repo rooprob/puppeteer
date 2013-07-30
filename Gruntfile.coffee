@@ -217,8 +217,8 @@ module.exports = (grunt) ->
 	grunt.event.on "watch", (action, filepath) ->
 		cwd = "src/"
 		filepath = filepath.replace cwd, ""
-		isCoffee = path.extname filepath is ".coffee"
-		isHTML = path.extname filepath is ".html"
+		isCoffee = path.extname(filepath) == ".coffee"
+		isHTML = path.extname(filepath) == ".html"
 		isTest = filepath.indexOf("test/specs") >= 0
 
 		if isHTML and not isTest
