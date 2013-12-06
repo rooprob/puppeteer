@@ -4,6 +4,7 @@
 	"version": "0.0.1",
 	"author": "Juan G. Hurtado <juan.g.hurtado@gmail.com>",
 	"description": "Web development stack. With Backbone, Marionette, CoffeeScript, Mocha, Chai, Bower, Grunt…",
+	"repository": "https://github.com/juanghurtado/puppeteer.git",
 	"devDependencies": {
 		"grunt" : "~0.4.0",
 		"grunt-contrib-clean" : "*",
