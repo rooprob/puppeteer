@@ -7,7 +7,8 @@ Backbone.js"). Some other funny names involved are:
 * [Gulp.js](http://gulpjs.com "Gulp.js - The streaming build system")
 * [CoffeeScript](http://gulpjs.com)
 * [Sass](http://sass-lang.com "Sass: Syntactically Awesome Style Sheets")
-* [Mocha](http://visionmedia.github.io/mocha/ "The fun, simple, flexible Javascript test framework")
+* [Mocha](http://visionmedia.github.io/mocha/ "The fun, simple, flexible
+	Javascript test framework")
 * [Handlebars](http://handlebarsjs.com "Minimal Templating on Steroids")
 
 ## Caution
@@ -15,16 +16,19 @@ Backbone.js"). Some other funny names involved are:
 This is an extremely personal stack, with an extremely personal way of doing
 things. I feel comfortable doing stuff this way, but I change my mind easily. So
 if you have something to suggest, please do it. Fork it, change it, adapt it,
-enlighten me with better ways of doing things.
+	enlighten me with better ways of doing things.
 
 ## First steps
 
-* Make sure you remove `.git/` folder, because you would like to have your own versioning, isn't it?
+* Make sure you remove `.git/` folder, because you would like to have your own
+	versioning, isn't it?
 * Install needed NPM packages for dev purposes: `npm install`
-* Remember that you should have Gulp.js, Bower and some other NPM packages installed globally
+* Remember that you should have Gulp.js, Bower and some other NPM packages
+	installed globally
 * Install project dependencies: `bower install`
 * Run your Gulp dev task: `gulp dev`
-* Open your browser and your editor and start coding: `http://localhost:3000/dist/`
+* Open your browser and your editor and start coding:
+	`http://localhost:3000/dist/`
 
 ## Folder structure
 
@@ -33,10 +37,13 @@ enlighten me with better ways of doing things.
 * `./src/index.html`: App web page, the entry point!
 * `./src/javascript.coffee`: Your main source file, it includes every other one
 * `./src/app/`: Your fabulous app
-* `./src/app/app.coffee`: The file for the main object of your App, the namespace
+* `./src/app/app.coffee`: The file for the main object of your App, the
+	namespace
 * `./src/app/entities/`: Entities (Collections and Models) used on the app
-* `./src/app/lib/`: Code related with the behaviour of your app. Think of it like a config for your app objects, not frameworks
-* `./src/app/modules/`: Modules that you will use to build your app: HeaderModule, FooterModule, KittensModule and so on
+* `./src/app/lib/`: Code related with the behaviour of your app. Think of it
+	like a config for your app objects, not frameworks
+* `./src/app/modules/`: Modules that you will use to build your app:
+	HeaderModule, FooterModule, KittensModule and so on
 * `./src/config/`: Config files for your frameworks: Backbone, jQuery
 * `./src/images/`: Images used in your app
 * `./src/styles/`: Sass styles for the app
