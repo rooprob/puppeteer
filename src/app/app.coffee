@@ -1,21 +1,16 @@
-define [
-	'app.framework'
-	'modules/header/init'
-	'modules/sample/init'
-	'modules/other/init'
-], (Framework, HeaderRegion, SampleRegion, OtherRegion) ->
+@App = do (Backbone, Marionette) ->
 
-	App = new Framework.Application
+	App = new Marionette.Application
 
 	App.addRegions
-		headerRegion: "#header-region"
-		contentRegion: "#content-region"
+		appRegion: "#app-region"
 
-	App.setDefaultRegion App.contentRegion
+	App.rootRoute = "sample"
+
+	App.reqres.setHandler "default:region", ->
+		return App.appRegion
 
 	App.addInitializer ->
-		new HeaderRegion App.headerRegion
-		new SampleRegion
-		new OtherRegion
+		console.log "App initializer!"
 
 	return App
