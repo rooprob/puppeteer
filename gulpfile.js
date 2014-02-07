@@ -82,7 +82,10 @@ gulp.task("templates", function(){
 			wrapped: true
 		}))
 		.pipe(plugins.declare({
-			namespace: "App.templates"
+			namespace: "App.templates",
+			processName: function(path) {
+				return path.replace('.js', '');
+			}
 		}))
 		.pipe(plugins.concat("templates.js"))
 		.pipe(gulp.dest('./src/app/templates/'));
