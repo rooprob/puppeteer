@@ -17,12 +17,12 @@
 
 #= require "app/app.coffee"
 
+#= require_tree "app/lib/"
+
 `
 // DON'T REMOVE OR MOVE THIS LINE!
 //= require "app/templates/templates.js"
 `
-
-#= require_tree "app/lib/"
 
 #= require_tree "app/entities/"
 
