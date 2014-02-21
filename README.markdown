@@ -5,7 +5,7 @@ Development stack to build web stuff using [Marionette](http://marionettejs.com
 Backbone.js"). Some other funny names involved are:
 
 * [GruntJS](http://gruntjs.com "Grunt: The Javascript Task Runner")
-* [CoffeeScript](http://gulpjs.com)
+* [CoffeeScript](http://coffeescript.org)
 * [Sass](http://sass-lang.com "Sass: Syntactically Awesome Style Sheets")
 * [Mocha](http://visionmedia.github.io/mocha/ "The fun, simple, flexible
 	Javascript test framework")
@@ -23,7 +23,7 @@ enlighten me with better ways of doing things.
 * Make sure you remove `.git/` folder, because you would like to have your own
 	versioning, isn't it?
 * Install needed NPM packages for dev purposes: `npm install`
-* Remember that you should have Gulp.js, Bower and some other NPM packages
+* Remember that you should have Grunt, Bower and some other NPM packages
 	installed globally
 * Install project dependencies: `bower install`
 * Run your Grunt default task: `grunt`
