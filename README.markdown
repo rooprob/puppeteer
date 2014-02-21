@@ -4,7 +4,7 @@ Development stack to build web stuff using [Marionette](http://marionettejs.com
 "Marionette.js – A scalable and composite application architecture for
 Backbone.js"). Some other funny names involved are:
 
-* [Gulp.js](http://gulpjs.com "Gulp.js - The streaming build system")
+* [GruntJS](http://gruntjs.com "Grunt: The Javascript Task Runner")
 * [CoffeeScript](http://gulpjs.com)
 * [Sass](http://sass-lang.com "Sass: Syntactically Awesome Style Sheets")
 * [Mocha](http://visionmedia.github.io/mocha/ "The fun, simple, flexible
@@ -16,7 +16,7 @@ Backbone.js"). Some other funny names involved are:
 This is an extremely personal stack, with an extremely personal way of doing
 things. I feel comfortable doing stuff this way, but I change my mind easily. So
 if you have something to suggest, please do it. Fork it, change it, adapt it,
-	enlighten me with better ways of doing things.
+enlighten me with better ways of doing things.
 
 ## First steps
 
@@ -26,7 +26,7 @@ if you have something to suggest, please do it. Fork it, change it, adapt it,
 * Remember that you should have Gulp.js, Bower and some other NPM packages
 	installed globally
 * Install project dependencies: `bower install`
-* Run your Gulp dev task: `gulp dev`
+* Run your Grunt default task: `grunt`
 * Open your browser and your editor and start coding:
 	`http://localhost:3000/dist/`
 
@@ -48,6 +48,8 @@ if you have something to suggest, please do it. Fork it, change it, adapt it,
 * `./src/images/`: Images used in your app
 * `./src/styles/`: Sass styles for the app
 * `./test/`: Test suite
-* `./test/test.coffee`: Include your specs on this files
-* `./test/specs/`: Your awesome specs to ensure the quality of your app
+* `./test/integration`: Integration tests for CasperJS
+* `./test/unit`: Unit tests for Mocha (with Chai and Sinon)
+* `./test/unit/test.coffee`: Include your specs on this files
+* `./test/unit/specs/`: Your awesome unit tests specs to ensure the quality of your app
 * `./vendor/`: Dependencies downloaded by Bower

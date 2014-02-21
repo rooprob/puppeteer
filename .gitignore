@@ -2,5 +2,5 @@ vendor
 src/app/templates
 node_modules
 dist
-test/test.js
+test/unit/test.js
 .sass-cache
