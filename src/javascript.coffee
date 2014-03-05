@@ -1,4 +1,4 @@
-#= require "../vendor/jquery/jquery.js"
+#= require "../vendor/jquery/dist/jquery.js"
 #= require "../vendor/underscore/underscore.js"
 #= require "../vendor/underscore-strings/src/underscore.strings.js"
 #= require "../vendor/backbone/backbone.js"
