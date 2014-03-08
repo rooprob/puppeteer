@@ -7,34 +7,34 @@ module.exports = (grunt) ->
 
 		paths:
 			src:
-				rootFolder: "./src"
-				appFolder: "<%= paths.src.rootFolder %>/app"
-				imagesFolder: "<%= paths.src.rootFolder %>/images"
-				stylesFolder: "<%= paths.src.rootFolder%>/styles"
+				root: "./src"
+				app: "<%= paths.src.root %>/app"
+				images: "<%= paths.src.root %>/images"
+				styles: "<%= paths.src.root %>/styles"
 			dist:
-				rootFolder: "./dist"
-				appFolder: "<%= paths.dist.rootFolder %>/app"
-				imagesFolder: "<%= paths.dist.rootFolder %>/images"
-				stylesFolder: "<%= paths.dist.rootFolder%>/styles"
-
-			testsFolder: "./test"
+				root: "./dist"
+				app: "<%= paths.dist.root %>/app"
+				images: "<%= paths.dist.root %>/images"
+				styles: "<%= paths.dist.root %>/styles"
+			tests:
+				root: "./test"
 
 		snocketsify:
 			app:
-				src: "<%= paths.src.rootFolder %>/javascript.coffee"
-				dest: "<%= paths.dist.rootFolder %>/app.js"
+				src: "<%= paths.src.root %>/javascript.coffee"
+				dest: "<%= paths.dist.root %>/app.js"
 			test:
-				src: "<%= paths.testsFolder %>/unit/test.coffee"
-				dest: "<%= paths.testsFolder %>/unit/test.js"
+				src: "<%= paths.tests.root %>/unit/test.coffee"
+				dest: "<%= paths.tests.root %>/unit/test.js"
 
 		uglify:
 			production:
 				files:
-					"<%= paths.dist.rootFolder %>/app.min.js" : "<%= paths.dist.rootFolder %>/app.js"
+					"<%= paths.dist.root %>/app.min.js" : "<%= paths.dist.root %>/app.js"
 
 		clean:
-			dist: "<%= paths.dist.rootFolder %>"
-			images: "<%= paths.dist.imagesFolder %>"
+			dist: "<%= paths.dist.root %>"
+			images: "<%= paths.dist.images %>"
 
 		imagemin:
 			compile:
@@ -42,18 +42,18 @@ module.exports = (grunt) ->
 					cache: false
 				files: [
 					expand: true
-					cwd: "<%= paths.src.imagesFolder %>"
+					cwd: "<%= paths.src.images %>"
 					src: ["**/*.{png,jpg,gif}"]
-					dest: "<%= paths.dist.imagesFolder %>"
+					dest: "<%= paths.dist.images %>"
 				]
 
 		copy:
 			html_dev:
-				src: "<%= paths.src.rootFolder %>/index.html"
-				dest: "<%= paths.dist.rootFolder %>/index.html"
+				src: "<%= paths.src.root %>/index.html"
+				dest: "<%= paths.dist.root %>/index.html"
 			html_production:
-				src: "<%= paths.src.rootFolder %>/index.html"
-				dest: "<%= paths.dist.rootFolder %>/index.html"
+				src: "<%= paths.src.root %>/index.html"
+				dest: "<%= paths.dist.root %>/index.html"
 				options:
 					process: (content, path) ->
 						content = content.replace ".js", ".min.js"
@@ -63,8 +63,8 @@ module.exports = (grunt) ->
 
 		concat:
 			compile:
-				src: ["<%= paths.dist.rootFolder %>/app.js", "<%= paths.src.appFolder %>/templates/templates.js"]
-				dest: "<%= paths.dist.rootFolder %>/app.js",
+				src: ["<%= paths.dist.root %>/app.js", "<%= paths.src.app %>/templates/templates.js"]
+				dest: "<%= paths.dist.root %>/app.js",
 
 		handlebars:
 			compile:
@@ -75,37 +75,37 @@ module.exports = (grunt) ->
 						path = path.replace ".hbs", ""
 						return path
 				files:
-					"<%= paths.src.appFolder %>/templates/templates.js" : "<%= paths.src.appFolder %>/**/*.hbs"
+					"<%= paths.src.app %>/templates/templates.js" : "<%= paths.src.app %>/**/*.hbs"
 
 		autoprefixer:
 			options:
 				browsers: ["last 1 version", "> 1%", "ie 8", "ie 7"]
-			
+
 			dev:
-				src: "<%= paths.dist.rootFolder %>/app.css"
-				dest: "<%= paths.dist.rootFolder %>/app.css"
+				src: "<%= paths.dist.root %>/app.css"
+				dest: "<%= paths.dist.root %>/app.css"
 
 			production:
-				src: "<%= paths.dist.rootFolder %>/app.css"
-				dest: "<%= paths.dist.rootFolder %>/app.min.css"
+				src: "<%= paths.dist.root %>/app.css"
+				dest: "<%= paths.dist.root %>/app.min.css"
 
 		compass:
 			dev:
 				options:
-					cssDir:	"<%= paths.dist.rootFolder %>"
-					sassDir: "<%= paths.src.stylesFolder %>"
-					imagesDir: "<%= paths.dist.imagesFolder %>"
-					generatedImagesDir: "<%= paths.dist.imagesFolder %>"
+					cssDir:	"<%= paths.dist.root %>"
+					sassDir: "<%= paths.src.styles %>"
+					imagesDir: "<%= paths.dist.images %>"
+					generatedImagesDir: "<%= paths.dist.images %>"
 					environment: "development"
 					outputStyle: "expanded"
 					relativeAssets: true
 
 			production:
 				options:
-					cssDir:	"<%= paths.dist.rootFolder %>"
-					sassDir: "<%= paths.src.stylesFolder %>"
-					imagesDir: "<%= paths.dist.imagesFolder %>"
-					generatedImagesDir: "<%= paths.dist.imagesFolder %>"
+					cssDir:	"<%= paths.dist.root %>"
+					sassDir: "<%= paths.src.styles %>"
+					imagesDir: "<%= paths.dist.images %>"
+					generatedImagesDir: "<%= paths.dist.images %>"
 					environment: "production"
 					outputStyle: "compressed"
 					relativeAssets: true
@@ -117,7 +117,7 @@ module.exports = (grunt) ->
 					livereload: true
 
 		casperjs:
-			files: ["<%= paths.testsFolder %>/integration/**/*.coffee"]
+			files: ["<%= paths.tests.root %>/integration/**/*.coffee"]
 
 		mocha:
 			test:
@@ -127,30 +127,30 @@ module.exports = (grunt) ->
 
 		watch:
 			app:
-				files: ["<%= paths.src.rootFolder %>/**/*.coffee", "<%= paths.src.rootFolder %>/**/*.hbs"]
+				files: ["<%= paths.src.root %>/**/*.coffee", "<%= paths.src.root %>/**/*.hbs"]
 				tasks: ["app:dev"]
 				options:
 					livereload: true
 			styles:
-				files: ["<%= paths.src.stylesFolder %>/**/*.scss"]
+				files: ["<%= paths.src.styles %>/**/*.scss"]
 				tasks: ["styles:dev"]
 				options:
 					livereload: true
 			html:
-				files: ["<%= paths.src.rootFolder %>/index.html"]
+				files: ["<%= paths.src.root %>/index.html"]
 				tasks: ["copy:html_dev"]
 				options:
 					livereload: true
 			images:
-				files: ["<%= paths.src.imagesFolder %>/**/*"]
+				files: ["<%= paths.src.images %>/**/*"]
 				tasks: ["images"]
 				options:
 					livereload: true
 			integration_tests:
-				files: ["<%= paths.testsFolder %>/integration/**/*.coffee"]
+				files: ["<%= paths.tests.root %>/integration/**/*.coffee"]
 				tasks: ["casperjs"]
 			unit_tests:
-				files: ["<%= paths.testsFolder %>/unit/specs/**/*.coffee"]
+				files: ["<%= paths.tests.root %>/unit/specs/**/*.coffee"]
 				tasks: ["app:dev", "app:test", "mocha"]
 				options:
 					livereload: true
