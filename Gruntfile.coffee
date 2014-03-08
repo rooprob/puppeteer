@@ -18,6 +18,8 @@ module.exports = (grunt) ->
 				styles: "<%= paths.dist.root %>/styles"
 			tests:
 				root: "./test"
+				unit: "<%= paths.tests.root %>/unit"
+				integration: "<%= paths.tests.root %>/integration"
 
 		snocketsify:
 			app:
@@ -147,10 +149,10 @@ module.exports = (grunt) ->
 				options:
 					livereload: true
 			integration_tests:
-				files: ["<%= paths.tests.root %>/integration/**/*.coffee"]
+				files: ["<%= paths.tests.integration %>/**/*.coffee"]
 				tasks: ["casperjs"]
 			unit_tests:
-				files: ["<%= paths.tests.root %>/unit/specs/**/*.coffee"]
+				files: ["<%= paths.tests.unit %>/specs/**/*.coffee"]
 				tasks: ["app:dev", "app:test", "mocha"]
 				options:
 					livereload: true
