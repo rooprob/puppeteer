@@ -26,8 +26,8 @@ module.exports = (grunt) ->
 				src: "<%= paths.src.root %>/javascript.coffee"
 				dest: "<%= paths.dist.root %>/app.js"
 			test:
-				src: "<%= paths.tests.root %>/unit/test.coffee"
-				dest: "<%= paths.tests.root %>/unit/test.js"
+				src: "<%= paths.tests.unit %>/test.coffee"
+				dest: "<%= paths.tests.unit %>/test.js"
 
 		uglify:
 			production:
@@ -119,7 +119,7 @@ module.exports = (grunt) ->
 					livereload: true
 
 		casperjs:
-			files: ["<%= paths.tests.root %>/integration/**/*.coffee"]
+			files: ["<%= paths.tests.integration %>/**/*.coffee"]
 
 		mocha:
 			test:
