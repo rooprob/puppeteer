@@ -6,17 +6,23 @@ module.exports = (grunt) ->
 		pkg: grunt.file.readJSON "package.json"
 
 		paths:
-			srcFolder: "./src"
-			appFolder: "<%= paths.srcFolder %>/app"
-			imagesFolder: "<%= paths.srcFolder %>/images"
-			stylesFolder: "<%= paths.srcFolder%>/styles"
-			distFolder: "./dist"
+			src:
+				rootFolder: "./src"
+				appFolder: "<%= paths.src.rootFolder %>/app"
+				imagesFolder: "<%= paths.src.rootFolder %>/images"
+				stylesFolder: "<%= paths.src.rootFolder%>/styles"
+			dist:
+				rootFolder: "./dist"
+				appFolder: "<%= paths.dist.rootFolder %>/app"
+				imagesFolder: "<%= paths.dist.rootFolder %>/images"
+				stylesFolder: "<%= paths.dist.rootFolder%>/styles"
+
 			testsFolder: "./test"
 
 		snocketsify:
 			app:
-				src: "<%= paths.srcFolder %>/javascript.coffee"
-				dest: "<%= paths.distFolder %>/app.js"
+				src: "<%= paths.src.rootFolder %>/javascript.coffee"
+				dest: "<%= paths.dist.rootFolder %>/app.js"
 			test:
 				src: "<%= paths.testsFolder %>/unit/test.coffee"
 				dest: "<%= paths.testsFolder %>/unit/test.js"
@@ -24,30 +30,30 @@ module.exports = (grunt) ->
 		uglify:
 			production:
 				files:
-					"<%= paths.distFolder %>/app.min.js" : "<%= paths.distFolder %>/app.js"
+					"<%= paths.dist.rootFolder %>/app.min.js" : "<%= paths.dist.rootFolder %>/app.js"
 
 		clean:
-			dist: "<%= paths.distFolder %>"
-			images: "<%= paths.distFolder %>/images"
+			dist: "<%= paths.dist.rootFolder %>"
+			images: "<%= paths.dist.imagesFolder %>"
 
 		imagemin:
 			compile:
 				options:
 					cache: false
-				files: [{
+				files: [
 					expand: true
-					cwd: "<%= paths.imagesFolder %>"
+					cwd: "<%= paths.src.imagesFolder %>"
 					src: ["**/*.{png,jpg,gif}"]
-					dest: "<%= paths.distFolder %>/images"
-				}]
+					dest: "<%= paths.dist.imagesFolder %>"
+				]
 
 		copy:
 			html_dev:
-				src: "<%= paths.srcFolder %>/index.html"
-				dest: "<%= paths.distFolder %>/index.html"
+				src: "<%= paths.src.rootFolder %>/index.html"
+				dest: "<%= paths.dist.rootFolder %>/index.html"
 			html_production:
-				src: "<%= paths.srcFolder %>/index.html"
-				dest: "<%= paths.distFolder %>/index.html"
+				src: "<%= paths.src.rootFolder %>/index.html"
+				dest: "<%= paths.dist.rootFolder %>/index.html"
 				options:
 					process: (content, path) ->
 						content = content.replace ".js", ".min.js"
@@ -57,8 +63,8 @@ module.exports = (grunt) ->
 
 		concat:
 			compile:
-				src: ["<%= paths.distFolder %>/app.js", "<%= paths.appFolder %>/templates/templates.js"]
-				dest: "<%= paths.distFolder %>/app.js",
+				src: ["<%= paths.dist.rootFolder %>/app.js", "<%= paths.src.appFolder %>/templates/templates.js"]
+				dest: "<%= paths.dist.rootFolder %>/app.js",
 
 		handlebars:
 			compile:
@@ -69,29 +75,40 @@ module.exports = (grunt) ->
 						path = path.replace ".hbs", ""
 						return path
 				files:
-					"<%= paths.appFolder %>/templates/templates.js" : "<%= paths.appFolder %>/**/*.hbs"
+					"<%= paths.src.appFolder %>/templates/templates.js" : "<%= paths.src.appFolder %>/**/*.hbs"
 
 		autoprefixer:
 			options:
 				browsers: ["last 1 version", "> 1%", "ie 8", "ie 7"]
+			
 			dev:
-				src: "<%= paths.distFolder %>/app.css"
-				dest: "<%= paths.distFolder %>/app.css"
-			production:
-				src: "<%= paths.distFolder %>/app.min.css"
-				dest: "<%= paths.distFolder %>/app.min.css"
+				src: "<%= paths.dist.rootFolder %>/app.css"
+				dest: "<%= paths.dist.rootFolder %>/app.css"
 
-		sass:
+			production:
+				src: "<%= paths.dist.rootFolder %>/app.css"
+				dest: "<%= paths.dist.rootFolder %>/app.min.css"
+
+		compass:
 			dev:
 				options:
-					style: "expanded"
-				files:
-					"<%= paths.distFolder %>/app.css": "<%= paths.stylesFolder %>/app.scss"
+					cssDir:	"<%= paths.dist.rootFolder %>"
+					sassDir: "<%= paths.src.stylesFolder %>"
+					imagesDir: "<%= paths.dist.imagesFolder %>"
+					generatedImagesDir: "<%= paths.dist.imagesFolder %>"
+					environment: "development"
+					outputStyle: "expanded"
+					relativeAssets: true
+
 			production:
 				options:
-					style: "compressed"
-				files:
-					"<%= paths.distFolder %>/app.min.css": "<%= paths.stylesFolder %>/app.scss"
+					cssDir:	"<%= paths.dist.rootFolder %>"
+					sassDir: "<%= paths.src.stylesFolder %>"
+					imagesDir: "<%= paths.dist.imagesFolder %>"
+					generatedImagesDir: "<%= paths.dist.imagesFolder %>"
+					environment: "production"
+					outputStyle: "compressed"
+					relativeAssets: true
 
 		connect:
 			server:
@@ -110,22 +127,22 @@ module.exports = (grunt) ->
 
 		watch:
 			app:
-				files: ["<%= paths.srcFolder %>/**/*.coffee", "<%= paths.srcFolder %>/**/*.hbs"]
+				files: ["<%= paths.src.rootFolder %>/**/*.coffee", "<%= paths.src.rootFolder %>/**/*.hbs"]
 				tasks: ["app:dev"]
 				options:
 					livereload: true
 			styles:
-				files: ["<%= paths.stylesFolder %>/**/*.scss"]
+				files: ["<%= paths.src.stylesFolder %>/**/*.scss"]
 				tasks: ["styles:dev"]
 				options:
 					livereload: true
 			html:
-				files: ["<%= paths.srcFolder %>/index.html"]
+				files: ["<%= paths.src.rootFolder %>/index.html"]
 				tasks: ["copy:html_dev"]
 				options:
 					livereload: true
 			images:
-				files: ["<%= paths.imagesFolder %>/**/*"]
+				files: ["<%= paths.src.imagesFolder %>/**/*"]
 				tasks: ["images"]
 				options:
 					livereload: true
@@ -141,9 +158,9 @@ module.exports = (grunt) ->
 	grunt.registerTask "images", ["clean:images", "imagemin"]
 	grunt.registerTask "app:dev", ["snocketsify:app", "templates"]
 	grunt.registerTask "app:test", ["snocketsify:test"]
-	grunt.registerTask "app:production", ["snocketsify:app", "templates", "uglify:production"]
-	grunt.registerTask "styles", ["sass", "autoprefixer"]
-	grunt.registerTask "styles:dev", ["sass:dev", "autoprefixer:dev"]
+	grunt.registerTask "app:production", ["snocketsify:app", "templates", "uglify:production" ]
+	grunt.registerTask "styles", ["compass:production", "autoprefixer" ]
+	grunt.registerTask "styles:dev", ["compass:dev", "autoprefixer:dev"]
 	grunt.registerTask "templates", ["handlebars", "concat"]
 
 	grunt.registerTask "dev", ["clean:dist", "app:dev", "app:test", "copy:html_dev", "images", "styles:dev"]

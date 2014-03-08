@@ -6,7 +6,7 @@ Backbone.js"). Some other funny names involved are:
 
 * [GruntJS](http://gruntjs.com "Grunt: The Javascript Task Runner")
 * [CoffeeScript](http://coffeescript.org)
-* [Sass](http://sass-lang.com "Sass: Syntactically Awesome Style Sheets")
+* [Compass](http://compass-style.org "Compass: an open-source CSS Authoring Framework.")
 * [Mocha](http://visionmedia.github.io/mocha/ "The fun, simple, flexible
 	Javascript test framework")
 * [Handlebars](http://handlebarsjs.com "Minimal Templating on Steroids")
@@ -26,6 +26,7 @@ enlighten me with better ways of doing things.
 * Remember that you should have Grunt, Bower and some other NPM packages
 	installed globally
 * Install project dependencies: `bower install`
+* Install [Ruby](https://www.ruby-lang.org/en/downloads "Download Ruby"), [Sass](http://sass-lang.com/install "Sass: Install Sass"), and [Compass](http://compass-style.org/install "Install the Compass Stylesheet Authoring Framework")
 * Run your Grunt default task: `grunt`
 * Open your browser and your editor and start coding:
 	`http://localhost:3000/dist/`

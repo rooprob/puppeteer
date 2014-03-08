@@ -1,3 +1,23 @@
+@import "compass/utilities/sprites/base";
+@import "sprite/*.png";
+@include all-sprite-sprites(true);
+
 .sample {
   color: #000;
+}
+
+.trololo
+{
+	background:image-url("trololo.jpg") no-repeat top left;
+	padding-left: 58px;
+	line-height: 48px;
+	margin: 15px 0;
+}
+
+.trololo:after
+{
+	@extend .sprite-lorry-delete;
+	content: "";
+	display: inline-block;
+	margin-left: 10px;
 }
