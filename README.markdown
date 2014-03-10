@@ -49,7 +49,7 @@ enlighten me with better ways of doing things.
 * `./src/images/`: Images used in your app
 * `./src/styles/`: Sass styles for the app
 * `./test/`: Test suite
-* `./test/integration`: Integration tests for CasperJS
+* `./test/functional`: Functional tests with CasperJS
 * `./test/unit`: Unit tests for Mocha (with Chai and Sinon)
 * `./test/unit/test.coffee`: Include your specs on this files
 * `./test/unit/specs/`: Your awesome unit tests specs to ensure the quality of your app

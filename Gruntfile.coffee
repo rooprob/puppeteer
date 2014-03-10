@@ -19,7 +19,7 @@ module.exports = (grunt) ->
 			tests:
 				root: "./test"
 				unit: "<%= paths.tests.root %>/unit"
-				integration: "<%= paths.tests.root %>/integration"
+				functional: "<%= paths.tests.root %>/functional"
 
 		snocketsify:
 			app:
@@ -119,7 +119,7 @@ module.exports = (grunt) ->
 					livereload: true
 
 		casperjs:
-			files: ["<%= paths.tests.integration %>/**/*.coffee"]
+			files: ["<%= paths.tests.functional %>/**/*.coffee"]
 
 		mocha:
 			test:
@@ -148,8 +148,8 @@ module.exports = (grunt) ->
 				tasks: ["images"]
 				options:
 					livereload: true
-			integration_tests:
-				files: ["<%= paths.tests.integration %>/**/*.coffee"]
+			functional_tests:
+				files: ["<%= paths.tests.functional %>/**/*.coffee"]
 				tasks: ["casperjs"]
 			unit_tests:
 				files: ["<%= paths.tests.unit %>/specs/**/*.coffee"]
