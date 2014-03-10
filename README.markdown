@@ -35,22 +35,19 @@ enlighten me with better ways of doing things.
 
 * `./dist/`: Generated files, ready to be used
 * `./src/`: The source code of your app
-* `./src/index.html`: App web page, the entry point!
-* `./src/javascript.coffee`: Your main source file, it includes every other one
-* `./src/app/`: Your fabulous app
-* `./src/app/app.coffee`: The file for the main object of your App, the
-	namespace
-* `./src/app/entities/`: Entities (Collections and Models) used on the app
-* `./src/app/lib/`: Code related with the behaviour of your app. Think of it
-	like a config for your app objects, not frameworks
-* `./src/app/modules/`: Modules that you will use to build your app:
-	HeaderModule, FooterModule, KittensModule and so on
-* `./src/config/`: Config files for your frameworks: Backbone, jQuery
-* `./src/images/`: Images used in your app
-* `./src/styles/`: Sass styles for the app
-* `./test/`: Test suite
-* `./test/functional`: Functional tests with CasperJS
-* `./test/unit`: Unit tests for Mocha (with Chai and Sinon)
-* `./test/unit/test.coffee`: Include your specs on this files
-* `./test/unit/specs/`: Your awesome unit tests specs to ensure the quality of your app
+	* `./src/index.html`: App web page, the entry point!
+	* `./src/javascript.coffee`: Your main source file, it includes every other one
+	* `./src/app/`: Your fabulous app
+		* `./src/app/app.coffee`: The file for the main object of your App, the namespace
+		* `./src/app/entities/`: Entities (Collections and Models) used on the app
+		* `./src/app/lib/`: Code related with the behaviour of your app. Think of it like a config for your app objects, not frameworks
+		* `./src/app/modules/`: Modules that you will use to build your app: HeaderModule, FooterModule, KittensModule and so on
+	* `./src/config/`: Config files for your frameworks: Backbone, jQuery…
+	* `./src/images/`: Images used in your app
+	* `./src/styles/`: Sass styles for the app (with Compass!)
+* `./test/`: Test suites
+	* `./test/functional`: Functional tests with CasperJS
+	* `./test/unit`: Unit tests with Mocha, Chai and Sinon
+		* `./test/unit/test.coffee`: Include your unit tests on this files
+		* `./test/unit/specs/`: Your awesome unit tests to ensure the quality of your app
 * `./vendor/`: Dependencies downloaded by Bower
