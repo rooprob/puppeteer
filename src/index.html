@@ -2,15 +2,22 @@
 <html>
 	<head>
 		<title>Puppeteer</title>
+		<!-- build:css:production app.min.css --> 
 		<link rel="stylesheet" href="app.css" />
+		<!-- /build -->
+
+		<!-- build:js:production app.min.js --> 
 		<script src="app.js"></script>
+		<!-- /build -->
+		<!-- build:template[production,dev] --> 
 		<script>
 			$(function() {
 				App.start({
-					environment: "dev"
+					environment: "<%= environment %>"
 				});
 			});
 		</script>
+		<!-- /build -->
 	</head>
 	<body>
 		<div id="app-region"></div>
