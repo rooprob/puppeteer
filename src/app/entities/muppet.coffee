@@ -14,7 +14,7 @@
 	API =
 		getMuppet: (id) ->
 			data = _.find array, (item) ->
-				return item.id == id
+				return item.id is +id
 
 			return new Entities.Muppet data
 
