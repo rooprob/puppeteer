@@ -2,17 +2,20 @@
 <html>
 	<head>
 		<title>Puppeteer</title>
-		<!-- build:css:production styles.min.css --> 
+		<!-- build:css:production styles.min.css -->
 		<link rel="stylesheet" href="styles.css" />
 		<!-- /build -->
 	</head>
 	<body>
-		<div id="app-region"></div>
-		
-		<!-- build:js:production app.min.js --> 
+		<div id="wrapper">
+			<div id="header-region"></div>
+			<div id="app-region"></div>
+		</div>
+
+		<!-- build:js:production app.min.js -->
 		<script src="app.js"></script>
 		<!-- /build -->
-		<!-- build:template[production,dev] --> 
+		<!-- build:template[production,dev] -->
 		<script>
 			$(function() {
 				App.start({

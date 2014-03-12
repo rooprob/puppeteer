@@ -1,6 +1,10 @@
 @import "compass/reset";
-@import "styles/samplepartial";
 
-body {
-	margin: 15px;
+#wrapper {
+	margin: 1em auto;
+	width: 55em;
+}
+
+#header-region {
+	text-align: center;
 }

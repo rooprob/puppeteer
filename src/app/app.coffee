@@ -4,13 +4,15 @@
 
 	App.addRegions
 		appRegion: "#app-region"
+		headerRegion : "#header-region"
 
-	App.rootRoute = "sample"
+	App.rootRoute = "muppets"
 
 	App.reqres.setHandler "default:region", ->
 		return App.appRegion
 
 	App.addInitializer ->
-		console.log "App initializer!"
+		App.HeaderModule.start
+			region: App.headerRegion
 
 	return App
