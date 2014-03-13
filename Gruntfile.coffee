@@ -115,7 +115,6 @@ module.exports = (grunt) ->
 					specify: "<%= paths.src.root %>/styles.scss"
 					imagesDir: "<%= paths.dist.images %>"
 					generatedImagesDir: "<%= paths.dist.images %>"
-					environment: "development"
 					outputStyle: "expanded"
 					relativeAssets: true
 
