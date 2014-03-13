@@ -7,17 +7,17 @@ module.exports = (grunt) ->
 
 		paths:
 			src:
-				root: "./src"
+				root: "src"
 				app: "<%= paths.src.root %>/app"
 				images: "<%= paths.src.root %>/images"
 				styles: "<%= paths.src.root %>/styles"
+				
 			dist:
-				root: "./dist"
+				root: "dist"
 				app: "<%= paths.dist.root %>/app"
 				images: "<%= paths.dist.root %>/images"
-				styles: "<%= paths.dist.root %>/styles"
 			tests:
-				root: "./test"
+				root: "test"
 				unit: "<%= paths.tests.root %>/unit"
 				functional: "<%= paths.tests.root %>/functional"
 
@@ -50,34 +50,49 @@ module.exports = (grunt) ->
 				]
 
 		copy:
-			html_dev:
-				src: "<%= paths.src.root %>/index.html"
-				dest: "<%= paths.dist.root %>/index.html"
-			html_production:
-				src: "<%= paths.src.root %>/index.html"
-				dest: "<%= paths.dist.root %>/index.html"
-				options:
-					process: (content, path) ->
-						content = content.replace ".js", ".min.js"
-						content = content.replace ".css", ".min.css"
-						content = content.replace "environment: \"dev\"", "environment: \"production\""
-						return content
+			images:
+				expand: true
+				cwd: "<%= paths.src.images %>"
+				src: ["**/*.{png,jpg,gif}"]
+				dest: "<%= paths.dist.images %>"
 
-		concat:
-			compile:
-				src: ["<%= paths.dist.root %>/app.js", "<%= paths.src.app %>/templates/templates.js"]
-				dest: "<%= paths.dist.root %>/app.js",
+			html:
+				expand: true
+				flatten: true
+				src: "<%= paths.src.root %>/**/*.html"
+				dest: "<%= paths.dist.root %>/"
+
+		processhtml:
+			options:
+				process: true
+
+			dev:
+				expand: true
+				cwd: "<%= paths.dist.root %>"
+				src: ["**/*.html"]
+				dest: "<%= paths.dist.root %>"
+
+			production:
+				expand: true
+				cwd: "<%= paths.dist.root %>"
+				src: ["**/*.html"]
+				dest: "<%= paths.dist.root %>"
 
 		handlebars:
 			compile:
 				options:
 					namespace: "App.templates"
 					processName: (path) ->
-						path = path.replace "./src/app/", ""
+						path = path.replace grunt.config("paths.src.app")+"/", ""
 						path = path.replace ".hbs", ""
 						return path
 				files:
 					"<%= paths.src.app %>/templates/templates.js" : "<%= paths.src.app %>/**/*.hbs"
+
+		concat:
+			compile:
+				src: ["<%= paths.dist.root %>/app.js", "<%= paths.src.app %>/templates/templates.js"]
+				dest: "<%= paths.dist.root %>/app.js",
 
 		autoprefixer:
 			options:
@@ -95,7 +110,8 @@ module.exports = (grunt) ->
 			dev:
 				options:
 					cssDir:	"<%= paths.dist.root %>"
-					sassDir: "<%= paths.src.styles %>"
+					sassDir:	"<%= paths.src.root %>"
+					specify: "<%= paths.src.root %>/app.scss"
 					imagesDir: "<%= paths.dist.images %>"
 					generatedImagesDir: "<%= paths.dist.images %>"
 					environment: "development"
@@ -105,7 +121,8 @@ module.exports = (grunt) ->
 			production:
 				options:
 					cssDir:	"<%= paths.dist.root %>"
-					sassDir: "<%= paths.src.styles %>"
+					sassDir:	"<%= paths.src.root %>"
+					specify: "<%= paths.src.root %>/app.scss"
 					imagesDir: "<%= paths.dist.images %>"
 					generatedImagesDir: "<%= paths.dist.images %>"
 					environment: "production"
@@ -140,7 +157,7 @@ module.exports = (grunt) ->
 					livereload: true
 			html:
 				files: ["<%= paths.src.root %>/index.html"]
-				tasks: ["copy:html_dev"]
+				tasks: ["html:dev"]
 				options:
 					livereload: true
 			images:
@@ -157,7 +174,9 @@ module.exports = (grunt) ->
 				options:
 					livereload: true
 
-	grunt.registerTask "images", ["clean:images", "imagemin"]
+	grunt.registerTask "images", ["clean:images", "copy:images"]
+	grunt.registerTask "html", ["copy:html", "processhtml:production"]
+	grunt.registerTask "html:dev", ["copy:html", "processhtml:dev"]
 	grunt.registerTask "app:dev", ["snocketsify:app", "templates"]
 	grunt.registerTask "app:test", ["snocketsify:test"]
 	grunt.registerTask "app:production", ["snocketsify:app", "templates", "uglify:production" ]
@@ -165,6 +184,6 @@ module.exports = (grunt) ->
 	grunt.registerTask "styles:dev", ["compass:dev", "autoprefixer:dev"]
 	grunt.registerTask "templates", ["handlebars", "concat"]
 
-	grunt.registerTask "dev", ["clean:dist", "app:dev", "app:test", "copy:html_dev", "images", "styles:dev"]
-	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "copy:html_production", "images", "styles", "casperjs", "mocha"]
+	grunt.registerTask "dev", ["clean:dist", "app:dev", "app:test", "html:dev", "images", "styles:dev"]
+	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "images", "styles", "imagemin", "casperjs", "mocha"]
 	grunt.registerTask "default", ["dev", "connect", "watch"]
