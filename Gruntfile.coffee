@@ -98,35 +98,25 @@ module.exports = (grunt) ->
 			options:
 				browsers: ["last 1 version", "> 1%", "ie 8", "ie 7"]
 
-			dev:
-				src: "<%= paths.dist.root %>/app.css"
-				dest: "<%= paths.dist.root %>/app.css"
+			compile:
+				src: "<%= paths.dist.root %>/styles.css"
+				dest: "<%= paths.dist.root %>/styles.css"
 
-			production:
-				src: "<%= paths.dist.root %>/app.css"
-				dest: "<%= paths.dist.root %>/app.min.css"
+		cssmin:
+			compile:
+				files:
+					"<%= paths.dist.root %>/styles.min.css": "<%= paths.dist.root %>/styles.css"
 
 		compass:
-			dev:
+			compile:
 				options:
 					cssDir:	"<%= paths.dist.root %>"
 					sassDir:	"<%= paths.src.root %>"
-					specify: "<%= paths.src.root %>/app.scss"
+					specify: "<%= paths.src.root %>/styles.scss"
 					imagesDir: "<%= paths.dist.images %>"
 					generatedImagesDir: "<%= paths.dist.images %>"
 					environment: "development"
 					outputStyle: "expanded"
-					relativeAssets: true
-
-			production:
-				options:
-					cssDir:	"<%= paths.dist.root %>"
-					sassDir:	"<%= paths.src.root %>"
-					specify: "<%= paths.src.root %>/app.scss"
-					imagesDir: "<%= paths.dist.images %>"
-					generatedImagesDir: "<%= paths.dist.images %>"
-					environment: "production"
-					outputStyle: "compressed"
 					relativeAssets: true
 
 		connect:
@@ -151,7 +141,7 @@ module.exports = (grunt) ->
 				options:
 					livereload: true
 			styles:
-				files: ["<%= paths.src.styles %>/**/*.scss"]
+				files: ["<%= paths.src.root %>/**/*.scss"]
 				tasks: ["styles:dev"]
 				options:
 					livereload: true
@@ -180,10 +170,10 @@ module.exports = (grunt) ->
 	grunt.registerTask "app:dev", ["snocketsify:app", "templates"]
 	grunt.registerTask "app:test", ["snocketsify:test"]
 	grunt.registerTask "app:production", ["snocketsify:app", "templates", "uglify:production" ]
-	grunt.registerTask "styles", ["compass:production", "autoprefixer" ]
-	grunt.registerTask "styles:dev", ["compass:dev", "autoprefixer:dev"]
+	grunt.registerTask "styles:dev", ["compass", "autoprefixer"]
+	grunt.registerTask "styles:production", ["styles:dev", "cssmin"]
 	grunt.registerTask "templates", ["handlebars", "concat"]
 
 	grunt.registerTask "dev", ["clean:dist", "app:dev", "app:test", "html:dev", "images", "styles:dev"]
-	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "images", "styles", "imagemin", "casperjs", "mocha"]
+	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "imagemin", "styles:production", "casperjs", "mocha"]
 	grunt.registerTask "default", ["dev", "connect", "watch"]
