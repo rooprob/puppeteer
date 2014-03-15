@@ -11,11 +11,12 @@ module.exports = (grunt) ->
 				app: "<%= paths.src.root %>/app"
 				images: "<%= paths.src.root %>/images"
 				styles: "<%= paths.src.root %>/styles"
-				
+
 			dist:
 				root: "dist"
 				app: "<%= paths.dist.root %>/app"
 				images: "<%= paths.dist.root %>/images"
+
 			tests:
 				root: "test"
 				unit: "<%= paths.tests.root %>/unit"
@@ -25,6 +26,7 @@ module.exports = (grunt) ->
 			app:
 				src: "<%= paths.src.root %>/javascript.coffee"
 				dest: "<%= paths.dist.root %>/app.js"
+
 			test:
 				src: "<%= paths.tests.unit %>/test.coffee"
 				dest: "<%= paths.tests.unit %>/test.js"
@@ -140,7 +142,7 @@ module.exports = (grunt) ->
 				options:
 					livereload: true
 			styles:
-				files: ["<%= paths.src.root %>/**/*.scss"]
+				files: ["<%= paths.src.root %>/app.scss", "<%= paths.src.styles %>/**/*.scss"]
 				tasks: ["styles:dev"]
 				options:
 					livereload: true
@@ -174,5 +176,5 @@ module.exports = (grunt) ->
 	grunt.registerTask "templates", ["handlebars", "concat"]
 
 	grunt.registerTask "dev", ["clean:dist", "app:dev", "app:test", "html:dev", "images", "styles:dev"]
-	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "imagemin", "styles:production", "casperjs", "mocha"]
+	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "styles", "imagemin", "casperjs", "mocha"]
 	grunt.registerTask "default", ["dev", "connect", "watch"]

@@ -1,0 +1,29 @@
+#muppets-list {
+	ul {
+		@include clearfix;
+
+		li {
+			@include border-radius(3px);
+			@include float-left;
+			@include single-transition(background-color, 200ms);
+
+			background-color: #f5f5f5;
+			cursor: pointer;
+			font-size: 0.85em;
+			margin: 0 4px 8px 4px;
+			padding: 0.5em;
+			text-align: center;
+			width: 170px;
+
+			&:hover {
+				background-color: #e8e8e8;
+			}
+
+			img {
+				@include border-radius(3px);
+
+				margin-bottom: 0.25em;
+			}
+		}
+	}
+}
