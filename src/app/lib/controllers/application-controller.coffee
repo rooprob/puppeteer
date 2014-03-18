@@ -17,8 +17,9 @@
 		show: (view, options = {}) ->
 			_.defaults options,
 				region: @region
-
-			view = if view.getMainView then view.getMainView() else view
+				
+			# A controller could display another controller that could display a view.
+			while view.getMainView then view = view.getMainView()
 
 			if not view
 				throw new Error("getMainView() did not return a view instance or #{view?.constructor?.name} is not a view instance")
