@@ -6,7 +6,6 @@
 #= require "../vendor/backbone.babysitter/lib/backbone.babysitter.js"
 #= require "../vendor/marionette/lib/backbone.marionette.js"
 #= require "../vendor/handlebars/handlebars.js"
-#= require "../vendor/backbone.chooser/build/backbone-chooser.js"
 
 #= require_tree "config/"
 
