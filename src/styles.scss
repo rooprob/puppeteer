@@ -1,6 +1,11 @@
 @import "compass/reset";
 @import "compass/css3";
 @import "compass/utilities/general";
+@import "compass/utilities/sprites";
+
+@import "sprites/*.png";
+@include all-sprites-sprites;
+
 @import "styles/app";
 @import "styles/filter-component";
 @import "styles/muppets-list";

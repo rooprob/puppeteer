@@ -176,5 +176,5 @@ module.exports = (grunt) ->
 	grunt.registerTask "templates", ["handlebars", "concat"]
 
 	grunt.registerTask "dev", ["clean:dist", "app:dev", "app:test", "html:dev", "images", "styles:dev"]
-	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "styles", "imagemin", "casperjs", "mocha"]
+	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "imagemin", "styles:production", "casperjs", "mocha"]
 	grunt.registerTask "default", ["dev", "connect", "watch"]
