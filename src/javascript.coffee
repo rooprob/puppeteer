@@ -12,7 +12,11 @@
 
 #= require "app/app.coffee"
 
-#= require_tree "app/lib/"
+#= require_tree "app/lib/utilities/"
+#= require_tree "app/lib/entities/"
+#= require_tree "app/lib/controllers/"
+#= require_tree "app/lib/views/"
+#= require_tree "app/lib/components/"
 
 #= require_tree "app/entities/"
 

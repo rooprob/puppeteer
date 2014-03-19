@@ -2,7 +2,7 @@
 
 _.extend Marionette.Renderer,
 
-	lookups: ["modules/"]
+	lookups: ["modules/", "lib/components/"]
 
 	render: (template, data) ->
 		return if template is false

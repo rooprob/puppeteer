@@ -30,7 +30,7 @@
 			return new Entities.Muppet data
 
 		getMuppets: ->
-			return new Entities.Samples array
+			return new Entities.Muppets array
 
 	App.reqres.setHandler "muppet:entity", (id) ->
 		API.getMuppet id if id

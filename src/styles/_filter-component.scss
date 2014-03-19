@@ -1,0 +1,16 @@
+.filter-component {
+	@include clearfix;
+
+	margin-bottom: 1em;
+	padding: 1em 0.25em;
+
+	input[type="text"] {
+		@include border-radius(25px);
+
+		border: 1px solid #ddd;
+		float: right;
+		font-size: 1.2em;
+		padding: 0.15em 0.75em;
+	}
+
+}
