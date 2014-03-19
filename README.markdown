@@ -37,8 +37,8 @@ enlighten me with better ways of doing things.
 * `./dist/`: Generated files, ready to be used
 * `./src/`: The source code of your app
 	* `./src/index.html`: App web page, the entry point!
-	* `./src/javascript.coffee`: Your main source file, it includes every other
-		one
+	* `./src/javascript.coffee`: Your main source file, it includes every other one
+	* `./src/styles.scss`: The main styles file for your app. This file should include the partials under `./src/styles/`
 	* `./src/app/`: Your fabulous app
 		* `./src/app/app.coffee`: The file for the main object of your App, the
 			namespace
@@ -49,7 +49,7 @@ enlighten me with better ways of doing things.
 			HeaderModule, FooterModule, KittensModule and so on
 	* `./src/config/`: Config files for your frameworks: Backbone, jQuery…
 	* `./src/images/`: Images used in your app
-	* `./src/styles/`: Sass styles for the app (with Compass!)
+	* `./src/styles/`: Sass styles for the app (with Compass!). Here we should have the partials styles for our app
 * `./test/`: Test suites
 	* `./test/functional`: Functional tests with CasperJS
 	* `./test/unit`: Unit tests with Mocha, Chai and Sinon
