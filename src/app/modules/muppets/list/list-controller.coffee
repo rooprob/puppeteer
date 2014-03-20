@@ -7,7 +7,7 @@
 		# -------------------------------------------------------
 		initialize: ->
 			@layout = @getLayoutView()
-			@muppets = App.request "muppet:entities"
+			@muppets = App.request "muppet:filterable:entities"
 
 			@listenTo @layout, "show", =>
 				@handleFilterRegion()
@@ -19,13 +19,12 @@
 		# LAYOUT REGIONS
 		# -------------------------------------------------------
 		handleFilterRegion: ->
-			filterComponent = App.request "filter:component",
-				collection: @muppets
-				filter: (muppet, searchText) ->
-					muppetName = muppet.get("name").toUpperCase()
-					return _.include muppetName, searchText.toUpperCase()
+			filterComponent = App.request "filter:component"
 
-			@layout.filter.show filterComponent.getMainView() if filterComponent.getMainView()
+			@listenTo filterComponent, "filter:text:changed", (text) ->
+				@muppets.filterByName text.trim()
+
+			@layout.filter.show filterComponent.getMainView()
 
 		handleContentRegion: ->
 			listView = @getListView @muppets

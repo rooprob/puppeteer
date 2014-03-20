@@ -13,28 +13,13 @@
 	class Filter.Controller extends App.Controllers.Application
 		initialize: (options) ->
 			@options = options
-			return if not @options.collection or not _.isFunction(@options.filter)
 
-			@collection = @options.collection
-			@originalModels = @collection.models
 			view = API.getFilterView()
 
 			@setMainView view
 
-			@listenTo view, "filter:text:changed", (text) ->
-				text = text.trim()
-				models = _.clone @originalModels
-
-				if text isnt ""
-					models = @filter models, text
-
-				@collection.reset models
-
-		filter: (models, text) ->
-			filteredModels = _.filter models, (model) =>
-				return @options.filter(model, text)
-
-			return filteredModels
+			@listenTo view, "filter:text:changed", (text) =>
+				@trigger "filter:text:changed", text
 
 	# ----------------------------------------------
 	# App requests

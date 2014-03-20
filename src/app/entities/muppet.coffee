@@ -32,8 +32,30 @@
 		getMuppets: ->
 			return new Entities.Muppets array
 
+		getFilterableMuppets: ->
+			muppets = new Entities.Muppets array
+			filterableMuppets = new Entities.Muppets array
+
+			API.addFilterByName muppets, filterableMuppets
+
+			return filterableMuppets
+
+		addFilterByName: (original, filterable) ->
+			filterable.filterByName = (text) ->
+				models = original.models
+
+				if text isnt ""
+					models = filterable.filter (muppet) ->
+						muppetName = muppet.get("name").toUpperCase()
+						return _.include muppetName, text.toUpperCase()
+
+				filterable.reset models
+
 	App.reqres.setHandler "muppet:entity", (id) ->
 		API.getMuppet id if id
 
 	App.reqres.setHandler "muppet:entities", ->
 		API.getMuppets()
+
+	App.reqres.setHandler "muppet:filterable:entities", ->
+		API.getFilterableMuppets()
