@@ -1,11 +1,5 @@
 @App.module "Components.Filter", (Filter, App, Backbone, Marionette, $, _) ->
 
-	# ----------------------------------------------
-	# API
-	# ----------------------------------------------
-	API =
-		getFilterView: ->
-			new Filter.FilterView()
 
 	# ----------------------------------------------
 	# Class definition
@@ -14,12 +8,14 @@
 		initialize: (options) ->
 			@options = options
 
-			view = API.getFilterView()
-
+			view = @getFilterView()
 			@setMainView view
 
 			@listenTo view, "filter:text:changed", (text) =>
 				@trigger "filter:text:changed", text
+		
+		getFilterView: ->
+			new Filter.FilterView()
 
 	# ----------------------------------------------
 	# App requests

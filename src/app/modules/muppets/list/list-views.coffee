@@ -3,8 +3,8 @@
 	class List.Layout extends App.Views.Layout
 		template: "muppets/list/layout"
 		regions:
-			filter: "#filter"
-			content: "#content"
+			filterRegion: "#filter"
+			contentRegion: "#content"
 
 	class List.ItemView extends App.Views.ItemView
 		template: "muppets/list/muppet-item"
