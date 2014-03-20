@@ -7,8 +7,7 @@
 
 		filterByName: (text) ->
 			return @models if text is ""
-			
-			@filter (muppet) ->
+			return @filter (muppet) ->
 				muppetName = muppet.get("name").toUpperCase()
 				return _.include muppetName, text.toUpperCase()
 

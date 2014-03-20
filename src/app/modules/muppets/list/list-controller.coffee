@@ -8,7 +8,7 @@
 		initialize: ->
 			@layout = @getLayoutView()
 			@muppets = App.request "muppet:entities"
-			@buffer = new @muppets.constructor(@muppets.models)
+			@buffer = @getBuffer @muppets
 
 			@listenTo @layout, "show", =>
 				@handleFilterRegion()
@@ -17,18 +17,25 @@
 			@show @layout
 
 		# -------------------------------------------------------
+		# API
+		# -------------------------------------------------------
+		applyFilter: (text)=>
+			@buffer.reset @muppets.filterByName text.trim()
+
+		getBuffer: ()->
+			@buffer or= new @muppets.constructor(@muppets.models)
+
+		# -------------------------------------------------------
 		# LAYOUT REGIONS
 		# -------------------------------------------------------
 		handleFilterRegion: ->
 			filterComponent = App.request "filter:component"
-
-			@listenTo filterComponent, "filter:text:changed", (text)=>
-				@buffer.reset @muppets.filterByName text.trim()
-
+			@listenTo filterComponent, "filter:text:changed", @applyFilter
 			@show filterComponent, region: @layout.filterRegion
 
+
 		handleContentRegion: ->
-			listView = @getListView @buffer
+			listView = @getListView()
 
 			@listenTo listView, "itemview:muppet:clicked", (itemView, opts) ->
 				App.vent.trigger "muppet:selected", opts.model
@@ -38,9 +45,10 @@
 		# -------------------------------------------------------
 		# VIEWS
 		# -------------------------------------------------------
-		getListView: ->
+		getListView: ()->
 			new List.ListView
-				collection: @muppets
+				collection: @buffer
 
 		getLayoutView: ->
 			new List.Layout()
+
