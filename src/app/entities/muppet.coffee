@@ -42,10 +42,10 @@
 
 		addFilterByName: (original, filterable) ->
 			filterable.filterByName = (text) ->
-				models = original.models
+				models = _.clone original.models
 
 				if text isnt ""
-					models = filterable.filter (muppet) ->
+					models = _.filter models, (muppet) ->
 						muppetName = muppet.get("name").toUpperCase()
 						return _.include muppetName, text.toUpperCase()
 
