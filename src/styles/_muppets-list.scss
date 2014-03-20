@@ -19,6 +19,11 @@
 				background-color: #e8e8e8;
 			}
 
+			a, span {
+				display: block;
+				text-decoration: none;
+			}
+
 			img {
 				@include border-radius(3px);
 

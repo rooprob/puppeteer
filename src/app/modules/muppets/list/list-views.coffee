@@ -10,7 +10,7 @@
 		template: "muppets/list/muppet-item"
 		tagName: "li"
 		triggers:
-			"click": "muppet:clicked"
+			"a click": "muppet:clicked"
 
 	class List.ListView extends App.Views.CompositeView
 		template: "muppets/list/muppets-list"
