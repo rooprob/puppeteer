@@ -8,7 +8,7 @@
 		initialize: ->
 			@layout = @getLayoutView()
 			@muppets = App.request "muppet:entities"
-			@buffer = @getBuffer @muppets
+			@visibleMuppets = @getVisibleMuppets @muppets
 
 			@listenTo @layout, "show", =>
 				@handleFilterRegion()
@@ -20,10 +20,10 @@
 		# API
 		# -------------------------------------------------------
 		applyFilter: (text) =>
-			@buffer.reset @muppets.filterByName(text.trim())
+			@visibleMuppets.reset @muppets.filterByName(text.trim())
 
-		getBuffer: ->
-			@buffer or= new @muppets.constructor(@muppets.models)
+		getVisibleMuppets: ->
+			@visibleMuppets or= new @muppets.constructor(@muppets.models)
 
 		# -------------------------------------------------------
 		# LAYOUT REGIONS
@@ -48,7 +48,7 @@
 		# -------------------------------------------------------
 		getListView: ->
 			new List.ListView
-				collection: @buffer
+				collection: @visibleMuppets
 
 		getLayoutView: ->
 			new List.Layout()
