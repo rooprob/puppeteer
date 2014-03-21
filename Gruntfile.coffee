@@ -6,6 +6,8 @@ module.exports = (grunt) ->
 		pkg: grunt.file.readJSON "package.json"
 
 		paths:
+			docs: "docs"
+
 			src:
 				root: "src"
 				app: "<%= paths.src.root %>/app"
@@ -135,6 +137,12 @@ module.exports = (grunt) ->
 					run: true
 					urls: ["http://localhost:3000/test/unit/"]
 
+		docco:
+			generate:
+				src: ["<%= paths.src.root %>/**/*.coffee"]
+				options:
+					output: "<%= paths.docs %>/"
+
 		watch:
 			app:
 				files: ["<%= paths.src.root %>/**/*.coffee", "<%= paths.src.root %>/**/*.hbs"]
@@ -176,5 +184,5 @@ module.exports = (grunt) ->
 	grunt.registerTask "templates", ["handlebars", "concat"]
 
 	grunt.registerTask "dev", ["clean:dist", "app:dev", "app:test", "html:dev", "images", "styles:dev"]
-	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "imagemin", "styles:production", "casperjs", "mocha"]
+	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "imagemin", "styles:production", "casperjs", "mocha", "docco"]
 	grunt.registerTask "default", ["dev", "connect", "watch"]
