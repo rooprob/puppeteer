@@ -18,9 +18,18 @@
 			&:hover {
 				background-color: #e8e8e8;
 			}
-
+			a, span {
+				display: block;
+				text-decoration: none;
+			}
 			img {
 				@include border-radius(3px);
+
+				background: image-url("ajax-loader.gif") no-repeat center center;
+
+				width: 157px;
+				height: 114px;
+
 				margin-bottom: 0.25em;
 			}
 		}

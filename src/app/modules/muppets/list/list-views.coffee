@@ -7,9 +7,9 @@
 			contentRegion: "#content"
 
 	class List.ItemView extends App.Views.ItemView
+		tagName: "li"
 		className: "muppets-item"
 		template: "muppets/list/muppet-item"
-		tagName: "li"
 		triggers:
 			"click": "muppet:clicked"
 
