@@ -12,7 +12,7 @@
 			@setMainView view
 
 			# whenever filter text changes, any listener of this component
-			# will become aware
+			# will be notified
 			@listenTo view, "filter:text:changed", (text) =>
 				if (text != options.filter)
 					@trigger "filter:text:changed", text
