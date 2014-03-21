@@ -10,8 +10,8 @@
 			new MuppetsModule.List.Controller()
 
 		show: (muppet) ->
-			if _.isFunction muppet.get
-				App.navigate "muppets/#{muppet.get 'id'}"
+			if muppet.id?
+				App.navigate "muppets/#{muppet.id}"
 			else
 				muppet = App.request "muppet:entity", muppet
 

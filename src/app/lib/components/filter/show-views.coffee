@@ -3,6 +3,7 @@
 	timer = null
 
 	class Filter.FilterView extends App.Views.ItemView
+		className: "filter-component"
 		template: "filter/filter"
 		ui:
 			textfield: "input[type='text']"
@@ -14,4 +15,7 @@
 
 				timer = setTimeout =>
 					@trigger "filter:text:changed", @ui.textfield.val()
-				, 200
+				, @options.delay || 0
+		
+		serializeData: ()->
+			@options

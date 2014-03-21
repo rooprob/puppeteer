@@ -5,6 +5,12 @@
 	class Entities.Muppets extends Entities.Collection
 		model: Entities.Muppet
 
+		filterByName: (text) ->
+			return @models if text is ""
+			return @filter (muppet) ->
+				muppetName = muppet.get("name").toUpperCase()
+				return _.include muppetName, text.toUpperCase()
+
 	array = []
 	array.push { id: 1, name: "Walter", image: "walter.jpg", desc: "Walter is a Muppet character that first appeared in the 2011 film The Muppets. Performed by Peter Linz, he is one of the central protagonists introduced in the film. During his adolescence, Walter frequently watched The Muppet Show, collecting memorabilia and finding the cast as a source of inspiration during his upbringing, which is why he often refers to himself as the \"world’s biggest Muppet fan\". While on vacation in Los Angeles, Walter assists the Muppets in regaining both their popularity with the public and control of their acquired studios from oil baron Tex Richman. At the conclusion of the film, Walter deduces that he is a Muppet, adopts whistling as his sole talent and joins the group as their newest member." }
 	array.push { id: 2, name: "Janice", image: "janice.jpg", desc: "Janice is a lead guitar player. She has blond hair, big eyelashes and lips, and usually wears a brown hat with a turquoise gem and a feather. Though she regularly performed vocals, she actually only sang lead a couple of times on the show. She also acted in sketches periodically, most notably as wisecracking Nurse Janice in \"Veterinarian's Hospital\", a recurring parody of medical dramas. Her name is an homage to Janis Joplin. Janice is the band's lead guitar player, and she plays left-handed. Her favourite guitar is a Gibson Les Paul with cherry sunburst colour scheme." }
@@ -32,30 +38,8 @@
 		getMuppets: ->
 			return new Entities.Muppets array
 
-		getFilterableMuppets: ->
-			muppets = new Entities.Muppets array
-			filterableMuppets = new Entities.Muppets array
-
-			API.addFilterByName muppets, filterableMuppets
-
-			return filterableMuppets
-
-		addFilterByName: (original, filterable) ->
-			filterable.filterByName = (text) ->
-				models = _.clone original.models
-
-				if text isnt ""
-					models = _.filter models, (muppet) ->
-						muppetName = muppet.get("name").toUpperCase()
-						return _.include muppetName, text.toUpperCase()
-
-				filterable.reset models
-
 	App.reqres.setHandler "muppet:entity", (id) ->
 		API.getMuppet id if id
 
 	App.reqres.setHandler "muppet:entities", ->
 		API.getMuppets()
-
-	App.reqres.setHandler "muppet:filterable:entities", ->
-		API.getFilterableMuppets()

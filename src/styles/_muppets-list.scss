@@ -1,4 +1,4 @@
-#muppets-list {
+.muppets-list {
 	ul {
 		@include clearfix;
 
@@ -27,7 +27,10 @@
 			img {
 				@include border-radius(3px);
 
+				background: image-url("ajax-loader.gif") no-repeat 50% 50%;
+				height: 114px;
 				margin-bottom: 0.25em;
+				width: 157px;
 			}
 		}
 	}
