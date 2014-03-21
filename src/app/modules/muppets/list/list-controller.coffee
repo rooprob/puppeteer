@@ -19,10 +19,10 @@
 		# -------------------------------------------------------
 		# API
 		# -------------------------------------------------------
-		applyFilter: (text)=>
-			@buffer.reset @muppets.filterByName text.trim()
+		applyFilter: (text) =>
+			@buffer.reset @muppets.filterByName(text.trim())
 
-		getBuffer: ()->
+		getBuffer: ->
 			@buffer or= new @muppets.constructor(@muppets.models)
 
 		# -------------------------------------------------------
@@ -30,9 +30,10 @@
 		# -------------------------------------------------------
 		handleFilterRegion: ->
 			filterComponent = App.request "filter:component"
-			@listenTo filterComponent, "filter:text:changed", @applyFilter
-			@show filterComponent, region: @layout.filterRegion
 
+			@listenTo filterComponent, "filter:text:changed", @applyFilter
+
+			@show filterComponent, region: @layout.filterRegion
 
 		handleContentRegion: ->
 			listView = @getListView()
@@ -45,7 +46,7 @@
 		# -------------------------------------------------------
 		# VIEWS
 		# -------------------------------------------------------
-		getListView: ()->
+		getListView: ->
 			new List.ListView
 				collection: @buffer
 

@@ -16,6 +16,6 @@
 				timer = setTimeout =>
 					@trigger "filter:text:changed", @ui.textfield.val()
 				, @options.delay || 0
-		
-		serializeData: ()->
-			@options
+
+		serializeData: ->
+			return @options
