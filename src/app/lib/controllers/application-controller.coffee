@@ -17,7 +17,7 @@
 		show: (view, options = {}) ->
 			_.defaults options,
 				region: @region
-				
+
 			# A controller could display another controller that could display a view.
 			while view.getMainView then view = view.getMainView()
 

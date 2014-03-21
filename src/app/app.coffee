@@ -7,8 +7,8 @@
 	# Adds two App regions, one for the header and
 	# one for the content of the application
 	App.addRegions
-		appRegion: "#app-region"
-		headerRegion : "#header-region"
+		contentRegion: "#content"
+		headerRegion : "#header"
 
 	# Sets the default route. Our application will navigate
 	# here if no route is provided on the URL.
@@ -21,7 +21,7 @@
 	# region provided.
 	# See: src/app/lib/controllers/application-controller.coffee
 	App.reqres.setHandler "default:region", ->
-		return App.appRegion
+		return App.contentRegion
 
 	# On application start, we want to start the HeaderModule.
 	# We could have opted to use Marionette's Modules auto-start
