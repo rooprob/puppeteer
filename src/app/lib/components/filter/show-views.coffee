@@ -3,6 +3,7 @@
 	timer = null
 
 	class Filter.FilterView extends App.Views.ItemView
+		className: "filter-component"
 		template: "filter/filter"
 		ui:
 			textfield: "input[type='text']"
