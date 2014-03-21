@@ -22,9 +22,7 @@
     "grunt-casperjs": "~1.4.0",
     "grunt-mocha": "~0.4.10",
     "grunt-processhtml": "~0.3.0",
-    "grunt-contrib-cssmin": "^0.9.0"
-  },
-  "dependencies": {
-    "grunt-docco": "^0.3.3"
+    "grunt-contrib-cssmin": "^0.9.0",
+    "grunt-groc": "^0.4.5"
   }
 }

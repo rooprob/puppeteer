@@ -41,6 +41,7 @@ module.exports = (grunt) ->
 		clean:
 			dist: "<%= paths.dist.root %>"
 			images: "<%= paths.dist.images %>"
+			docs: "<%= paths.docs %>"
 
 		imagemin:
 			compile:
@@ -137,11 +138,10 @@ module.exports = (grunt) ->
 					run: true
 					urls: ["http://localhost:3000/test/unit/"]
 
-		docco:
-			generate:
-				src: ["<%= paths.src.root %>/**/*.coffee"]
-				options:
-					output: "<%= paths.docs %>/"
+		groc:
+			javascript: ["src/app/**/*.coffee", "README.markdown"]
+			options:
+				out: "<%= paths.docs %>/"
 
 		watch:
 			app:
@@ -184,5 +184,5 @@ module.exports = (grunt) ->
 	grunt.registerTask "templates", ["handlebars", "concat"]
 
 	grunt.registerTask "dev", ["clean:dist", "app:dev", "app:test", "html:dev", "images", "styles:dev"]
-	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "imagemin", "styles:production", "casperjs", "mocha", "docco"]
+	grunt.registerTask "production", ["connect", "clean:dist", "clean:docs", "app:production", "html", "imagemin", "styles:production", "casperjs", "mocha", "groc"]
 	grunt.registerTask "default", ["dev", "connect", "watch"]
