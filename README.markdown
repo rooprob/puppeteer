@@ -57,3 +57,12 @@ enlighten me with better ways of doing things.
 		* `./test/unit/specs/`: Your awesome unit tests to ensure the quality of
 			your app
 * `./vendor/`: Dependencies downloaded by Bower
+
+## Contribute
+
+* Fork the project
+* Create your feature branch (`git checkout -b my-feature`)
+* Do your changes (don't forget the tests suite if needed)
+* Commit your changes (`git commit -am 'Awesome feature added'`)
+* Push to the server (`git push origin my-feature`)
+* Create a new pull request!
