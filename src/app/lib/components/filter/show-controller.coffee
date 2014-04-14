@@ -1,11 +1,15 @@
+# Show Controller
+#
+# This controller will handle everything related to the "show" action
+# of the `Filter` component.
 @App.module "Components.Filter", (Filter, App, Backbone, Marionette, $, _) ->
 
-	# ----------------------------------------------
-	# Class definition
-	# ----------------------------------------------
 	class Filter.Controller extends App.Controllers.Application
 		initialize: (options) ->
 			@options = options
+
+			# Retrieves the `FilterView` and set it as the "main view" of the
+			# controller
 			view = @getFilterView(options)
 			@setMainView view
 
@@ -24,9 +28,9 @@
 		getFilterView: (options) ->
 			new Filter.FilterView options
 
-	# ----------------------------------------------
-	# App requests
-	# ----------------------------------------------
+	# Creates a `filter:component` request, which instances and return
+	# a new `Filter` component. This is the way to use the component, requesting
+	# it.
 	App.reqres.setHandler "filter:component", (options) ->
 		new Filter.Controller options
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang="en"><head><title>README</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="README"><meta name="groc-project-path" content="README.markdown"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path">README.markdown</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="puppeteer">Puppeteer</h1>
+
+<p>Development stack to build web stuff using [Marionette](http://marionettejs.com
+"Marionette.js – A scalable and composite application architecture for
+Backbone.js"). Some other funny names involved are:</p>
+
+<ul>
+<li><a href="http://gruntjs.com" title="Grunt: The Javascript Task Runner">GruntJS</a></li>
+<li><a href="http://coffeescript.org">CoffeeScript</a></li>
+<li><a href="http://compass-style.org" title="Compass: an open-source CSS Authoring Framework.">Compass</a></li>
+<li><a href="http://visionmedia.github.io/mocha/" title="The fun, simple, flexible Javascript test framework">Mocha</a></li>
+<li><a href="http://handlebarsjs.com" title="Minimal Templating on Steroids">Handlebars</a></li>
+</ul>
+
+<h2 id="caution">Caution</h2>
+
+<p>This is an extremely personal stack, with an extremely personal way of doing
+things. I feel comfortable doing stuff this way, but I change my mind easily. So
+if you have something to suggest, please do it. Fork it, change it, adapt it,
+enlighten me with better ways of doing things.</p>
+
+<h2 id="first-steps">First steps</h2>
+
+<ul>
+<li>Make sure you remove <code>.git/</code> folder, because you would like to have your own
+versioning, isn't it?</li>
+<li>Install needed NPM packages for dev purposes: <code>npm install</code></li>
+<li>Remember that you should have Grunt, Bower and some other NPM packages
+installed globally</li>
+<li>Install project dependencies: <code>bower install</code></li>
+<li>Install <a href="https://www.ruby-lang.org/en/downloads" title="Download Ruby">Ruby</a>,
+<a href="http://sass-lang.com/install" title="Sass: Install Sass">Sass</a>, and
+<a href="http://compass-style.org/install" title="Install the Compass Stylesheet Authoring Framework">Compass</a></li>
+<li>Run your Grunt default task: <code>grunt</code></li>
+<li>Open your browser and your editor and start coding:
+<code>http://localhost:3000/dist/</code></li>
+</ul>
+
+<h2 id="folder-structure">Folder structure</h2>
+
+<ul>
+<li><code>./dist/</code>: Generated files, ready to be used</li>
+<li><code>./src/</code>: The source code of your app
+<ul><li><code>./src/index.html</code>: App web page, the entry point!</li>
+<li><code>./src/javascript.coffee</code>: Your main source file, it includes every other one</li>
+<li><code>./src/styles.scss</code>: The main styles file for your app. This file should include the partials under <code>./src/styles/</code></li>
+<li><code>./src/app/</code>: Your fabulous app
+<ul><li><code>./src/app/app.coffee</code>: The file for the main object of your App, the
+namespace</li>
+<li><code>./src/app/entities/</code>: Entities (Collections and Models) used on the app</li>
+<li><code>./src/app/lib/</code>: Code related with the behaviour of your app. Think of it
+like a config for your app objects, not frameworks</li>
+<li><code>./src/app/modules/</code>: Modules that you will use to build your app:
+HeaderModule, FooterModule, KittensModule and so on</li></ul></li>
+<li><code>./src/config/</code>: Config files for your frameworks: Backbone, jQuery…</li>
+<li><code>./src/images/</code>: Images used in your app</li>
+<li><code>./src/styles/</code>: Sass styles for the app (with Compass!). Here we should have the partials styles for our app</li></ul></li>
+<li><code>./test/</code>: Test suites
+<ul><li><code>./test/functional</code>: Functional tests with CasperJS</li>
+<li><code>./test/unit</code>: Unit tests with Mocha, Chai and Sinon
+<ul><li><code>./test/unit/test.coffee</code>: Include your unit tests on this file</li>
+<li><code>./test/unit/specs/</code>: Your awesome unit tests to ensure the quality of
+your app</li></ul></li></ul></li>
+<li><code>./vendor/</code>: Dependencies downloaded by Bower</li>
+</ul>
+
+<h2 id="contribute">Contribute</h2>
+
+<ul>
+<li>Fork the project</li>
+<li>Create your feature branch (<code>git checkout -b my-feature</code>)</li>
+<li>Do your changes (don't forget the tests suite if needed)</li>
+<li>Commit your changes (<code>git commit -am 'Awesome feature added'</code>)</li>
+<li>Push to the server (<code>git push origin my-feature</code>)</li>
+<li>Create a new pull request!</li>
+</ul></div></div></div></div></body></html>

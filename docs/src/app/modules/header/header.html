@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="en"><head><title>src/app/modules/header/header</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../../"><meta name="groc-document-path" content="src/app/modules/header/header"><meta name="groc-project-path" content="src/app/modules/header/header.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../../assets/style.css"><script type="text/javascript" src="../../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">src/app/modules/header/header.coffee</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="header-module">Header Module</h1>
+
+<p>This is the main file for the <code>Header</code> module.</p></div></div><div class="code"><div class="wrapper"><span class="nx">@App</span><span class="p">.</span><span class="nx">module</span> <span class="s">&quot;HeaderModule&quot;</span><span class="p">,</span> <span class="nf">(HeaderModule, App, Backbone, Marionette, $, _) -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="api">API</h2>
+
+<p>Holds the methods to perform actions within the module.</p></div></div><div class="code"><div class="wrapper">  <span class="nv">API =</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="show">Show</h3>
+
+<p>Instantiates a new <code>Show.Controller</code>, with the <code>headerRegion</code>
+of the application as the container region. The controller
+will use this region as a rendering zone.</p></div></div><div class="code"><div class="wrapper">    <span class="nv">show: </span><span class="nf">-&gt;</span>
+      <span class="k">new</span> <span class="nx">HeaderModule</span><span class="p">.</span><span class="nx">Show</span><span class="p">.</span><span class="nx">Controller</span>
+        <span class="nv">region: </span><span class="nx">App</span><span class="p">.</span><span class="nx">headerRegion</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="initializer">Initializer</h2>
+
+<p>Adds an initializer which will be executed when the module is started.
+This initializer will execute the <code>show()</code> API method, since it is
+the action we want to perform when the module is started</p></div></div><div class="code"><div class="wrapper">  <span class="nx">HeaderModule</span><span class="p">.</span><span class="nx">addInitializer</span> <span class="nf">-&gt;</span>
+    <span class="nx">API</span><span class="p">.</span><span class="nx">show</span><span class="p">()</span></div></div></div></div></body></html>

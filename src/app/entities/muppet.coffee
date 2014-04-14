@@ -1,17 +1,40 @@
+# # Muppet Entity
+#
+# This is the Muppet Entity. It is responsible for the managment of Muppets
+# (in the form of a Collection or a Model). They are stored under the
+# `Entities` module.
+
 @App.module "Entities", (Entities, App, Backbone, Marionette, $, _) ->
 
+	# ## Muppet Model
+	#
+	# Represents a single Muppet. Each of them should have a `name` an `image`
+	# and a `description`, but we don't set them explicitly as defaults since
+	# our data is being bootstraped for this sample application.
 	class Entities.Muppet extends Entities.Model
 
+	# ## Muppets Collection
+	#
+	# Represents a group of Muppets.
 	class Entities.Muppets extends Entities.Collection
 		model: Entities.Muppet
 
+		# ### Filter by name
 		filterByName: (text) ->
+
+			# If no `text` is provided, returns all Models in the Collection.
 			return @models if text is ""
 
+			# Else, returns only models which contains `text` on its
+			# `name` attribute (case insensitive).
 			return @filter (muppet) ->
 				muppetName = muppet.get("name").toUpperCase()
 				return _.include muppetName, text.toUpperCase()
 
+	# ## Sample data
+	#
+	# This data will bootstrap the Collection. Usually, this data would come from
+	# a backend, but to simplify the application it is provided inline.
 	array = []
 	array.push { id: 1, name: "Walter", image: "walter.jpg", desc: "Walter is a Muppet character that first appeared in the 2011 film The Muppets. Performed by Peter Linz, he is one of the central protagonists introduced in the film. During his adolescence, Walter frequently watched The Muppet Show, collecting memorabilia and finding the cast as a source of inspiration during his upbringing, which is why he often refers to himself as the \"world’s biggest Muppet fan\". While on vacation in Los Angeles, Walter assists the Muppets in regaining both their popularity with the public and control of their acquired studios from oil baron Tex Richman. At the conclusion of the film, Walter deduces that he is a Muppet, adopts whistling as his sole talent and joins the group as their newest member." }
 	array.push { id: 2, name: "Janice", image: "janice.jpg", desc: "Janice is a lead guitar player. She has blond hair, big eyelashes and lips, and usually wears a brown hat with a turquoise gem and a feather. Though she regularly performed vocals, she actually only sang lead a couple of times on the show. She also acted in sketches periodically, most notably as wisecracking Nurse Janice in \"Veterinarian's Hospital\", a recurring parody of medical dramas. Her name is an homage to Janis Joplin. Janice is the band's lead guitar player, and she plays left-handed. Her favourite guitar is a Gibson Les Paul with cherry sunburst colour scheme." }
@@ -29,6 +52,9 @@
 	array.push { id: 14, name: "Scooter", image: "scooter.jpg", desc: "Scooter serves as a \"gofer\" backstage on The Muppet Show, and appeared from the first produced episode through the end of the series. Possessing glasses with eyes embedded in the lenses and generally wearing a green track jacket, Scooter is a vaguely humanoid character of unknown heritage (as cited in Of Muppets and Men, when pressed about his family, he explained that his mother was a parrot but he didn't know about his father)." }
 	array.push { id: 15, name: "Waldorf", image: "waldorf.jpg", desc: "Statler and Waldorf share the stage left balcony box in the Muppet Theater, and the two delight in heckling every aspect of The Muppet Show. Statler and Waldorf are especially unforgiving to Fozzie Bear. However, it is revealed in A Muppet Family Christmas that the two critics were friends with Fozzie's mother, Ma Bear. They always have the last word, with a final comment at the end of each episode." }
 
+	# ## API
+	#
+	# Holds the methods to work with the Entity.
 	API =
 		getMuppet: (id) ->
 			data = _.find array, (item) ->
@@ -39,8 +65,12 @@
 		getMuppets: ->
 			return new Entities.Muppets array
 
+	# ## Requests
+
+	# Returns a Model instance with given `id`.
 	App.reqres.setHandler "muppet:entity", (id) ->
 		API.getMuppet id if id
 
+	# Returns a Collection instance holding all the Models.
 	App.reqres.setHandler "muppet:entities", ->
 		API.getMuppets()

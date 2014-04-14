@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en"><head><title>src/app/modules/muppets/muppets</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../../"><meta name="groc-document-path" content="src/app/modules/muppets/muppets"><meta name="groc-project-path" content="src/app/modules/muppets/muppets.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../../assets/style.css"><script type="text/javascript" src="../../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">src/app/modules/muppets/muppets.coffee</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="muppets-module">Muppets Module</h1>
+
+<p>This is the main file for the <code>Muppets</code> module. This is a routed module, so it
+needs a <code>Marionette.AppRouter</code> to be defined, setting the routes which it will
+listen.</p></div></div><div class="code"><div class="wrapper"><span class="nx">@App</span><span class="p">.</span><span class="nx">module</span> <span class="s">&quot;MuppetsModule&quot;</span><span class="p">,</span> <span class="nf">(MuppetsModule, App, Backbone, Marionette, $, _) -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="router">Router</h2>
+
+<p>Defines a <code>Router</code> class which sets the URL paths to be watched
+and the actions to be executed on each path:
+* <code>muppets</code>: Executes <code>list()</code> method
+* <code>muppets/:id</code>: Executes <code>show()</code> method passing given <code>:id</code></p></div></div><div class="code"><div class="wrapper">  <span class="k">class</span> <span class="nx">MuppetsModule</span><span class="p">.</span><span class="nx">Router</span> <span class="k">extends</span> <span class="nx">Marionette</span><span class="p">.</span><span class="nx">AppRouter</span>
+    <span class="nv">appRoutes:</span>
+      <span class="s">&quot;muppets&quot;</span><span class="o">:</span> <span class="s">&quot;list&quot;</span>
+      <span class="s">&quot;muppets/:id&quot;</span><span class="o">:</span> <span class="s">&quot;show&quot;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="api">API</h2>
+
+<p>Object which holds the methods to be executed by the module (through
+the Router, or directly).</p></div></div><div class="code"><div class="wrapper">  <span class="nv">API =</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="list">List</h3>
+
+<p>Instantiates a new <code>List.Controller</code>.</p></div></div><div class="code"><div class="wrapper">    <span class="nv">list: </span><span class="nf">-&gt;</span>
+      <span class="k">new</span> <span class="nx">MuppetsModule</span><span class="p">.</span><span class="nx">List</span><span class="p">.</span><span class="nx">Controller</span><span class="p">()</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="show">Show</h3>
+
+<p>Instantiates a new <code>Show.Controller</code>, passing a <code>Muppet</code> model. This model
+will be recieved directly as a parameter, or if the parameter is an
+integer, the model must be requested previous to the instantiation of the
+<code>Show.Controller</code>.</p></div></div><div class="code"><div class="wrapper">    <span class="nv">show: </span><span class="nf">(muppet) -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>If <code>muppet</code> parameter has an <code>id</code>, it means that is a <code>Muppet</code> model,
+so the URL is updated to reflect the action that is being performed.</p></div></div><div class="code"><div class="wrapper">      <span class="k">if</span> <span class="nx">muppet</span><span class="p">.</span><span class="nx">id</span><span class="o">?</span>
+        <span class="nx">App</span><span class="p">.</span><span class="nx">navigate</span> <span class="s">&quot;muppets/</span><span class="si">#{</span><span class="nx">muppet</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="s">&quot;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Else, <code>muppet</code> parameter should be an integer matching an <code>id</code> of an
+existing <code>Muppet</code> model, so it is requested before showing it.</p></div></div><div class="code"><div class="wrapper">      <span class="k">else</span>
+        <span class="nv">muppet = </span><span class="nx">App</span><span class="p">.</span><span class="nx">request</span> <span class="s">&quot;muppet:entity&quot;</span><span class="p">,</span> <span class="nx">muppet</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Instantiate the <code>Show.Controller</code> passing the <code>Muppet</code> model to be
+shown.</p></div></div><div class="code"><div class="wrapper">      <span class="k">new</span> <span class="nx">MuppetsModule</span><span class="p">.</span><span class="nx">Show</span><span class="p">.</span><span class="nx">Controller</span> <span class="nx">muppet</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="muppetselected-event">"muppet:selected" event</h2>
+
+<p>Shows given <code>Muppet</code> model, which can be passed directly as an object, or
+as an <code>id</code>.</p></div></div><div class="code"><div class="wrapper">  <span class="nx">App</span><span class="p">.</span><span class="nx">vent</span><span class="p">.</span><span class="nx">on</span> <span class="s">&quot;muppet:selected&quot;</span><span class="p">,</span> <span class="nf">(muppet) -&gt;</span>
+    <span class="nx">API</span><span class="p">.</span><span class="nx">show</span> <span class="nx">muppet</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="app-initializer">App initializer</h2>
+
+<p>Instantiates the router for the module.</p></div></div><div class="code"><div class="wrapper">  <span class="nx">App</span><span class="p">.</span><span class="nx">addInitializer</span> <span class="nf">-&gt;</span>
+    <span class="k">new</span> <span class="nx">MuppetsModule</span><span class="p">.</span><span class="nx">Router</span>
+      <span class="nv">controller: </span><span class="nx">API</span></div></div></div></div></body></html>
