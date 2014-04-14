@@ -32,7 +32,7 @@
 		# ### Show
 		#
 		# Instantiates a new `Show.Controller`, passing a `Muppet` model. This model
-		# will be recieved directly as a parameter, or if the parameter is an
+		# will be received directly as a parameter, or if the parameter is an
 		# integer, the model must be requested previous to the instantiation of the
 		# `Show.Controller`.
 		show: (muppet) ->
