@@ -680,7 +680,17 @@ f.event={add:function(a,c,d,e,g){var h,i,j,k,l,m,n,o,p,q,r,s;if(!(a.nodeType===3
                         "projectPath": "src/app/lib/views/compositeview.coffee",
                         "targetPath": "src/app/lib/views/compositeview",
                         "pageTitle": "src/app/lib/views/compositeview",
-                        "title": "compositeview"
+                        "firstHeader": {
+                          "type": "heading",
+                          "data": {
+                            "level": 1,
+                            "title": "CompositeView",
+                            "slug": "compositeview",
+                            "isFileHeader": true
+                          },
+                          "depth": 1
+                        },
+                        "title": "CompositeView"
                       },
                       "depth": 5,
                       "outline": []
