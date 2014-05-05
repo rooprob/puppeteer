@@ -150,7 +150,7 @@ module.exports = (grunt) ->
 				options:
 					livereload: true
 			styles:
-				files: ["<%= paths.src.root %>/app.scss", "<%= paths.src.styles %>/**/*.scss"]
+				files: ["<%= paths.src.root %>/styles.scss", "<%= paths.src.styles %>/**/*.scss"]
 				tasks: ["styles:dev"]
 				options:
 					livereload: true
