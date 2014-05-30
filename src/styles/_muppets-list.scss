@@ -1,37 +1,37 @@
 .muppets-list {
-	ul {
-		@include clearfix;
+  ul {
+    @include clearfix;
 
-		li {
-			@include border-radius(3px);
-			@include float-left;
-			@include single-transition(background-color, 200ms);
+    li {
+      @include border-radius(3px);
+      @include float-left;
+      @include single-transition(background-color, 200ms);
 
-			background-color: #f5f5f5;
-			cursor: pointer;
-			font-size: 0.85em;
-			margin: 0 4px 8px 4px;
-			padding: 0.5em;
-			text-align: center;
-			width: 170px;
+      background-color: #f5f5f5;
+      cursor: pointer;
+      font-size: 0.85em;
+      margin: 0 4px 8px 4px;
+      padding: 0.5em;
+      text-align: center;
+      width: 170px;
 
-			&:hover {
-				background-color: #e8e8e8;
-			}
+      &:hover {
+        background-color: #e8e8e8;
+      }
 
-			a, span {
-				display: block;
-				text-decoration: none;
-			}
+      a, span {
+        display: block;
+        text-decoration: none;
+      }
 
-			img {
-				@include border-radius(3px);
+      img {
+        @include border-radius(3px);
 
-				background: image-url("ajax-loader.gif") no-repeat 50% 50%;
-				height: 114px;
-				margin-bottom: 0.25em;
-				width: 157px;
-			}
-		}
-	}
+        background: image-url("ajax-loader.gif") no-repeat 50% 50%;
+        height: 114px;
+        margin-bottom: 0.25em;
+        width: 157px;
+      }
+    }
+  }
 }
