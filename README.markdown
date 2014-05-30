@@ -1,4 +1,4 @@
-# Puppeteer
+# Puppeteer v1.0.0
 
 Development stack to build web stuff using [Marionette](http://marionettejs.com
 "Marionette.js – A scalable and composite application architecture for Backbone.js"). Some other funny names involved are:
