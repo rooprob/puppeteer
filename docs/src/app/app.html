@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="en"><head><title>src/app/app</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../"><meta name="groc-document-path" content="src/app/app"><meta name="groc-project-path" content="src/app/app.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../assets/style.css"><script type="text/javascript" src="../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">src/app/app.coffee</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="application-namespace">Application Namespace</h1>
+
+<p>Creates a global <code>App</code> object attached to the
+<code>window</code> to namespace our application.</p></div></div><div class="code"><div class="wrapper"><span class="vi">@App = </span><span class="nx">do</span> <span class="nf">(Backbone, Marionette) -&gt;</span>
+
+  <span class="nv">App = </span><span class="k">new</span> <span class="nx">Marionette</span><span class="p">.</span><span class="nx">Application</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Adds two application regions, one for
+the header and one for the content.</p></div></div><div class="code"><div class="wrapper">  <span class="nx">App</span><span class="p">.</span><span class="nx">addRegions</span>
+    <span class="nv">contentRegion: </span><span class="s">&quot;</span><span class="err">#</span><span class="s">content&quot;</span>
+    <span class="nv">headerRegion : </span><span class="s">&quot;</span><span class="err">#</span><span class="s">header&quot;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Sets the default route. Our application will navigate
+here if no route is provided on the URL.
+See: <a href="navigation.html">navigation.coffee</a></p></div></div><div class="code"><div class="wrapper">  <span class="nv">App.rootRoute = </span><span class="s">&quot;muppets&quot;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Creates an application global request to return the
+default region. It will be used, for example, by
+Controllers trying to show views without an specific
+region provided.
+See: <a href="application-controller.html">application-controller.coffee</a></p></div></div><div class="code"><div class="wrapper">  <span class="nx">App</span><span class="p">.</span><span class="nx">reqres</span><span class="p">.</span><span class="nx">setHandler</span> <span class="s">&quot;default:region&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+    <span class="k">return</span> <span class="nx">App</span><span class="p">.</span><span class="nx">contentRegion</span>
+
+  <span class="k">return</span> <span class="nx">App</span></div></div></div></div></body></html>

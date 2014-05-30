@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="en"><head><title>src/app/modules/muppets/show/show-controller</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../../../"><meta name="groc-document-path" content="src/app/modules/muppets/show/show-controller"><meta name="groc-project-path" content="src/app/modules/muppets/show/show-controller.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../../../assets/style.css"><script type="text/javascript" src="../../../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">src/app/modules/muppets/show/show-controller.coffee</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="show-controller">Show Controller</h1>
+
+<p>This controller will handle everything related to the "show"
+action of the <code>Muppet</code> module. Extends from <code>App.Controllers.Application</code>,
+which in the end is nothing but a custom extension of <code>Marionette.Controller</code>.</p></div></div><div class="code"><div class="wrapper"><span class="nx">@App</span><span class="p">.</span><span class="nx">module</span> <span class="s">&quot;MuppetsModule.Show&quot;</span><span class="p">,</span> <span class="nf">(Show, App, Backbone, Marionette, $, _) -&gt;</span>
+
+  <span class="k">class</span> <span class="nx">Show</span><span class="p">.</span><span class="nx">Controller</span> <span class="k">extends</span> <span class="nx">App</span><span class="p">.</span><span class="nx">Controllers</span><span class="p">.</span><span class="nx">Application</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="initialize">Initialize</h2>
+
+<p>Shows a <code>Show.MuppetView</code> on the Application default region
+for the <code>Muppet</code> to be shown.</p></div></div><div class="code"><div class="wrapper">    <span class="nv">initialize: </span><span class="nf">(muppet) -&gt;</span>
+      <span class="nv">muppetView = </span><span class="nx">@getMuppetView</span> <span class="nx">muppet</span>
+      <span class="nx">@show</span> <span class="nx">muppetView</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="getmuppetview">getMuppetView</h2>
+
+<p>Returns a new instance of a <code>Show.MuppetView</code> passing the
+<code>Muppet</code> to be shown.</p></div></div><div class="code"><div class="wrapper">    <span class="nv">getMuppetView: </span><span class="nf">(muppet) -&gt;</span>
+      <span class="k">new</span> <span class="nx">Show</span><span class="p">.</span><span class="nx">MuppetView</span>
+        <span class="nv">model: </span><span class="nx">muppet</span></div></div></div></div></body></html>

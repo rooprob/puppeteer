@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="en"><head><title>src/app/lib/components/filter/show-views</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../../../"><meta name="groc-document-path" content="src/app/lib/components/filter/show-views"><meta name="groc-project-path" content="src/app/lib/components/filter/show-views.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../../../assets/style.css"><script type="text/javascript" src="../../../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">src/app/lib/components/filter/show-views.coffee</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><p>Show Views
+This are the views used for the "show" action of the <code>Filter</code> component.</p></div></div><div class="code"><div class="wrapper"><span class="nx">@App</span><span class="p">.</span><span class="nx">module</span> <span class="s">&quot;Components.Filter&quot;</span><span class="p">,</span> <span class="nf">(Filter, App, Backbone, Marionette, $, _) -&gt;</span>
+
+  <span class="nv">timer = </span><span class="kc">null</span>
+
+  <span class="k">class</span> <span class="nx">Filter</span><span class="p">.</span><span class="nx">FilterView</span> <span class="k">extends</span> <span class="nx">App</span><span class="p">.</span><span class="nx">Views</span><span class="p">.</span><span class="nx">ItemView</span>
+    <span class="nv">className: </span><span class="s">&quot;filter-component&quot;</span>
+    <span class="nv">template: </span><span class="s">&quot;filter/filter&quot;</span>
+    <span class="nv">ui:</span>
+      <span class="nv">textfield: </span><span class="s">&quot;input[type=&#39;text&#39;]&quot;</span>
+    <span class="nv">events:</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>On each keypress of the text field of the component
+a <code>filter:text:changed</code> event is triggered on the view,
+checking against a timeout to avoid sending too many
+events.</p></div></div><div class="code"><div class="wrapper">      <span class="s">&quot;keyup @ui.textfield&quot;</span><span class="o">:</span> <span class="nf">(e) -&gt;</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+
+        <span class="nx">clearTimeout</span> <span class="nx">timer</span>
+
+        <span class="nv">timer = </span><span class="nx">setTimeout</span> <span class="o">=&gt;</span>
+          <span class="nx">@trigger</span> <span class="s">&quot;filter:text:changed&quot;</span><span class="p">,</span> <span class="nx">@ui</span><span class="p">.</span><span class="nx">textfield</span><span class="p">.</span><span class="nx">val</span><span class="p">()</span>
+        <span class="p">,</span> <span class="nx">@options</span><span class="p">.</span><span class="nx">delay</span> <span class="o">||</span> <span class="mi">0</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>Custom <code>serializeData()</code> method for the view in order to pass
+<code>options</code> variable to the template</p></div></div><div class="code"><div class="wrapper">    <span class="nv">serializeData: </span><span class="nf">-&gt;</span>
+      <span class="k">return</span> <span class="nx">@options</span></div></div></div></div></body></html>

@@ -6,16 +6,19 @@ module.exports = (grunt) ->
 		pkg: grunt.file.readJSON "package.json"
 
 		paths:
+			docs: "docs"
+
 			src:
 				root: "src"
 				app: "<%= paths.src.root %>/app"
 				images: "<%= paths.src.root %>/images"
 				styles: "<%= paths.src.root %>/styles"
-				
+
 			dist:
 				root: "dist"
 				app: "<%= paths.dist.root %>/app"
 				images: "<%= paths.dist.root %>/images"
+
 			tests:
 				root: "test"
 				unit: "<%= paths.tests.root %>/unit"
@@ -25,6 +28,7 @@ module.exports = (grunt) ->
 			app:
 				src: "<%= paths.src.root %>/javascript.coffee"
 				dest: "<%= paths.dist.root %>/app.js"
+
 			test:
 				src: "<%= paths.tests.unit %>/test.coffee"
 				dest: "<%= paths.tests.unit %>/test.js"
@@ -37,6 +41,7 @@ module.exports = (grunt) ->
 		clean:
 			dist: "<%= paths.dist.root %>"
 			images: "<%= paths.dist.images %>"
+			docs: "<%= paths.docs %>"
 
 		imagemin:
 			compile:
@@ -133,6 +138,11 @@ module.exports = (grunt) ->
 					run: true
 					urls: ["http://localhost:3000/test/unit/"]
 
+		groc:
+			javascript: ["src/app/**/*.coffee", "README.markdown"]
+			options:
+				out: "<%= paths.docs %>/"
+
 		watch:
 			app:
 				files: ["<%= paths.src.root %>/**/*.coffee", "<%= paths.src.root %>/**/*.hbs"]
@@ -140,7 +150,7 @@ module.exports = (grunt) ->
 				options:
 					livereload: true
 			styles:
-				files: ["<%= paths.src.root %>/**/*.scss"]
+				files: ["<%= paths.src.root %>/styles.scss", "<%= paths.src.styles %>/**/*.scss"]
 				tasks: ["styles:dev"]
 				options:
 					livereload: true
@@ -174,5 +184,5 @@ module.exports = (grunt) ->
 	grunt.registerTask "templates", ["handlebars", "concat"]
 
 	grunt.registerTask "dev", ["clean:dist", "app:dev", "app:test", "html:dev", "images", "styles:dev"]
-	grunt.registerTask "production", ["connect", "clean:dist", "app:production", "html", "imagemin", "styles:production", "casperjs", "mocha"]
+	grunt.registerTask "production", ["connect", "clean:dist", "clean:docs", "app:production", "html", "imagemin", "styles:production", "casperjs", "mocha", "groc"]
 	grunt.registerTask "default", ["dev", "connect", "watch"]

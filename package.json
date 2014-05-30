@@ -3,8 +3,8 @@
   "name": "puppeteer",
   "version": "0.2.0",
   "author": "Juan G. Hurtado <juan.g.hurtado@gmail.com>",
-  "description": "Web development stack. With Backbone, Marionette, CoffeeScript, Mocha, Chai, Bower, Grunt…",
-  "repository": "https://github.com/juanghurtado/puppeteer.git",
+  "description": "Web development stack",
+  "repository": "https://github.com/puppeteer/puppeteer.git",
   "devDependencies": {
     "grunt": "~0.4.2",
     "load-grunt-tasks": "~0.3.0",
@@ -21,9 +21,8 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-casperjs": "~1.4.0",
     "grunt-mocha": "~0.4.10",
-    "grunt-processhtml": "~0.3.0"
-  },
-  "dependencies": {
-    "grunt-contrib-cssmin": "^0.9.0"
+    "grunt-processhtml": "~0.3.0",
+    "grunt-contrib-cssmin": "^0.9.0",
+    "grunt-groc": "^0.4.5"
   }
 }

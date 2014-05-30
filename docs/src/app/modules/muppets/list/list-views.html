@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="en"><head><title>src/app/modules/muppets/list/list-views</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content="../../../../../"><meta name="groc-document-path" content="src/app/modules/muppets/list/list-views"><meta name="groc-project-path" content="src/app/modules/muppets/list/list-views.coffee"><link rel="stylesheet" type="text/css" media="all" href="../../../../../assets/style.css"><script type="text/javascript" src="../../../../../assets/behavior.js"></script><body><div id="meta"><div class="file-path">src/app/modules/muppets/list/list-views.coffee</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="list-views">List Views</h1>
+
+<p>Defines all the views used on the "list" action of the
+<code>Muppets</code> module.</p></div></div><div class="code"><div class="wrapper"><span class="nx">@App</span><span class="p">.</span><span class="nx">module</span> <span class="s">&quot;MuppetsModule.List&quot;</span><span class="p">,</span> <span class="nf">(List, App, Backbone, Marionette, $, _) -&gt;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="layout">Layout</h2>
+
+<p>Defines two regions for this module:
+* <code>filterRegion</code>: will hold the filter component
+* <code>contentRegion</code>: will hold the <code>Muppets</code> list</p></div></div><div class="code"><div class="wrapper">  <span class="k">class</span> <span class="nx">List</span><span class="p">.</span><span class="nx">Layout</span> <span class="k">extends</span> <span class="nx">App</span><span class="p">.</span><span class="nx">Views</span><span class="p">.</span><span class="nx">Layout</span>
+    <span class="nv">template: </span><span class="s">&quot;muppets/list/layout&quot;</span>
+    <span class="nv">regions:</span>
+      <span class="nv">filterRegion: </span><span class="s">&quot;</span><span class="err">#</span><span class="s">filter&quot;</span>
+      <span class="nv">contentRegion: </span><span class="s">&quot;</span><span class="err">#</span><span class="s">content&quot;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="itemview">ItemView</h2>
+
+<p>Each <code>Muppet</code> on the list.
+Triggers a <code>muppet:clicked</code> event when
+is clicked.</p></div></div><div class="code"><div class="wrapper">  <span class="k">class</span> <span class="nx">List</span><span class="p">.</span><span class="nx">ItemView</span> <span class="k">extends</span> <span class="nx">App</span><span class="p">.</span><span class="nx">Views</span><span class="p">.</span><span class="nx">ItemView</span>
+    <span class="nv">tagName: </span><span class="s">&quot;li&quot;</span>
+    <span class="nv">className: </span><span class="s">&quot;muppets-item&quot;</span>
+    <span class="nv">template: </span><span class="s">&quot;muppets/list/muppet-item&quot;</span>
+    <span class="nv">triggers:</span>
+      <span class="s">&quot;a click&quot;</span><span class="o">:</span> <span class="s">&quot;muppet:clicked&quot;</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="listview">ListView</h2>
+
+<p>List of <code>Muppets</code>. Shows a <code>ItemView</code> for every
+<code>Muppet</code> on the list</p></div></div><div class="code"><div class="wrapper">  <span class="k">class</span> <span class="nx">List</span><span class="p">.</span><span class="nx">ListView</span> <span class="k">extends</span> <span class="nx">App</span><span class="p">.</span><span class="nx">Views</span><span class="p">.</span><span class="nx">CompositeView</span>
+    <span class="nv">className: </span><span class="s">&quot;muppets-list&quot;</span>
+    <span class="nv">template: </span><span class="s">&quot;muppets/list/muppets-list&quot;</span>
+    <span class="nv">itemView: </span><span class="nx">List</span><span class="p">.</span><span class="nx">ItemView</span>
+    <span class="nv">itemViewContainer: </span><span class="s">&quot;ul&quot;</span></div></div></div></div></body></html>

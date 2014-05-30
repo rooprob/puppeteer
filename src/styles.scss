@@ -1,6 +1,12 @@
 @import "compass/reset";
-@import "styles/samplepartial";
+@import "compass/css3";
+@import "compass/utilities/general";
+@import "compass/utilities/sprites";
 
-body {
-	margin: 15px;
-}
+@import "sprites/*.png";
+@include all-sprites-sprites;
+
+@import "styles/app";
+@import "styles/filter-component";
+@import "styles/muppets-list";
+@import "styles/muppets-view";
