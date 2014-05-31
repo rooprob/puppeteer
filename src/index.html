@@ -1,35 +1,35 @@
 <!doctype html>
 <html>
-	<head>
-		<title>Puppeteer</title>
+  <head>
+    <title>Puppeteer</title>
 
-		<!-- build:css:production styles.min.css -->
-		<link rel="stylesheet" href="styles.css" />
-		<!-- /build -->
-	</head>
-	<body>
-		<div id="wrapper">
-			<div id="header"></div>
-			<div id="content"></div>
+    <!-- build:css:production styles.min.css -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- /build -->
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="header"></div>
+      <div id="content"></div>
 
-			<div class="copyright">
-				Muppets images by
-				<a href="http://society6.com/FriesFrame/We-Are-the-Muppets_Print#1=45">Fries Frame</a>
-			</div>
-		</div>
+      <div class="copyright">
+        Muppets images by
+        <a href="http://society6.com/FriesFrame/We-Are-the-Muppets_Print#1=45">Fries Frame</a>
+      </div>
+    </div>
 
-		<!-- build:js:production app.min.js -->
-		<script src="app.js"></script>
-		<!-- /build -->
+    <!-- build:js:production app.min.js -->
+    <script src="app.js"></script>
+    <!-- /build -->
 
-		<!-- build:template[production,dev] -->
-		<script>
-			$(function() {
-				App.start({
-					environment: "<%= environment %>"
-				});
-			});
-		</script>
-		<!-- /build -->
-	</body>
+    <!-- build:template[production,dev] -->
+    <script>
+      $(function() {
+        App.start({
+          environment: "<%= environment %>"
+        });
+      });
+    </script>
+    <!-- /build -->
+  </body>
 </html>

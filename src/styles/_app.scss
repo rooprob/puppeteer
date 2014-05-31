@@ -1,38 +1,38 @@
 * {
-	@include box-sizing(border-box);
+  @include box-sizing(border-box);
 }
 
 body {
-	font-family: Helvetica, Verdana, sans-serif;
-	color: #666;
+  font-family: Helvetica, Verdana, sans-serif;
+  color: #666;
 }
 
 a {
-	color: #999;
+  color: #999;
 
-	&:hover {
-		color: #555;
-	}
+  &:hover {
+    color: #555;
+  }
 }
 
 #wrapper {
-	margin: 1em auto;
+  margin: 1em auto;
 }
 
 #header {
-	text-align: center;
+  text-align: center;
 }
 
 .copyright,
 #content {
-	margin: 0 auto;
-	width: 535px;
+  margin: 0 auto;
+  width: 535px;
 }
 
 .copyright {
-	color: #ddd;
-	font-size: 0.75em;
-	margin-top: 3em;
-	text-align: right;
+  color: #ddd;
+  font-size: 0.75em;
+  margin-top: 3em;
+  text-align: right;
 }
 

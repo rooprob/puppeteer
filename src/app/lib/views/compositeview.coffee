@@ -5,4 +5,4 @@
 # on the application without modifying Marionette code directly.
 @App.module "Views", (Views, App, Backbone, Marionette, $, _) ->
 
-	class Views.CompositeView extends Marionette.CompositeView
+  class Views.CompositeView extends Marionette.CompositeView

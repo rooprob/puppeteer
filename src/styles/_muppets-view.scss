@@ -1,21 +1,21 @@
 .muppet-view {
-	@include clearfix;
-	line-height: 1.4;
+  @include clearfix;
+  line-height: 1.4;
 
-	h2 {
-		color: #222;
-		font-size: 2em;
-		margin-bottom: 0.5em;
-	}
+  h2 {
+    color: #222;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
 
-	img {
-		@include border-radius;
-		border: 0.5em solid #f5f5f5;
-		float: left;
-		margin: 0 1.5em 0 0;
-	}
+  img {
+    @include border-radius;
+    border: 0.5em solid #f5f5f5;
+    float: left;
+    margin: 0 1.5em 0 0;
+  }
 
-	div {
-		margin-left: 200px;
-	}
+  div {
+    margin-left: 200px;
+  }
 }

@@ -1,30 +1,30 @@
 .filter-component {
-	@include clearfix;
+  @include clearfix;
 
-	margin-bottom: 1em;
-	padding: 1em 0.25em;
-	position: relative;
+  margin-bottom: 1em;
+  padding: 1em 0.25em;
+  position: relative;
 
-	&:after {
-		$height: sprites-sprite-height(zoom);
-		$width: sprites-sprite-width(zoom);
-		@include sprites-sprite(zoom);
+  &:after {
+    $height: sprites-sprite-height(zoom);
+    $width: sprites-sprite-width(zoom);
+    @include sprites-sprite(zoom);
 
-		content: "";
-		height: $height;
-		position: absolute;
-		right: 1em;
-		top: 1.4em;
-		width: $width;
-	}
+    content: "";
+    height: $height;
+    position: absolute;
+    right: 1em;
+    top: 1.4em;
+    width: $width;
+  }
 
-	input[type="text"] {
-		@include border-radius(25px);
+  input[type="text"] {
+    @include border-radius(25px);
 
-		border: 1px solid #ddd;
-		float: right;
-		font-size: 1.2em;
-		padding: 0.15em 1.75em 0.15em 0.75em;
-	}
+    border: 1px solid #ddd;
+    float: right;
+    font-size: 1.2em;
+    padding: 0.15em 1.75em 0.15em 0.75em;
+  }
 
 }

@@ -5,36 +5,36 @@
 
 _.extend Marionette.Renderer,
 
-	# Paths where the templates of the views can be found
-	lookups: ["modules/", "lib/components/"]
+  # Paths where the templates of the views can be found
+  lookups: ["modules/", "lib/components/"]
 
-	# Overwrite the views default `render()` method
-	render: (template, data) ->
-		
-		# Don't render if the template is false
-		return if template is false
+  # Overwrite the views default `render()` method
+  render: (template, data) ->
 
-		path = @getTemplate(template)
+    # Don't render if the template is false
+    return if template is false
 
-		# If the template is not found, throw an error
-		unless path
-			error = "Template '#{template}' not found!"
-			console.error error
-			throw new Error(error)
-			return
+    path = @getTemplate(template)
 
-		# Execute the template (It is a Handlebars template)
-		path(data)
+    # If the template is not found, throw an error
+    unless path
+      error = "Template '#{template}' not found!"
+      console.error error
+      throw new Error(error)
+      return
 
-	# Search for the template on the lookups
-	getTemplate: (template) ->
-		for lookup in @lookups
-			for path in [template, @withTemplate(template)]
-				return App.templates[lookup + path] if App.templates[lookup + path]
+    # Execute the template (It is a Handlebars template)
+    path(data)
 
-	# Allow `getTemplate()` method to search for templates without having to
-	# specify "templates/" on the path.
-	withTemplate: (string) ->
-		array = string.split("/")
-		array.splice(-1, 0, "templates")
-		array.join("/")
+  # Search for the template on the lookups
+  getTemplate: (template) ->
+    for lookup in @lookups
+      for path in [template, @withTemplate(template)]
+        return App.templates[lookup + path] if App.templates[lookup + path]
+
+  # Allow `getTemplate()` method to search for templates without having to
+  # specify "templates/" on the path.
+  withTemplate: (string) ->
+    array = string.split("/")
+    array.splice(-1, 0, "templates")
+    array.join("/")
