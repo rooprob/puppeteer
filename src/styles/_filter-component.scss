@@ -1,27 +1,22 @@
 .filter-component {
-  @include clearfix;
-
   margin-bottom: 1em;
+  overflow: hidden;
   padding: 1em 0.25em;
   position: relative;
 
   &:after {
-    $height: sprites-sprite-height(zoom);
-    $width: sprites-sprite-width(zoom);
-    @include sprites-sprite(zoom);
-
+    background: image-url("zoom.png") no-repeat 50% 50%;
     content: "";
-    height: $height;
+    height: 16px;
     position: absolute;
     right: 1em;
     top: 1.4em;
-    width: $width;
+    width: 16px;
   }
 
   input[type="text"] {
-    @include border-radius(25px);
-
     border: 1px solid #ddd;
+    border-radius: 25px;
     float: right;
     font-size: 1.2em;
     padding: 0.15em 1.75em 0.15em 0.75em;

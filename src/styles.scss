@@ -1,10 +1,10 @@
-@import "compass/reset";
-@import "compass/css3";
-@import "compass/utilities/general";
-@import "compass/utilities/sprites";
+@import "../vendor/normalize-scss/normalize";
 
-@import "sprites/*.png";
-@include all-sprites-sprites;
+ul, li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
 
 @import "styles/app";
 @import "styles/filter-component";

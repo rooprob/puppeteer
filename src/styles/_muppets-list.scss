@@ -1,14 +1,12 @@
 .muppets-list {
   ul {
-    @include clearfix;
+    overflow: hidden;
 
     li {
-      @include border-radius(3px);
-      @include float-left;
-      @include single-transition(background-color, 200ms);
-
       background-color: #f5f5f5;
+      border-radius: 3px;
       cursor: pointer;
+      float: left;
       font-size: 0.85em;
       margin: 0 4px 8px 4px;
       padding: 0.5em;
@@ -25,9 +23,8 @@
       }
 
       img {
-        @include border-radius(3px);
-
         background: image-url("ajax-loader.gif") no-repeat 50% 50%;
+        border-radius: 3px;
         height: 114px;
         margin-bottom: 0.25em;
         width: 157px;

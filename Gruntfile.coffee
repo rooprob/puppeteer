@@ -113,16 +113,14 @@ module.exports = (grunt) ->
         files:
           "<%= paths.dist.root %>/styles.min.css": "<%= paths.dist.root %>/styles.css"
 
-    compass:
+    sass:
       compile:
         options:
-          cssDir: "<%= paths.dist.root %>"
-          sassDir:  "<%= paths.src.root %>"
-          specify: "<%= paths.src.root %>/styles.scss"
-          imagesDir: "<%= paths.dist.images %>"
-          generatedImagesDir: "<%= paths.dist.images %>"
-          outputStyle: "expanded"
-          relativeAssets: true
+          imagePath: "images"
+          outputStyle: "compressed"
+          sourceMap: true
+        files:
+          "<%= paths.dist.root %>/styles.css": "<%= paths.src.root %>/styles.scss"
 
     connect:
       server:
@@ -180,7 +178,7 @@ module.exports = (grunt) ->
   grunt.registerTask "app:dev", ["snocketsify:app", "templates"]
   grunt.registerTask "app:test", ["snocketsify:test"]
   grunt.registerTask "app:production", ["snocketsify:app", "templates", "uglify:production" ]
-  grunt.registerTask "styles:dev", ["compass", "autoprefixer"]
+  grunt.registerTask "styles:dev", ["sass", "autoprefixer"]
   grunt.registerTask "styles:production", ["styles:dev", "cssmin"]
   grunt.registerTask "templates", ["handlebars", "concat"]
 
