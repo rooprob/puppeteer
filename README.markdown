@@ -5,7 +5,7 @@ Development stack to build web stuff using [Marionette](http://marionettejs.com
 
 * [GruntJS](http://gruntjs.com "Grunt: The Javascript Task Runner")
 * [CoffeeScript](http://coffeescript.org)
-* [Compass](http://compass-style.org "Compass: an open-source CSS Authoring Framework.")
+* [Sass](http://sass-lang.com)
 * [Mocha](http://visionmedia.github.io/mocha/ "The fun, simple, flexible Javascript test framework")
 * [Handlebars](http://handlebarsjs.com "Minimal Templating on Steroids")
 
@@ -29,10 +29,8 @@ If you choose the first, follow these steps:
 * Remember that you should have Grunt, Bower and some other NPM packages
   installed globally
 * Install project dependencies: `bower install`
-* Install [Ruby](https://www.ruby-lang.org/en/downloads "Download Ruby"),
-  [Sass](http://sass-lang.com/install "Sass: Install Sass"), and
-  [Compass](http://compass-style.org/install "Install the Compass Stylesheet Authoring Framework")
-  if you don't have them already
+* Install [Ruby](https://www.ruby-lang.org/en/downloads "Download Ruby") and
+  [Sass](http://sass-lang.com/install "Sass: Install Sass") if you don't have them already
 * Run your Grunt default task: `grunt`
 * Open your browser and your editor and see the example project:
   `http://localhost:3000/dist/`
@@ -70,7 +68,7 @@ of them.
       HeaderModule, FooterModule, KittensModule and so on
   * `./src/config/`: Config files for your frameworks: Backbone, jQuery…
   * `./src/images/`: Images used in your app
-  * `./src/styles/`: Sass styles for the app (with Compass!). Here we should
+  * `./src/styles/`: Sass styles for the app. Here we should
     have the partials styles for our app
 * `./test/`: Test suites
   * `./test/functional`: Functional tests with CasperJS
