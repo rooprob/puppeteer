@@ -8,5 +8,5 @@
   #
   # This environment is passed the `start()` of the application.
   # If no environment is passed, the default is "production"
-  App.on "initialize:before", (options) ->
+  App.on "before:start", (options) ->
     App.environment = options.environment or "production"

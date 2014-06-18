@@ -22,7 +22,7 @@
       Backbone.history.start() if Backbone.history
 
   if App.autoInitHistory
-    App.on "initialize:after", ->
+    App.on "start", ->
 
       # Starts the Backbone History
       @startHistory()
