@@ -34,7 +34,7 @@
     # Close all the regions on the controller instances of the registry
     closeRegions: ->
       for key, controller of App._registry
-        controller?.region?.close()
+        controller?.region?.destroy()
 
     # Get the size of the registry
     getRegistrySize: ->

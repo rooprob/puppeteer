@@ -36,5 +36,5 @@
   class List.ListView extends App.Views.CompositeView
     className: "muppets-list"
     template: "muppets/list/muppets-list"
-    itemView: List.ItemView
-    itemViewContainer: "ul"
+    childView: List.ItemView
+    childViewContainer: "ul"

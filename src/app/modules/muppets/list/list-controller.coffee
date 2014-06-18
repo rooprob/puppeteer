@@ -73,11 +73,11 @@
       # Instances the `ListView`
       listView = @getListView()
 
-      # Set the controller to listen to the `itemview:muppet:clicked` event
+      # Set the controller to listen to the `childview:muppet:clicked` event
       # from the `ListView`. When it occurs, triggers a `muppet:selected` event
       # passing the clicked `Muppet`. That event is handled
       # on the [Muppet module](../muppet.html).
-      @listenTo listView, "itemview:muppet:clicked", (itemView, opts) ->
+      @listenTo listView, "childview:muppet:clicked", (itemView, opts) ->
         App.vent.trigger "muppet:selected", opts.model
 
       # Shows the `ListView` on the `contentRegion` of the `LayoutView`.

@@ -53,7 +53,7 @@
       @_mainView = view
 
       # When the "main view" is closed, the controller is also closed
-      @listenTo view, "close", @close
+      @listenTo view, "destroy", @destroy
 
     _manageView: (view, options) ->
       options.region.show view
