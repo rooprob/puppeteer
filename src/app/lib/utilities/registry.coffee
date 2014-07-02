@@ -27,7 +27,7 @@
         previous: oldCount
         msg: "There were #{oldCount} controllers in the registry, there are now #{@getRegistrySize()}"
 
-      console.info ret.msg if App.environment is "dev"
+      console.info ret.msg if App.request("app:option", "environment") is "dev"
 
       return ret
 
@@ -42,11 +42,11 @@
 
   # Creates a command for registering instances on the registry
   App.commands.setHandler "register:instance", (instance, id) ->
-    API.register instance, id if App.environment is "dev"
+    API.register instance, id if App.request("app:option", "environment") is "dev"
 
   # Creates a command for removing instances from the registry
   App.commands.setHandler "unregister:instance", (instance, id) ->
-    API.unregister instance, id if App.environment is "dev"
+    API.unregister instance, id if App.request("app:option", "environment") is "dev"
 
   # Creates a command for resetting the registry
   App.reqres.setHandler "reset:registry", ->

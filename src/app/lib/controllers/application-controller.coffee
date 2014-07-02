@@ -19,7 +19,7 @@
       App.execute "register:instance", @, @_instance_id
 
     close: ->
-      console.log "closing", @ if App.environment is "dev"
+      console.log "closing", @ if App.request("app:option", "environment") is "dev"
 
       # Remove the closed instance from the registry
       App.execute "unregister:instance", @, @_instance_id

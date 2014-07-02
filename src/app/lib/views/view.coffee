@@ -14,5 +14,5 @@
   _.extend Marionette.View::,
 
     remove: (args...) ->
-      console.log "removing", @ if App.environment is "dev"
+      console.log "removing", @ if App.request("app:option", "environment") is "dev"
       _remove.apply @, args
