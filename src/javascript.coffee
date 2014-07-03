@@ -2,8 +2,6 @@
 #= require "../vendor/underscore/underscore.js"
 #= require "../vendor/underscore-strings/src/underscore.strings.js"
 #= require "../vendor/backbone/backbone.js"
-#= require "../vendor/backbone.wreqr/lib/backbone.wreqr.js"
-#= require "../vendor/backbone.babysitter/lib/backbone.babysitter.js"
 #= require "../vendor/marionette/lib/backbone.marionette.js"
 #= require "../vendor/handlebars/handlebars.js"
 
