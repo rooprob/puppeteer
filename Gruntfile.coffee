@@ -25,14 +25,21 @@ module.exports = (grunt) ->
         unit: "<%= paths.tests.root %>/unit"
         functional: "<%= paths.tests.root %>/functional"
 
-    snocketsify:
+    mince:
       app:
-        src: "<%= paths.src.root %>/javascript.coffee"
-        dest: "<%= paths.dist.root %>/app.js"
+        options:
+          enable: ["source_maps"]
+          sourceMappingBaseURL: "../"
+        files: [
+          src: "<%= paths.src.root %>/javascript.coffee"
+          dest: "<%= paths.dist.root %>/app.js"
+        ]
 
       test:
-        src: "<%= paths.tests.unit %>/test.coffee"
-        dest: "<%= paths.tests.unit %>/test.js"
+        files: [
+          src: "<%= paths.tests.unit %>/test.coffee"
+          dest: "<%= paths.tests.unit %>/test.js"
+        ]
 
     uglify:
       production:
@@ -175,9 +182,9 @@ module.exports = (grunt) ->
   grunt.registerTask "images", ["clean:images", "copy:images"]
   grunt.registerTask "html", ["copy:html", "processhtml:production"]
   grunt.registerTask "html:dev", ["copy:html", "processhtml:dev"]
-  grunt.registerTask "app:dev", ["snocketsify:app", "templates"]
-  grunt.registerTask "app:test", ["snocketsify:test"]
-  grunt.registerTask "app:production", ["snocketsify:app", "templates", "uglify:production" ]
+  grunt.registerTask "app:dev", ["mince:app", "templates"]
+  grunt.registerTask "app:test", ["mince:test"]
+  grunt.registerTask "app:production", ["mince:app", "templates", "uglify:production" ]
   grunt.registerTask "styles:dev", ["sass", "autoprefixer"]
   grunt.registerTask "styles:production", ["styles:dev", "cssmin"]
   grunt.registerTask "templates", ["handlebars", "concat"]
