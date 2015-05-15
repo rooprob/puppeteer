@@ -2,8 +2,8 @@
   "name": "Puppeteer",
   "version": "1.0.0",
   "dependencies": {
-    "backbone": "~1.1.2",
-    "chai": "~2.2.0",
+    "backbone": "~1.2.0",
+    "chai": "~2.3.0",
     "chai-jquery": "~2.0.0",
     "fixtures": "~1.5.3",
     "handlebars": "~3.0.0",
@@ -17,6 +17,8 @@
     "underscore-strings": "~0.1.0"
   },
   "resolutions": {
-    "underscore": "1.4.4 - 1.6.0"
+    "underscore": "~1.8.3",
+    "backbone": "~1.2.0",
+    "chai": "~2.3.0"
   }
 }
