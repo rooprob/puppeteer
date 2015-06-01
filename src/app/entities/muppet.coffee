@@ -59,17 +59,32 @@
     getMuppet: (id) ->
       data = _.find array, (item) ->
         return item.id is +id
-
       return new Entities.Muppet data
 
     getMuppets: ->
       return new Entities.Muppets array
+
+    getFriends: (id) ->
+      # XXX a fixed set of friends
+      # Filter builds up a truth table first, then a table scan
+      ids = {}
+      _.each [6,7,15], (item) ->
+        ids[item] = true
+
+      data = _.filter array, (item) ->
+        return ids[item.id]
+
+      return new Entities.Muppets data
 
   # ## Requests
 
   # Returns a Model instance with given `id`.
   App.reqres.setHandler "muppet:entity", (id) ->
     API.getMuppet id if id
+
+  # Returns a Collection instance of friends for given `id`.
+  App.reqres.setHandler "muppet:friends", (id) ->
+    API.getFriends id if id
 
   # Returns a Collection instance holding all the Models.
   App.reqres.setHandler "muppet:entities", ->
